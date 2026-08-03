@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[project]
+name = "go_standard_annotation_schema"
+description = "LinkML schema for GO Standard Annotations"
+authors = [
+  { name = "Patrick Kalita", email = "pkalita@lbl.gov" },
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+
+dependencies = [
+  "linkml-runtime>=1.11.1,<2",
+]
+
+[dependency-groups]
+dev = [
+  "codespell>=2.4.3",
+  "linkml>=1.11.1,<2",
+  "mkdocs-material>=8.2.8",
+  "mkdocs-mermaid2-plugin>=1.1.1",
+  "mkdocs-pymdownx-material-extras>=2.5.6",
+  "pre-commit>=4.6.0",
+  "pytest>=9.1.1",
+  "ruff>=0.15.22",
+  "rust-just>=1.57.0",
+  "ty>=0.0.61",
+  "yamllint>=1.38.0",
+]
+
+# See https://hatch.pypa.io/latest/config/build/#file-selection for how to
+# explicitly include files other than default into the build distributions.
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+# Ref.: https://github.com/ninoseki/uv-dynamic-versioning/
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+fallback-version = "0.0.0"
+
+# Ref.: https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
+[tool.pytest]
+testpaths = ["tests"]
+
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+# Enforce extend-exclude even when a path is explicitly passed to ruff (i.e. via pre-commit)
+force-exclude = true
+extend-exclude = [
+  "src/go_standard_annotation_schema/datamodel/go_standard_annotation_schema.py",
+]
+# Set oldest supported Python version
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+  # flake8-bugbear
+  "B",
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # isort
+  "I",
+  # flake8-simplify,
+  "SIM",
+  # flake8-print
+  "T20",
+  # pyupgrade
+  "UP",
+]
+
+# https://docs.astral.sh/ty/configuration/
+[tool.ty.src]
+include = ["src", "tests"]
+exclude = [
+  "src/go_standard_annotation_schema/datamodel/go_standard_annotation_schema.py",
+]
+
+# Ref.: https://github.com/codespell-project/codespell
+[tool.codespell]
+skip = [
+  "LICENSE",
+  "./docs/elements/*",
+  "./examples/output/*",
+  "./project/*",
+  "./src/go_standard_annotation_schema/datamodel/go_standard_annotation_schema.py",
+  "./tmp/*",
+  "uv.lock",
+]
+ignore-words-list = "ND"
+quiet-level = 3

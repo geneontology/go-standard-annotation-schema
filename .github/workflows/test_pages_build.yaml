@@ -1,0 +1,65 @@
+name: Preview documentation build
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+env:
+  CLICOLOR: 1
+
+concurrency: preview-${{ github.ref }}
+
+permissions: {}
+
+jobs:
+  run:
+    # Don't run for PRs from forks which fails due to lack of permissions.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    # Grant GITHUB_TOKEN the permissions required to make a gh-pages deployment
+    permissions:
+      contents: write  # to let mkdocs write the new docs
+      pages: write     # to deploy to Pages
+      id-token: write  # allow to generate an OpenID Connect (OIDC) token
+      pull-requests: write  # add comment on the PR with the preview URL
+    runs-on: ubuntu-latest
+
+    steps:
+      # https://github.com/actions/checkout
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+
+      # https://github.com/actions/setup-python
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version-file: ".python-version"
+
+      # https://github.com/astral-sh/setup-uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          version: "0.11.24"
+
+      - name: Install dependencies
+        run: uv sync --locked --dev --no-progress
+
+      - name: Build documentation
+        run: |
+          uv run --locked just gen-doc
+          uv run mkdocs build -d site
+          touch site/.nojekyll
+
+      # https://github.com/rossjrw/pr-preview-action
+      - name: Deploy preview
+        # yamllint disable-line rule:line-length
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        with:
+          source-dir: site/
+          preview-branch: gh-pages

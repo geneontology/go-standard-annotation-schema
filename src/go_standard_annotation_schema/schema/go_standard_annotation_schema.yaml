@@ -1,0 +1,252 @@
+id: https://w3id.org/geneontology/go-standard-annotation-schema
+name: go-standard-annotation-schema
+title: GO Standard Annotation Schema
+description: |-
+  LinkML schema for GO Standard Annotations
+license: BSD-3-Clause
+see_also:
+  - https://geneontology.github.io/go-standard-annotation-schema
+
+prefixes:
+  go_standard_annotation_schema: https://w3id.org/geneontology/go-standard-annotation-schema/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: go_standard_annotation_schema
+default_range: string
+
+imports:
+  - linkml:types
+
+types:
+  # TODO: structured_pattern on types is not currently materialized in generated
+  #       artifacts. See: https://github.com/linkml/linkml/pull/3832
+  external_identifier:
+    description: |-
+      An identifier of an object from an external source, such as a gene product, an
+      ontology term, or a publication.
+    typeof: string
+    structured_pattern:
+      syntax: "{prefix}:{local_id}"
+      interpolated: true
+      partial_match: false
+
+  eco_identifier:
+    description: |-
+      An identifier of an ECO term.
+    typeof: external_identifier
+    structured_pattern:
+      syntax: "ECO:{local_id}"
+      interpolated: true
+      partial_match: false
+
+  go_identifier:
+    description: |-
+      An identifier of a GO term.
+    typeof: external_identifier
+    structured_pattern:
+      syntax: "GO:{local_id}"
+      interpolated: true
+      partial_match: false
+
+  ncbi_taxon_identifier:
+    description: |-
+      An identifier of a taxon from the NCBI Taxonomy database.
+    typeof: external_identifier
+    structured_pattern:
+      syntax: "NCBITaxon:{local_id}"
+      interpolated: true
+      partial_match: false
+
+slots:
+  db_object_id:
+    description: |-
+      A unique identifier for the item being annotated.
+    range: external_identifier
+    required: true
+
+  negation:
+    description: |-
+      A boolean indicating whether the annotation is negated.
+    range: boolean
+    required: false
+
+  relation:
+    description: |-
+      Relation from the Relation Ontology that describe how the annotated biological
+      entity relates to the GO term with which it is associated.
+    range: external_identifier
+    required: true
+    todos:
+      - The GPAD spec says that the "relation used SHOULD come from the allowed
+        gene-product-to-term relations". Decide whether to enforce this in the schema
+        via an enum.
+
+  ontology_class_id:
+    description: |-
+      The GO identifier for the term attributed to the DB object ID.
+    range: go_identifier
+    required: true
+
+  references:
+    description: |-
+      One or more unique identifiers for a single source cited as an authority for the
+      attribution of the GO ID to the DB object ID. This may be a literature reference
+      or a database record. Valid references are one of: PubMed, DOI, GO_REF, MOD
+      reference.
+    range: external_identifier
+    required: true
+    multivalued: true
+    minimum_cardinality: 1
+
+  evidence_type:
+    description: |-
+      The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that
+      supports the association between the DB object ID and the GO term.
+    range: eco_identifier
+    required: true
+
+  with_or_from:
+    description: |-
+      Used with specific ECO codes to capture an additional identifier supporting the
+      evidence for the annotation. For example, it can identify another gene product to
+      which the annotated gene product is similar (ISS) or interacts with (IPI).
+      Population of the With/From is mandatory for certain evidence codes.
+    range: external_identifier
+    required: false
+    multivalued: true
+    comments:
+      - Cardinality must be 0 for evidence codes IDA, TAS, NAS, or ND
+      - Cardinality must be 1, >1 for IEA, IC, IGI, IPI, ISS & child terms of ISS
+    todos:
+      - The GPAD spec makes a distinction between pipe- and comma-separated lists of
+        With/From values. Decide if and how this should be represented in the schema.
+
+  interacting_taxon:
+    description: |-
+      Taxonomic identifier for interacting organism to be used only in conjunction with
+      terms that have the biological process term 'GO:0044419 biological process
+      involved in interspecies interaction between organisms' or the cellular component
+      term 'GO:0018995 host cellular component' as an ancestor. Identifiers must come
+      from NCBI Taxonomy database.
+    range: ncbi_taxon_identifier
+    required: false
+    multivalued: true
+
+  annotation_date:
+    description: |-
+      Date on which the annotation was made
+    range: date
+    required: true
+    todos:
+      - The GPAD file description says that this is a date in the format `YYYY-MM-DD`.
+        The spec says that it is a date or datetime. Decide whether to permit date,
+        datetime, or both.
+
+  assigned_by:
+    description: |-
+      The database which made the annotation one of the values from the set of GOC
+      groups; used for tracking the source of an individual annotation.
+    range: string
+    required: true
+    comments:
+      - Value may differ from the DB:DB Object ID column. Any annotation that is made by
+        one database and incorporated into another retains the original value.
+
+  extension_relation:
+    description: |-
+      A term from the Relation Ontology that describes how the GO term in the extension
+      relates to the GO term in the standard annotation.
+    range: external_identifier
+    required: true
+
+  extension_term:
+    description: |-
+      The gene product, chemical, cell type, anatomical structure, or other entity that
+      is used to further specify the GO term in the standard annotation.
+    range: external_identifier
+    required: true
+
+  annotation_extensions:
+    description: |-
+      Annotation extensions allow GO terms in standard annotations to be further
+      specified, using gene products, chemicals, cell types, anatomical structures, to
+      provide additional biological context. The cross-reference is prefaced by an
+      appropriate relationship from the Relation Ontology.
+    range: AnnotationExtension
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    todos:
+      - The GPAD spec makes a distinction between pipe- and comma-separated lists of
+        annotation extensions. Decide if and how this should be represented in the
+        schema.
+      - Annotation extensions do not have a unique identifier, so the schema indicates
+        they are inlined as a list. This makes change operations that target a specific
+        annotation extension more difficult.
+
+  property_key:
+    description: |-
+      The key of an annotation property.
+    range: string
+    required: true
+
+  property_value:
+    description: |-
+      The value of an annotation property.
+    range: string
+    required: true
+
+  annotation_properties:
+    description: |-
+      A list if key-value pairs that provide additional information about a standard
+      annotation.
+    range: AnnotationProperty
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    todos:
+      - Annotation properties do not have a unique identifier, so the schema indicates
+        they are inlined as a list. This makes change operations that target a specific
+        annotation property more difficult.
+
+classes:
+  StandardAnnotation:
+    description: |-
+      An association between a gene product and a GO term, with an evidence code, a
+      reference to support the association, and other data associated with the gene
+      product or the annotation.
+    slots:
+      - db_object_id
+      - negation
+      - relation
+      - ontology_class_id
+      - references
+      - evidence_type
+      - with_or_from
+      - interacting_taxon
+      - annotation_date
+      - assigned_by
+      - annotation_extensions
+      - annotation_properties
+
+  AnnotationExtension:
+    description: |-
+      Annotation extensions allow GO terms in standard annotations to be further
+      specified, using gene products, chemicals, cell types, anatomical structures, to
+      provide additional biological context.
+    slots:
+      - extension_relation
+      - extension_term
+
+  AnnotationProperty:
+    description: |-
+      A key-value pair that provides additional information about a standard annotation.
+    slots:
+      - property_key
+      - property_value
+
+settings:
+  prefix: "[A-Za-z][A-Za-z0-9_\\-.]*"
+  local_id: "[A-Za-z0-9_\\-.:/]+"

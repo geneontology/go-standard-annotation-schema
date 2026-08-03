@@ -1,0 +1,62 @@
+---
+# https://pre-commit.com/
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-toml
+      - id: check-yaml
+        # mkdocs.yml uses !!python/name tags unsupported by the safe YAML loader
+        exclude: ^mkdocs\.yml$
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff check
+        entry: uv run --locked ruff check --fix --exit-non-zero-on-fix
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --locked ruff format
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+
+      - id: ty
+        name: ty check
+        entry: uv run --locked just type-check
+        language: system
+        files: ^(src|tests)/.*\.py$
+        pass_filenames: false
+
+      - id: yamllint
+        name: yamllint
+        entry: uv run --locked yamllint
+        language: system
+        types: [yaml]
+
+      - id: codespell
+        name: codespell
+        entry: uv run --locked codespell
+        language: system
+        types: [text]
+
+      - id: linkml-lint
+        name: LinkML lint
+        entry: uv run --locked just lint-schema
+        language: system
+        files: ^src/go_standard_annotation_schema/schema/.*\.ya?ml$
+        pass_filenames: false
+
+      - id: uv-lock
+        name: uv lock check
+        entry: uv lock --check
+        language: system
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false

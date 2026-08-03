@@ -1,0 +1,53 @@
+---
+name: Deploy docs
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions required to make a gh-pages deployment
+    permissions:
+      contents: write  # to let mkdocs write the new docs
+      pages: write     # to deploy to Pages
+      id-token: write  # allow to generate an OpenID Connect (OIDC) token
+
+    steps:
+      # https://github.com/actions/checkout
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0  # otherwise, you will fail to push refs to dest repo
+
+      - name: Configure git for the bot
+        # Gives the bot that commits to gh-pages a name & email address
+        # so that the commits have an author in the commit log.
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+
+      # https://github.com/astral-sh/setup-uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          enable-cache: true
+          version: "0.11.24"
+
+      # https://github.com/actions/setup-python
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: uv sync --locked --no-progress
+
+      - name: Generate schema documentation
+        run: |
+          uv run --locked just gen-doc
+          uv run mkdocs gh-deploy --force
