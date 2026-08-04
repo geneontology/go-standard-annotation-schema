@@ -66,7 +66,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: pypi-release
+      name: pypi
       url: https://pypi.org/p/go_standard_annotation_schema
     permissions:
       id-token: write  # this permission is mandatory for trusted publishing
