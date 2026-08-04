@@ -108,4 +108,5 @@ jobs:
           gh release upload \
             "${{ github.event.release.tag_name }}" \
             project/jsonschema/go_standard_annotation_schema.schema.json \
+            --repo "${{ github.repository }}" \
             --clobber
