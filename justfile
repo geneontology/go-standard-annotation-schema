@@ -97,6 +97,7 @@ all: gen-doc gen-json-schema gen-python
 [group('model development')]
 gen-doc: _gen-materialized-schema
   uv run linkml generate doc \
+    --stacktrace \
     --directory {{doc_dir}} \
     {{materialized_schema_path}}
 
@@ -110,7 +111,7 @@ serve-doc: gen-doc
 gen-json-schema: _gen-materialized-schema
   mkdir -p {{project_dir}}/jsonschema
   uv run linkml generate json-schema \
-    --top-class StandardAnnotation \
+    --top-class Annotation \
     {{materialized_schema_path}} > {{project_dir}}/jsonschema/{{schema_name}}.schema.json
 
 # Generate Pydantic models from the schema

@@ -10,6 +10,9 @@ see_also:
 prefixes:
   go_standard_annotation_schema: https://w3id.org/geneontology/go-standard-annotation-schema/
   linkml: https://w3id.org/linkml/
+  PR: http://purl.obolibrary.org/obo/PR_
+  SO: http://purl.obolibrary.org/obo/SO_
+  GO: http://purl.obolibrary.org/obo/GO_
 
 default_prefix: go_standard_annotation_schema
 default_range: string
@@ -69,6 +72,10 @@ slots:
       A boolean indicating whether the annotation is negated.
     range: boolean
     required: false
+    todos:
+      - Decide if this should be required in the schema so that it is always explicitly
+        set to true or false. Or, is it okay to have it be optional and assumed false if
+        not present?
 
   relation:
     description: |-
@@ -121,7 +128,7 @@ slots:
       - The GPAD spec makes a distinction between pipe- and comma-separated lists of
         With/From values. Decide if and how this should be represented in the schema.
 
-  interacting_taxon:
+  interacting_taxon_id:
     description: |-
       Taxonomic identifier for interacting organism to be used only in conjunction with
       terms that have the biological process term 'GO:0044419 biological process
@@ -155,23 +162,23 @@ slots:
   extension_relation:
     description: |-
       A term from the Relation Ontology that describes how the GO term in the extension
-      relates to the GO term in the standard annotation.
+      relates to the GO term in the annotation.
     range: external_identifier
     required: true
 
   extension_term:
     description: |-
       The gene product, chemical, cell type, anatomical structure, or other entity that
-      is used to further specify the GO term in the standard annotation.
+      is used to further specify the GO term in the annotation.
     range: external_identifier
     required: true
 
   annotation_extensions:
     description: |-
-      Annotation extensions allow GO terms in standard annotations to be further
-      specified, using gene products, chemicals, cell types, anatomical structures, to
-      provide additional biological context. The cross-reference is prefaced by an
-      appropriate relationship from the Relation Ontology.
+      Annotation extensions allow GO terms in annotations to be further specified, using
+      gene products, chemicals, cell types, anatomical structures, to provide additional
+      biological context. The cross-reference is prefaced by an appropriate relationship
+      from the Relation Ontology.
     range: AnnotationExtension
     required: false
     multivalued: true
@@ -199,8 +206,7 @@ slots:
 
   annotation_properties:
     description: |-
-      A list if key-value pairs that provide additional information about a standard
-      annotation.
+      A list if key-value pairs that provide additional information about an annotation.
     range: AnnotationProperty
     required: false
     multivalued: true
@@ -211,8 +217,100 @@ slots:
         they are inlined as a list. This makes change operations that target a specific
         annotation property more difficult.
 
+  db_object_symbol:
+    description: |-
+      The symbol of the entity being annotated.
+    range: string
+    required: false
+    todos:
+      - The GPI spec says that this is required, but in practice it is missing in many
+        rows of existing GPI files. Decide whether this should be required in the schema
+        and handled in the file parsing code if it is missing.
+
+  db_object_name:
+    description: |-
+      The name of the entity being annotated.
+    range: string
+    required: false
+
+  db_object_synonyms:
+    description: |-
+      Alternative names for the entity being annotated.
+    range: string
+    required: false
+    multivalued: true
+
+  db_object_type:
+    description: |-
+      The class of biological entity being annotated.
+    range: external_identifier
+    required: true
+    notes:
+      - This field should describe the type of biological object as defined by the
+        contributing database. For example, WormBase identifiers represent genes,
+        PomBase identifiers represent protein-coding genes, and SGD identifiers
+        represent proteins.
+      - GO does not allow 'gene' and 'gene product' as biological entity types, as this
+        does not allow to differentiate between proteins and ncRNAs products.
+
+  db_object_taxon_id:
+    description: |-
+      The NCBI Taxonomy identifier for the organism (species or strain) encoding the
+      entity being annotated.
+    range: ncbi_taxon_identifier
+    required: true
+
+  encoded_by:
+    description: |-
+      For proteins and transcripts, the gene that encodes the entity being annotated.
+    range: external_identifier
+    required: false
+    multivalued: true
+
+  canonical_object_id:
+    description: |-
+      If the entity being annotated is a gene, gene-centric reference protein or a
+      protein complex, this should repeat the ID of the object being annotated. If the
+      entity being annotated is derived from a gene product such as a protein isoform, a
+      modified protein or a processed transcript (e. g. miRNA), then this refers to the
+      gene-centric ID of the annotated entity.
+    range: external_identifier
+    required: true
+
+  protein_containing_complex_members:
+    description: |-
+      If the entity being annotated is a protein-containing complex, this should list
+      the gene-centric canonical protein identifiers.
+    range: external_identifier
+    required: false
+    multivalued: true
+
+  db_xrefs:
+    description: |-
+      Cross-references to other databases for the entity being annotated.
+    range: external_identifier
+    required: false
+    multivalued: true
+    notes:
+      - |-
+        This field is mandatory if the prefix of the annotated entity's identifier is
+        not one of: UniProtKB, RNACentral, ComplexPortal. In these cases, db_xrefs must
+        include the corresponding UniProtKB ID, RNACentral, or ComplexPortal as
+        appropriate according to the Object Type.
+      - Additional cross references such as NCBI gene or protein IDs, HGNC, etc, may
+        also be included.
+
+  gene_product_properties:
+    description: |-
+      A list of key-value pairs that provide additional information about an entity.
+    range: EntityProperty
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
 classes:
-  StandardAnnotation:
+  Annotation:
     description: |-
       An association between a gene product and a GO term, with an evidence code, a
       reference to support the association, and other data associated with the gene
@@ -225,7 +323,7 @@ classes:
       - references
       - evidence_type
       - with_or_from
-      - interacting_taxon
+      - interacting_taxon_id
       - annotation_date
       - assigned_by
       - annotation_extensions
@@ -233,19 +331,55 @@ classes:
 
   AnnotationExtension:
     description: |-
-      Annotation extensions allow GO terms in standard annotations to be further
-      specified, using gene products, chemicals, cell types, anatomical structures, to
+      Annotation extensions allow GO terms in annotations to be further specified, using
+      gene products, chemicals, cell types, anatomical structures, to
       provide additional biological context.
     slots:
       - extension_relation
       - extension_term
 
-  AnnotationProperty:
+  Property:
     description: |-
-      A key-value pair that provides additional information about a standard annotation.
+      A key-value pair that provides additional information about an annotation or
+      entity.
     slots:
       - property_key
       - property_value
+
+  AnnotationProperty:
+    description: |-
+      A key-value pair that provides additional information about an annotation.
+    is_a: Property
+
+  EntityProperty:
+    description: |-
+      A key-value pair that provides additional information about an entity.
+    is_a: Property
+    slot_usage:
+      property_key:
+        equals_string_in:
+          - db-subset
+          - uniprot-proteome
+          - go-annotation-complete
+          - go-annotation-summary
+
+  Entity:
+    description: |-
+      An annotatable biological entity for an organism: protein-coding genes, non-coding
+      RNA genes, protein isoforms (i. e., splice variants) and modified forms, such as
+      cleaved forms or proteins modified by post-translational modifications.
+    slots:
+      - db_object_id
+      - db_object_symbol
+      - db_object_name
+      - db_object_synonyms
+      - db_object_type
+      - db_object_taxon_id
+      - encoded_by
+      - canonical_object_id
+      - protein_containing_complex_members
+      - db_xrefs
+      - gene_product_properties
 
 settings:
   prefix: "[A-Za-z][A-Za-z0-9_\\-.]*"
