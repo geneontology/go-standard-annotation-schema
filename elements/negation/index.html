@@ -409,6 +409,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#todos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TODOs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -495,7 +506,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../StandardAnnotation/">StandardAnnotation</a></td>
+<td><a href="../Annotation/">Annotation</a></td>
 <td>An association between a gene product and a GO term, with an evidence code, a</td>
 <td>no</td>
 </tr>
@@ -517,7 +528,7 @@
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../StandardAnnotation/">StandardAnnotation</a></td>
+<td><a href="../Annotation/">Annotation</a></td>
 </tr>
 </tbody>
 </table>
@@ -536,6 +547,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="todos">TODOs</h2>
+<ul>
+<li>Decide if this should be required in the schema so that it is always explicitly set to true or false. Or, is it okay to have it be optional and assumed false if not present?</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -564,10 +579,14 @@
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">negation</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A boolean indicating whether the annotation is negated.</span>
+<span class="nt">todos</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decide if this should be required in the schema so that it is always explicitly</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">set to true or false. Or, is it okay to have it be optional and assumed false if</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">not present?</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">StandardAnnotation</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>

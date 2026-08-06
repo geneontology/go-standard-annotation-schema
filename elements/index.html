@@ -554,16 +554,28 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="AnnotationExtension/">AnnotationExtension</a></td>
-<td>Annotation extensions allow GO terms in standard annotations to be further</td>
-</tr>
-<tr>
-<td><a href="AnnotationProperty/">AnnotationProperty</a></td>
-<td>A key-value pair that provides additional information about a standard annota...</td>
-</tr>
-<tr>
-<td><a href="StandardAnnotation/">StandardAnnotation</a></td>
+<td><a href="Annotation/">Annotation</a></td>
 <td>An association between a gene product and a GO term, with an evidence code, a</td>
+</tr>
+<tr>
+<td><a href="AnnotationExtension/">AnnotationExtension</a></td>
+<td>Annotation extensions allow GO terms in annotations to be further specified, ...</td>
+</tr>
+<tr>
+<td><a href="Entity/">Entity</a></td>
+<td>An annotatable biological entity for an organism: protein-coding genes, non-c...</td>
+</tr>
+<tr>
+<td><a href="Property/">Property</a></td>
+<td>A key-value pair that provides additional information about an annotation or</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AnnotationProperty/">AnnotationProperty</a></td>
+<td>A key-value pair that provides additional information about an annotation</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="EntityProperty/">EntityProperty</a></td>
+<td>A key-value pair that provides additional information about an entity</td>
 </tr>
 </tbody>
 </table>
@@ -582,19 +594,51 @@
 </tr>
 <tr>
 <td><a href="annotation_extensions/">annotation_extensions</a></td>
-<td>Annotation extensions allow GO terms in standard annotations to be further</td>
+<td>Annotation extensions allow GO terms in annotations to be further specified, ...</td>
 </tr>
 <tr>
 <td><a href="annotation_properties/">annotation_properties</a></td>
-<td>A list if key-value pairs that provide additional information about a standar...</td>
+<td>A list if key-value pairs that provide additional information about an annota...</td>
 </tr>
 <tr>
 <td><a href="assigned_by/">assigned_by</a></td>
 <td>The database which made the annotation one of the values from the set of GOC</td>
 </tr>
 <tr>
+<td><a href="canonical_object_id/">canonical_object_id</a></td>
+<td>If the entity being annotated is a gene, gene-centric reference protein or a</td>
+</tr>
+<tr>
 <td><a href="db_object_id/">db_object_id</a></td>
 <td>A unique identifier for the item being annotated</td>
+</tr>
+<tr>
+<td><a href="db_object_name/">db_object_name</a></td>
+<td>The name of the entity being annotated</td>
+</tr>
+<tr>
+<td><a href="db_object_symbol/">db_object_symbol</a></td>
+<td>The symbol of the entity being annotated</td>
+</tr>
+<tr>
+<td><a href="db_object_synonyms/">db_object_synonyms</a></td>
+<td>Alternative names for the entity being annotated</td>
+</tr>
+<tr>
+<td><a href="db_object_taxon_id/">db_object_taxon_id</a></td>
+<td>The NCBI Taxonomy identifier for the organism (species or strain) encoding th...</td>
+</tr>
+<tr>
+<td><a href="db_object_type/">db_object_type</a></td>
+<td>The class of biological entity being annotated</td>
+</tr>
+<tr>
+<td><a href="db_xrefs/">db_xrefs</a></td>
+<td>Cross-references to other databases for the entity being annotated</td>
+</tr>
+<tr>
+<td><a href="encoded_by/">encoded_by</a></td>
+<td>For proteins and transcripts, the gene that encodes the entity being annotate...</td>
 </tr>
 <tr>
 <td><a href="evidence_type/">evidence_type</a></td>
@@ -609,7 +653,11 @@
 <td>The gene product, chemical, cell type, anatomical structure, or other entity ...</td>
 </tr>
 <tr>
-<td><a href="interacting_taxon/">interacting_taxon</a></td>
+<td><a href="gene_product_properties/">gene_product_properties</a></td>
+<td>A list of key-value pairs that provide additional information about an entity</td>
+</tr>
+<tr>
+<td><a href="interacting_taxon_id/">interacting_taxon_id</a></td>
 <td>Taxonomic identifier for interacting organism to be used only in conjunction ...</td>
 </tr>
 <tr>
@@ -627,6 +675,10 @@
 <tr>
 <td><a href="property_value/">property_value</a></td>
 <td>The value of an annotation property</td>
+</tr>
+<tr>
+<td><a href="protein_containing_complex_members/">protein_containing_complex_members</a></td>
+<td>If the entity being annotated is a protein-containing complex, this should li...</td>
 </tr>
 <tr>
 <td><a href="references/">references</a></td>
