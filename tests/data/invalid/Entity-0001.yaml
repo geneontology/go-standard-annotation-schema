@@ -1,0 +1,13 @@
+# This file is invalid because it is missing the required db_object_id field
+
+db_object_symbol: abt-1
+db_object_name: ABC transporter domain-containing protein
+db_object_synonyms:
+  - C24F3.5
+  - CELE_C24F3.5
+  - abt-1
+db_object_type: "PR:000000001"
+db_object_taxon_id: "NCBITaxon:6239"
+canonical_object_id: "WB:WBGene00000019"
+db_xrefs:
+  - "UniProtKB:S6EZS3"
