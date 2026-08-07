@@ -3,7 +3,7 @@ from __future__ import annotations
 import gzip
 import os
 from collections import deque
-from collections.abc import Callable, Iterator
+from collections.abc import Iterator
 from datetime import date, datetime
 from io import TextIOBase
 from typing import ClassVar, Generic, TextIO, TypeVar
@@ -15,6 +15,7 @@ from go_standard_annotation_schema.datamodel import (
 )
 
 from .types import (
+    ErrorCallback,
     ErrorMode,
     FileMetadata,
     FormatName,
@@ -25,12 +26,11 @@ from .types import (
     ReaderStats,
     RowError,
     RowIssue,
+    Source,
 )
 
 ModelT = TypeVar("ModelT")
 PropertyT = TypeVar("PropertyT", bound=Property)
-Source = str | os.PathLike[str] | TextIO
-ErrorCallback = Callable[[RowIssue], None]
 
 
 class _FieldCountError(ValueError):
@@ -125,6 +125,25 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
         errors: ErrorMode = "strict",
         on_error: ErrorCallback | None = None,
     ) -> None:
+        """Initialize a reader.
+
+        Args:
+            source: A filesystem path or readable text stream. Paths ending in
+                ``.gz`` are decompressed automatically.
+            errors: ``"strict"`` raises the first row error. ``"skip"`` skips
+                invalid rows and continues reading.
+            on_error: Optional callback invoked with each skipped
+                [`RowIssue`][go_standard_annotation_schema.io.RowIssue]. It is
+                used only when ``errors="skip"``.
+
+        Raises:
+            ValueError: If `errors` is neither ``"strict"`` nor ``"skip"``.
+            HeaderError: If the file header is missing, malformed, or has the wrong
+                format version.
+            ReaderStateError: If iteration occurs outside the open context or the
+                reader is entered more than once.
+            RowError: If a data row is invalid and `errors` is ``"strict"``.
+        """
         if errors not in ("strict", "skip"):
             raise ValueError("errors must be 'strict' or 'skip'")
         self._source = source
@@ -149,6 +168,17 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
 
     @property
     def metadata(self) -> FileMetadata:
+        """Metadata read from the file header.
+
+        The header is consumed when the reader enters its context manager, so
+        metadata is available before the first data record is yielded.
+
+        Returns:
+            The parsed format, version, generation metadata, and header entries.
+
+        Raises:
+            ReaderStateError: If accessed before entering the reader.
+        """
         if self._state == "new" or self._metadata is None:
             raise ReaderStateError(
                 "metadata is available only after entering the reader"
@@ -157,6 +187,16 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
 
     @property
     def stats(self) -> ReaderStats:
+        """A snapshot of the reader's current counters.
+
+        Counts are updated as the reader consumes lines, parses metadata, and yields
+        records. This property can be accessed at any time, but the counts may not
+        reflect the final state until the reader is exhausted.
+
+        Returns:
+            Counts for consumed lines, metadata, data rows, yielded records, skipped
+                rows, blank lines, and ignored comments.
+        """
         return ReaderStats(**self._counters)
 
     def __enter__(self) -> _Reader[ModelT]:

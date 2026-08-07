@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import os
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import Literal
+from typing import Literal, TextIO
 
 ErrorMode = Literal["strict", "skip"]
+"""The error handling mode for a reader."""
+
 FormatName = Literal["gpad", "gpi"]
 ReaderState = Literal["new", "open", "exhausted", "closed"]
 
@@ -33,6 +37,8 @@ class FileMetadata:
 
 @dataclass(frozen=True)
 class RowIssue:
+    """Information about a problem with a data row."""
+
     source: str | None
     line_number: int | None
     format: FormatName
@@ -43,6 +49,8 @@ class RowIssue:
 
 @dataclass(frozen=True)
 class ReaderStats:
+    """Statistics about the reader's progress and results."""
+
     lines_read: int = 0
     metadata_entries: int = 0
     data_rows: int = 0
@@ -65,6 +73,8 @@ class HeaderError(ReaderError):
 
 
 class RowError(ReaderError):
+    """Raised when a data row is invalid."""
+
     def __init__(self, issue: RowIssue):
         self.issue = issue
         if issue.source and issue.line_number is not None:
@@ -77,3 +87,10 @@ class RowError(ReaderError):
             location = "row"
         message = f"{location}: invalid {issue.format.upper()} row ({issue.code})"
         super().__init__(message)
+
+
+Source = str | os.PathLike[str] | TextIO
+"""A source of data for the reader."""
+
+ErrorCallback = Callable[[RowIssue], None]
+"""A callback function for handling row issues."""

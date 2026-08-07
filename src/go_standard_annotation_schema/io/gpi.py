@@ -15,7 +15,21 @@ from ._common import (
 
 
 class GpiReader(_Reader[Entity]):
-    """Stream GPI 2.0 rows as validated Entity models."""
+    """Stream GPI 2.0 rows as validated `Entity` models.
+
+    Use the reader as a context manager. The header is parsed on entry, and
+    iteration is valid only while the context is open.
+
+    Examples:
+        ```python
+        from go_standard_annotation_schema.io import GpiReader
+
+        with GpiReader("entities.gpi") as reader:
+            for entity in reader:
+                print(entity.db_object_id)
+            print(reader.metadata.version)
+        ```
+    """
 
     format_name: ClassVar[str] = "gpi"
     version_header: ClassVar[str] = "gpi-version"
@@ -55,6 +69,27 @@ class GpiReader(_Reader[Entity]):
         line_number: int | None = None,
         source: str | None = None,
     ) -> Entity:
+        """Parse one GPI 2.0 data row into an entity.
+
+        Args:
+            line: A tab-delimited GPI data row, with or without a line ending.
+            line_number: Optional source line number included in error details.
+            source: Optional source name included in error details.
+
+        Returns:
+            The validated entity represented by the row.
+
+        Raises:
+            RowError: If the row has the wrong field count, invalid GPI syntax,
+                or values rejected by model validation.
+
+        Examples:
+            ```python
+            from go_standard_annotation_schema.io import GpiReader
+
+            entity = GpiReader.parse_line(line)
+            ```
+        """
         (entity,) = cls._parse_models(
             line,
             line_number=line_number,
