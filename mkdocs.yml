@@ -24,6 +24,27 @@ extra_javascript: []
 
 plugins:
   - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src
+          # Load object inventories to enable cross-references to other projects.
+          inventories:
+            - https://docs.python.org/3/objects.inv
+          options:
+            docstring_options:
+              ignore_init_summary: true
+            docstring_section_style: list
+            docstring_style: google
+            group_by_category: true
+            inherited_members: true
+            merge_init_into_class: true
+            show_bases: false
+            show_category_heading: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_source: false
   - mermaid2:
       version: 11.4.1
   # https://pypi.org/project/mkdocs-pymdownx-material-extras
@@ -60,6 +81,7 @@ watch:
 nav:
   - Home: index.md
   - Schema: elements/index.md
+  - Readers API: readers.md
   - About: about.md
 
 site_url: https://geneontology.github.io/go-standard-annotation-schema

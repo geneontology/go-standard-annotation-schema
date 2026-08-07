@@ -25,6 +25,7 @@ dev = [
   "mkdocs-material>=8.2.8",
   "mkdocs-mermaid2-plugin>=1.1.1",
   "mkdocs-pymdownx-material-extras>=2.5.6",
+  "mkdocstrings-python>=2.0.5",
   "pre-commit>=4.6.0",
   "pytest>=9.1.1",
   "ruff>=0.15.22",

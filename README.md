@@ -46,9 +46,7 @@ If you have just installed globally, you can omit the `uv run --locked` prefix a
 `GpadReader` and `GpiReader` stream validated annotations and entities without loading
 the whole file into memory. Both readers support only version 2.0 of their respective
 formats. A path ending in `.gz` is opened as a gzip-compressed text file; other paths
-are opened as ordinary text files. For compatibility with producers that omit the GPI
-object symbol, an empty column 2 is preserved as an empty `db_object_symbol`; other
-mandatory GPI scalar columns remain required.
+are opened as ordinary text files.
 
 Use a reader as a context manager to inspect its header metadata and iterate over its
 records:
@@ -95,13 +93,13 @@ from go_standard_annotation_schema.io import GpadReader
 print(annotation.ontology_class_id)
 ```
 
-For GPAD columns 7 and 11, pipes separate alternative annotations and commas
-separate values within one annotation. When either field contains pipes, the reader
-emits one `Annotation` for each Cartesian-product combination. Therefore
+For GPAD columns 7 and 11, pipes separate alternative annotations and commas separate
+values within one annotation. When either field contains pipes, the reader emits one
+`Annotation` for each Cartesian-product combination. Therefore
 `GpadReader.parse_line()` returns a tuple, even when a row produces one annotation.
 
-Interacting taxon identifiers are split only on pipes. Other content is passed
-unchanged to `Annotation.model_validate()` for model-level validation.
+Interacting taxon identifiers are split only on pipes. Other content is passed unchanged
+to `Annotation.model_validate()` for model-level validation.
 
 See the
 official [GPAD 2.0 format documentation](https://geneontology.org/docs/gene-product-association-data-gpad-format/)
