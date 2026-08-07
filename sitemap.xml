@@ -2,238 +2,238 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/about/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Annotation/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/AnnotationExtension/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/AnnotationProperty/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Boolean/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Curie/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Date/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/DateOrDatetime/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Datetime/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Decimal/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Double/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/EcoIdentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Entity/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/EntityProperty/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/ExternalIdentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Float/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/GoIdentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Integer/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Jsonpath/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Jsonpointer/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/NcbiTaxonIdentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Ncname/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Nodeidentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Objectidentifier/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Property/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Sparqlpath/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/String/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Time/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Uri/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/Uriorcurie/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/annotation_date/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/annotation_extensions/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/annotation_properties/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/assigned_by/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/canonical_object_id/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_id/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_name/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_symbol/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_synonyms/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_taxon_id/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_object_type/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/db_xrefs/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/encoded_by/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/evidence_type/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/extension_relation/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/extension_term/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/gene_product_properties/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/go-standard-annotation-schema/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/interacting_taxon_id/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/negation/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/ontology_class_id/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/property_key/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/property_value/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/protein_containing_complex_members/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/references/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/relation/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://geneontology.github.io/go-standard-annotation-schema/elements/with_or_from/</loc>
-         <lastmod>2026-08-06</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
 </urlset>
