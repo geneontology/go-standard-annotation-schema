@@ -352,7 +352,7 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
         except ValueError as error:
             self._header_error("date-generated", "is not a valid ISO date", error)
 
-        # Populate the file metadata field with the collectd and validated values.
+        # Populate the file metadata field with the collected and validated values.
         self._metadata = FileMetadata(
             format=self.format_name,
             version=version,
