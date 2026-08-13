@@ -110,7 +110,7 @@ slots:
 
   relation:
     description: >-
-      Relation from the Relation Ontology that describe how the annotated biological
+      Relation from the Relation Ontology that describes how the annotated biological
       entity relates to the GO term with which it is associated.
     range: external_identifier
     required: true
@@ -272,7 +272,7 @@ slots:
         does not allow to differentiate between proteins and ncRNAs products.
     notes:
       - The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' ID )*` but
-        the narrative spec says that it cardinality 1. The narrative spec seems more
+        the narrative spec says that it has cardinality 1. The narrative spec seems more
         appropriate, so that is what is implemented here. Decide if that is correct.
 
   db_object_taxon_id:
@@ -300,8 +300,9 @@ slots:
     required: true
     notes:
       - The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '|' ID )* )?`
-        but the narrative spec says that it cardinality 1. The narrative spec seems more
-        appropriate, so that is what is implemented here. Decide if that is correct.
+        but the narrative spec says that it has cardinality 1. The narrative spec seems
+        more appropriate, so that is what is implemented here. Decide if that is
+        correct.
 
   protein_containing_complex_members:
     description: >-

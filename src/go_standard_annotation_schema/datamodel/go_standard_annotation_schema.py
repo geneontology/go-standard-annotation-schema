@@ -404,7 +404,7 @@ class Annotation(ConfiguredBaseModel):
          'notes': ['Decide if this should be required in the schema so that it is '
                    'always explicitly set to true or false. Or, is it okay to have it '
                    'be optional and assumed false if not present?']} })
-    relation: str = Field(default=..., description="""Relation from the Relation Ontology that describe how the annotated biological entity relates to the GO term with which it is associated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
+    relation: str = Field(default=..., description="""Relation from the Relation Ontology that describes how the annotated biological entity relates to the GO term with which it is associated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
          'notes': ['The GPAD spec says that the "relation used SHOULD come from the '
                    'allowed gene-product-to-term relations". Decide whether to enforce '
                    'this in the schema via an enum.']} })
@@ -563,15 +563,15 @@ class Entity(ConfiguredBaseModel):
                       'proteins and ncRNAs products.'],
          'domain_of': ['Entity'],
          'notes': ["The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' "
-                   'ID )*` but the narrative spec says that it cardinality 1. The '
+                   'ID )*` but the narrative spec says that it has cardinality 1. The '
                    'narrative spec seems more appropriate, so that is what is '
                    'implemented here. Decide if that is correct.']} })
     db_object_taxon_id: str = Field(default=..., description="""The NCBI Taxonomy identifier for the organism (species or strain) encoding the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
     encoded_by: Optional[list[str]] = Field(default=None, description="""For proteins and transcripts, the gene that encodes the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
     canonical_object_id: str = Field(default=..., description="""If the entity being annotated is a gene, gene-centric reference protein or a protein complex, this should repeat the ID of the object being annotated. If the entity being annotated is derived from a gene product such as a protein isoform, a modified protein or a processed transcript (e. g. miRNA), then this refers to the gene-centric ID of the annotated entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
          'notes': ['The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '
-                   "'|' ID )* )?` but the narrative spec says that it cardinality 1. "
-                   'The narrative spec seems more appropriate, so that is what is '
+                   "'|' ID )* )?` but the narrative spec says that it has cardinality "
+                   '1. The narrative spec seems more appropriate, so that is what is '
                    'implemented here. Decide if that is correct.']} })
     protein_containing_complex_members: Optional[list[str]] = Field(default=None, description="""If the entity being annotated is a protein-containing complex, this should list the gene-centric canonical protein identifiers.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
     db_xrefs: Optional[list[str]] = Field(default=None, description="""Cross-references to other databases for the entity being annotated.""", json_schema_extra = { "linkml_meta": {'comments': ["This field is mandatory if the prefix of the annotated entity's "
