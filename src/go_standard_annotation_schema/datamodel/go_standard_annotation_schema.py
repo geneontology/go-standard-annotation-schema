@@ -72,6 +72,18 @@ linkml_meta = LinkMLMeta({'default_prefix': 'go_standard_annotation_schema',
      'id': 'https://w3id.org/geneontology/go-standard-annotation-schema',
      'license': 'BSD-3-Clause',
      'name': 'go-standard-annotation-schema',
+     'notes': ['This schema uses custom types with structured patterns to '
+               'represent various types of identifiers. However, LinkML tooling '
+               'currently does not materialize structured patterns in generated '
+               'artifacts. The necessary changes are currently (as of 2026-08-13) '
+               'pending in https://github.com/linkml/linkml/pull/3832. Once this '
+               'PR is merged, the changes released, and the LinkML dependency in '
+               'this project updated, we will have stronger validation of '
+               'identifier formats.',
+               'This schema deviates from the grammar and specs when necessary to '
+               'either reflect actual data or to establish better modeling '
+               'practices. These deviations are documented as notes on specific '
+               'schema elements.'],
      'prefixes': {'GO': {'prefix_prefix': 'GO',
                          'prefix_reference': 'http://purl.obolibrary.org/obo/GO_'},
                   'PR': {'prefix_prefix': 'PR',
@@ -88,7 +100,10 @@ linkml_meta = LinkMLMeta({'default_prefix': 'go_standard_annotation_schema',
                            'prefix_reference': 'http://www.w3.org/ns/shex#'},
                   'xsd': {'prefix_prefix': 'xsd',
                           'prefix_reference': 'http://www.w3.org/2001/XMLSchema#'}},
-     'see_also': ['https://geneontology.github.io/go-standard-annotation-schema'],
+     'see_also': ['https://geneontology.github.io/go-standard-annotation-schema',
+                  'https://github.com/geneontology/go-annotation/blob/master/specs/gpad-gpi-2-0.md',
+                  'https://geneontology.github.io/docs/gene-product-association-data-gpad-format',
+                  'https://geneontology.org/docs/gene-product-information-gpi-format-2.0'],
      'settings': {'local_id': {'setting_key': 'local_id',
                                'setting_value': '[A-Za-z0-9_\\-.:/]+'},
                   'prefix': {'setting_key': 'prefix',
@@ -300,6 +315,14 @@ linkml_meta = LinkMLMeta({'default_prefix': 'go_standard_annotation_schema',
                                               '"objectidentifier".'],
                                     'repr': 'str',
                                     'uri': 'shex:iri'},
+               'ro_identifier': {'description': 'An identifier of a Relation '
+                                                'Ontology term.',
+                                 'from_schema': 'https://w3id.org/geneontology/go-standard-annotation-schema',
+                                 'name': 'ro_identifier',
+                                 'structured_pattern': {'interpolated': True,
+                                                        'partial_match': False,
+                                                        'syntax': '(RO|BFO):{local_id}'},
+                                 'typeof': 'external_identifier'},
                'sparqlpath': {'base': 'str',
                               'conforms_to': 'https://www.w3.org/TR/sparql11-query/#propertypaths',
                               'description': 'A string encoding a SPARQL Property '
@@ -373,11 +396,11 @@ class Annotation(ConfiguredBaseModel):
 
     db_object_id: str = Field(default=..., description="""A unique identifier for the item being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation', 'Entity']} })
     negation: Optional[bool] = Field(default=None, description="""A boolean indicating whether the annotation is negated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
-         'todos': ['Decide if this should be required in the schema so that it is '
+         'notes': ['Decide if this should be required in the schema so that it is '
                    'always explicitly set to true or false. Or, is it okay to have it '
                    'be optional and assumed false if not present?']} })
     relation: str = Field(default=..., description="""Relation from the Relation Ontology that describe how the annotated biological entity relates to the GO term with which it is associated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
-         'todos': ['The GPAD spec says that the "relation used SHOULD come from the '
+         'notes': ['The GPAD spec says that the "relation used SHOULD come from the '
                    'allowed gene-product-to-term relations". Decide whether to enforce '
                    'this in the schema via an enum.']} })
     ontology_class_id: str = Field(default=..., description="""The GO identifier for the term attributed to the DB object ID.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation']} })
@@ -386,13 +409,10 @@ class Annotation(ConfiguredBaseModel):
     with_or_from: Optional[list[str]] = Field(default=None, description="""Used with specific ECO codes to capture an additional identifier supporting the evidence for the annotation. For example, it can identify another gene product to which the annotated gene product is similar (ISS) or interacts with (IPI). Population of the With/From is mandatory for certain evidence codes.""", json_schema_extra = { "linkml_meta": {'comments': ['Cardinality must be 0 for evidence codes IDA, TAS, NAS, or ND',
                       'Cardinality must be 1, >1 for IEA, IC, IGI, IPI, ISS & child '
                       'terms of ISS'],
-         'domain_of': ['Annotation'],
-         'todos': ['The GPAD spec makes a distinction between pipe- and '
-                   'comma-separated lists of With/From values. Decide if and how this '
-                   'should be represented in the schema.']} })
+         'domain_of': ['Annotation']} })
     interacting_taxon_id: Optional[list[str]] = Field(default=None, description="""Taxonomic identifier for interacting organism to be used only in conjunction with terms that have the biological process term 'GO:0044419 biological process involved in interspecies interaction between organisms' or the cellular component term 'GO:0018995 host cellular component' as an ancestor. Identifiers must come from NCBI Taxonomy database.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation']} })
     annotation_date: date = Field(default=..., description="""Date on which the annotation was made""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
-         'todos': ['The GPAD file description says that this is a date in the format '
+         'notes': ['The GPAD file description says that this is a date in the format '
                    '`YYYY-MM-DD`. The spec says that it is a date or datetime. Decide '
                    'whether to permit date, datetime, or both.']} })
     assigned_by: str = Field(default=..., description="""The database which made the annotation one of the values from the set of GOC groups; used for tracking the source of an individual annotation.""", json_schema_extra = { "linkml_meta": {'comments': ['Value may differ from the DB:DB Object ID column. Any '
@@ -400,10 +420,7 @@ class Annotation(ConfiguredBaseModel):
                       'another retains the original value.'],
          'domain_of': ['Annotation']} })
     annotation_extensions: Optional[list[AnnotationExtension]] = Field(default=None, description="""Annotation extensions allow GO terms in annotations to be further specified, using gene products, chemicals, cell types, anatomical structures, to provide additional biological context. The cross-reference is prefaced by an appropriate relationship from the Relation Ontology.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation'],
-         'todos': ['The GPAD spec makes a distinction between pipe- and '
-                   'comma-separated lists of annotation extensions. Decide if and how '
-                   'this should be represented in the schema.',
-                   'Annotation extensions do not have a unique identifier, so the '
+         'notes': ['Annotation extensions do not have a unique identifier, so the '
                    'schema indicates they are inlined as a list. This makes change '
                    'operations that target a specific annotation extension more '
                    'difficult.']} })
@@ -439,9 +456,18 @@ class AnnotationProperties(ConfiguredBaseModel):
     noctua_model_id: Optional[str] = Field(default=None, description="""The unique identifier of the associated GO-CAM model.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
     contributor_id: Optional[list[str]] = Field(default=None, description="""The identifier of a curator or user who entered or changed an annotation.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
     reviewer_id: Optional[list[str]] = Field(default=None, description="""The identifier of a curator or user who last reviewed an annotation.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
-    creation_date: Optional[date] = Field(default=None, description="""The date on which the annotation was created.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
-    modification_date: Optional[list[date]] = Field(default=None, description="""A date on which the annotation was modified.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
-    reviewed_date: Optional[list[date]] = Field(default=None, description="""A date on which the annotation was reviewed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
+    creation_date: Optional[date] = Field(default=None, description="""The date on which the annotation was created.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties'],
+         'notes': ['The grammar says this should be a date or datetime, but the '
+                   'narrative spec is less clear. This is being modeled as a date to '
+                   'keep it in alignment with other date fields for now.']} })
+    modification_date: Optional[list[date]] = Field(default=None, description="""A date on which the annotation was modified.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties'],
+         'notes': ['The grammar says this should be a date or datetime, but the '
+                   'narrative spec is less clear. This is being modeled as a date to '
+                   'keep it in alignment with other date fields for now.']} })
+    reviewed_date: Optional[list[date]] = Field(default=None, description="""A date on which the annotation was reviewed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties'],
+         'notes': ['The grammar says this should be a date or datetime, but the '
+                   'narrative spec is less clear. This is being modeled as a date to '
+                   'keep it in alignment with other date fields for now.']} })
     comment: Optional[list[str]] = Field(default=None, description="""Free text about a specific annotation.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AnnotationProperties']} })
 
     @field_validator('model_state')
@@ -472,8 +498,15 @@ class GeneProductProperties(ConfiguredBaseModel):
          'equals_string_in': ['TrEMBL', 'Swiss-Prot'],
          'notes': ['Using equals_string_in instead of an enum here to avoid issues '
                    'with the specific capitalization and punctuation of the values.']} })
-    uniprot_proteome: Optional[str] = Field(default=None, description="""The UniProt proteome accession for the set of proteins that constitute an organism's proteome.""", json_schema_extra = { "linkml_meta": {'domain_of': ['GeneProductProperties']} })
-    go_annotation_complete: Optional[date] = Field(default=None, description="""The date on which a curator determined that the set of GO annotations for an entity was complete.""", json_schema_extra = { "linkml_meta": {'domain_of': ['GeneProductProperties']} })
+    uniprot_proteome: Optional[str] = Field(default=None, description="""The UniProt proteome accession for the set of proteins that constitute an organism's proteome.""", json_schema_extra = { "linkml_meta": {'domain_of': ['GeneProductProperties'],
+         'notes': ['The GPI grammar says this should be a prefixed identifier, but the '
+                   'example shows an unprefixed identifier. It is unclear what is '
+                   'actually used in practice. This is being modeled as an unprefixed '
+                   'identifier for now.']} })
+    go_annotation_complete: Optional[date] = Field(default=None, description="""The date on which a curator determined that the set of GO annotations for an entity was complete.""", json_schema_extra = { "linkml_meta": {'domain_of': ['GeneProductProperties'],
+         'notes': ['The GPI grammar and spec say this can be a date or datetime. It is '
+                   'unclear what is actually used in practice. This is being modeled '
+                   'as a date to keep it in alignment with other date fields for now.']} })
     go_annotation_summary: Optional[str] = Field(default=None, description="""A textual gene or gene-product description.""", json_schema_extra = { "linkml_meta": {'domain_of': ['GeneProductProperties']} })
 
     @field_validator('uniprot_proteome')
@@ -498,44 +531,52 @@ class Entity(ConfiguredBaseModel):
 
     db_object_id: str = Field(default=..., description="""A unique identifier for the item being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Annotation', 'Entity']} })
     db_object_symbol: Optional[str] = Field(default=None, description="""The symbol of the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
-         'todos': ['The GPI grammar and narrative spec both say that this is required, '
+         'notes': ['The GPI grammar and narrative spec both say that this is required, '
                    'but in practice it is missing in many rows of existing GPI files. '
                    'Decide whether this should be required in the schema and handled '
                    'in the file parsing code if it is missing.']} })
     db_object_name: Optional[str] = Field(default=None, description="""The name of the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
-         'todos': ['The GPI grammar implies that column 3 is required, but the '
+         'notes': ['The GPI grammar implies that column 3 is required, but the '
                    'narrative spec says that it is optional. The narrative spec seems '
                    'more appropriate, so that is what is implemented here. Decide if '
                    'that is correct.']} })
     db_object_synonyms: Optional[list[str]] = Field(default=None, description="""Alternative names for the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
-    db_object_type: str = Field(default=..., description="""The class of biological entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
-         'notes': ['This field should describe the type of biological object as '
-                   'defined by the contributing database. For example, WormBase '
-                   'identifiers represent genes, PomBase identifiers represent '
-                   'protein-coding genes, and SGD identifiers represent proteins.',
-                   "GO does not allow 'gene' and 'gene product' as biological entity "
-                   'types, as this does not allow to differentiate between proteins '
-                   'and ncRNAs products.'],
-         'todos': ["The GPI grammar says that column 6 has cardinality 1..*, `ID ( '|' "
+    db_object_type: str = Field(default=..., description="""The class of biological entity being annotated.""", json_schema_extra = { "linkml_meta": {'comments': ['This field should describe the type of biological object as '
+                      'defined by the contributing database. For example, WormBase '
+                      'identifiers represent genes, PomBase identifiers represent '
+                      'protein-coding genes, and SGD identifiers represent proteins.',
+                      'The entity type value must be provided as an ontology term '
+                      'identifier from Sequence Ontology, Protein Ontology, or GO, and '
+                      'must correspond to one of the permitted GPI entity types or a '
+                      'more granular child term. Common entries include PR:000000001 '
+                      '(protein), GO:0032991 (protein-containing complex), SO:0001217 '
+                      '(protein-coding gene), SO:0000655 (ncRNA) or any SO child term, '
+                      'SO:0001263 (ncRNA-coding gene) or any SO child term, SO:0000336 '
+                      '(pseudogene).',
+                      "GO does not allow 'gene' and 'gene product' as biological "
+                      'entity types, as this does not allow to differentiate between '
+                      'proteins and ncRNAs products.'],
+         'domain_of': ['Entity'],
+         'notes': ["The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' "
                    'ID )*` but the narrative spec says that it cardinality 1. The '
                    'narrative spec seems more appropriate, so that is what is '
                    'implemented here. Decide if that is correct.']} })
     db_object_taxon_id: str = Field(default=..., description="""The NCBI Taxonomy identifier for the organism (species or strain) encoding the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
     encoded_by: Optional[list[str]] = Field(default=None, description="""For proteins and transcripts, the gene that encodes the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
     canonical_object_id: str = Field(default=..., description="""If the entity being annotated is a gene, gene-centric reference protein or a protein complex, this should repeat the ID of the object being annotated. If the entity being annotated is derived from a gene product such as a protein isoform, a modified protein or a processed transcript (e. g. miRNA), then this refers to the gene-centric ID of the annotated entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
-         'todos': ['The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '
+         'notes': ['The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '
                    "'|' ID )* )?` but the narrative spec says that it cardinality 1. "
                    'The narrative spec seems more appropriate, so that is what is '
                    'implemented here. Decide if that is correct.']} })
     protein_containing_complex_members: Optional[list[str]] = Field(default=None, description="""If the entity being annotated is a protein-containing complex, this should list the gene-centric canonical protein identifiers.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
-    db_xrefs: Optional[list[str]] = Field(default=None, description="""Cross-references to other databases for the entity being annotated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity'],
-         'notes': ["This field is mandatory if the prefix of the annotated entity's "
-                   'identifier is not one of: UniProtKB, RNACentral, ComplexPortal. In '
-                   'these cases, db_xrefs must include the corresponding UniProtKB ID, '
-                   'RNACentral, or ComplexPortal as appropriate according to the '
-                   'Object Type.',
-                   'Additional cross references such as NCBI gene or protein IDs, '
-                   'HGNC, etc, may also be included.']} })
+    db_xrefs: Optional[list[str]] = Field(default=None, description="""Cross-references to other databases for the entity being annotated.""", json_schema_extra = { "linkml_meta": {'comments': ["This field is mandatory if the prefix of the annotated entity's "
+                      'identifier is not UniProtKB, RNACentral, or ComplexPortal. In '
+                      'these cases, db_xrefs must include the corresponding UniProtKB '
+                      'ID, RNACentral, or ComplexPortal as appropriate according to '
+                      'the Object Type.',
+                      'Additional cross references such as NCBI gene or protein IDs, '
+                      'HGNC, etc, may also be included.'],
+         'domain_of': ['Entity']} })
     gene_product_properties: Optional[GeneProductProperties] = Field(default=None, description="""The properties associated with an entity in a GPI row.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Entity']} })
 
     @field_validator('db_object_symbol')
