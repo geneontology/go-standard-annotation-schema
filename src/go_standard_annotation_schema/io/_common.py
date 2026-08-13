@@ -3,16 +3,12 @@ from __future__ import annotations
 import gzip
 import os
 from collections import deque
-from collections.abc import Iterator
+from collections.abc import Iterator, Mapping, Set
 from datetime import date, datetime
 from io import TextIOBase
 from typing import ClassVar, Generic, TextIO, TypeVar
 
 from pydantic import ValidationError
-
-from go_standard_annotation_schema.datamodel import (
-    Property,
-)
 
 from .types import (
     ErrorCallback,
@@ -30,7 +26,6 @@ from .types import (
 )
 
 ModelT = TypeVar("ModelT")
-PropertyT = TypeVar("PropertyT", bound=Property)
 
 
 class _FieldCountError(ValueError):
@@ -60,24 +55,41 @@ def _split_optional(value: str | None, separator: str = "|") -> list[str] | None
     return _split_values(value, separator)
 
 
-def _parse_properties(
-    value: str | None, property_type: type[PropertyT]
-) -> list[PropertyT] | None:
-    """Parse a string of property expressions into a list of Property instances.
-
-    The input string is expected to be a series of expressions separated by '|', where
-    each expression is of the form 'key=value'. This function will create instances of
-    the specified property_type for each valid expression. If the input is None or
-    empty, it returns None. Raises ValueError for any invalid expressions.
-    """
+def _parse_property_values(
+    value: str | None,
+    *,
+    key_map: Mapping[str, str],
+    multivalued_slots: Set[str],
+) -> dict[str, str | list[str]] | None:
+    """Parse a closed set of property pairs into model-ready slot values."""
     if not value:
         return None
-    result = []
+
+    result: dict[str, str | list[str]] = {}
+    current_multivalued_values: list[str] | None = None
     for expression in value.split("|"):
-        key, separator, property_value = expression.partition("=")
-        if not separator or not key or not property_value:
+        key, separator, slot_value = expression.partition("=")
+        if not separator:
+            if not expression or current_multivalued_values is None:
+                raise ValueError(f"invalid property expression: {expression!r}")
+            current_multivalued_values.append(expression)
+            continue
+
+        current_multivalued_values = None
+        slot_name = key_map.get(key)
+        if not key or not slot_value or slot_name is None:
             raise ValueError(f"invalid property expression: {expression!r}")
-        result.append(property_type(property_key=key, property_value=property_value))
+
+        if slot_name in multivalued_slots:
+            existing = result.setdefault(slot_name, [])
+            if not isinstance(existing, list):
+                raise ValueError(f"duplicate scalar property: {key!r}")
+            existing.append(slot_value)
+            current_multivalued_values = existing
+        elif slot_name in result:
+            raise ValueError(f"duplicate scalar property: {key!r}")
+        else:
+            result[slot_name] = slot_value
     return result
 
 

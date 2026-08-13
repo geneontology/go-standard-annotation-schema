@@ -1,9 +1,11 @@
 import gzip
+from datetime import date
 from io import StringIO
 
 import pytest
 
 import go_standard_annotation_schema.io as go_io
+from go_standard_annotation_schema.datamodel import GeneProductProperties
 from go_standard_annotation_schema.datamodel.go_standard_annotation_schema import Entity
 from go_standard_annotation_schema.io import GpiReader, RowError
 
@@ -42,8 +44,8 @@ def test_parse_gpi_line_returns_entity():
     assert entity.encoded_by is None
     assert entity.canonical_object_id == "WB:WBGene00000019"
     assert entity.db_xrefs == ["UniProtKB:S6EZS3"]
-    assert entity.gene_product_properties is not None
-    assert entity.gene_product_properties[0].property_value == "Swiss-Prot"
+    assert isinstance(entity.gene_product_properties, GeneProductProperties)
+    assert entity.gene_product_properties.db_subset == "Swiss-Prot"
 
 
 def test_reader_exposes_gpi_metadata_and_streams_entities():
@@ -92,7 +94,54 @@ def test_gpi_property_values_preserve_equals_after_the_delimiter():
     entity = GpiReader.parse_line("\t".join(fields))
 
     assert entity.gene_product_properties is not None
-    assert entity.gene_product_properties[0].property_value == "a=b"
+    assert entity.gene_product_properties.go_annotation_summary == "a=b"
+
+
+def test_gpi_maps_all_gene_product_property_names():
+    line = _with_field(
+        GPI_LINE,
+        11,
+        "db-subset=TrEMBL|uniprot-proteome=UP000001940|"
+        "go-annotation-complete=2026-08-13|"
+        "go-annotation-summary=Curated summary",
+    )
+
+    entity = GpiReader.parse_line(line)
+
+    assert entity.gene_product_properties is not None
+    assert entity.gene_product_properties.db_subset == "TrEMBL"
+    assert entity.gene_product_properties.uniprot_proteome == "UP000001940"
+    assert entity.gene_product_properties.go_annotation_complete == date(2026, 8, 13)
+    assert entity.gene_product_properties.go_annotation_summary == "Curated summary"
+
+
+def test_gpi_empty_gene_product_property_column_maps_to_none():
+    entity = GpiReader.parse_line(_with_field(GPI_LINE, 11, ""))
+    assert entity.gene_product_properties is None
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "db-subset=TrEMBL|db-subset=Swiss-Prot",
+        "uniprot-proteome=UP000001940|uniprot-proteome=UP000001941",
+        "go-annotation-complete=2026-08-13|go-annotation-complete=2026-08-14",
+        "go-annotation-summary=one|go-annotation-summary=two",
+        "db-subset=invalid",
+        "uniprot-proteome=not-a-proteome",
+        "go-annotation-complete=not-a-date",
+    ],
+)
+def test_gpi_rejects_duplicate_or_invalid_gene_product_properties(value):
+    with pytest.raises(RowError):
+        GpiReader.parse_line(_with_field(GPI_LINE, 11, value))
+
+
+def test_gpi_rejects_keyless_property_continuations():
+    line = _with_field(GPI_LINE, 11, "db-subset=TrEMBL|Swiss-Prot")
+
+    with pytest.raises(RowError):
+        GpiReader.parse_line(line)
 
 
 def test_gpi_accepts_an_ncrna_sequence_ontology_descendant():

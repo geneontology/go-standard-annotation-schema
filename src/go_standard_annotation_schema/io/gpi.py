@@ -4,14 +4,20 @@ from typing import ClassVar
 
 from go_standard_annotation_schema.datamodel import (
     Entity,
-    EntityProperty,
 )
 
 from ._common import (
-    _parse_properties,
+    _parse_property_values,
     _Reader,
     _split_optional,
 )
+
+_GENE_PRODUCT_PROPERTY_KEYS = {
+    "db-subset": "db_subset",
+    "uniprot-proteome": "uniprot_proteome",
+    "go-annotation-complete": "go_annotation_complete",
+    "go-annotation-summary": "go_annotation_summary",
+}
 
 
 class GpiReader(_Reader[Entity]):
@@ -54,8 +60,10 @@ class GpiReader(_Reader[Entity]):
                     "canonical_object_id": fields[7],
                     "protein_containing_complex_members": _split_optional(fields[8]),
                     "db_xrefs": _split_optional(fields[9]),
-                    "gene_product_properties": _parse_properties(
-                        fields[10], EntityProperty
+                    "gene_product_properties": _parse_property_values(
+                        fields[10],
+                        key_map=_GENE_PRODUCT_PROPERTY_KEYS,
+                        multivalued_slots=set(),
                     ),
                 }
             ),

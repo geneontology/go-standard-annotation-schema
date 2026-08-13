@@ -5,12 +5,9 @@ from typing import cast
 
 import pytest
 
-from go_standard_annotation_schema.datamodel.go_standard_annotation_schema import (
-    Property,
-)
 from go_standard_annotation_schema.io._common import (
     _empty_as_none,
-    _parse_properties,
+    _parse_property_values,
     _Reader,
     _split_optional,
 )
@@ -44,6 +41,12 @@ class FieldsValueErrorReader(StringReader):
     @classmethod
     def _convert_fields(cls, fields):
         raise ValueError("converter rejected fields after inspection")
+
+
+PROPERTY_KEYS = {
+    "single-value": "single_value",
+    "repeated-value": "repeated_value",
+}
 
 
 VALID = """!gpad-version: 2.0
@@ -268,15 +271,52 @@ def test_empty_as_none_converts_only_the_empty_string():
     assert _empty_as_none(" ") == " "
 
 
-def test_parse_properties_preserves_equals_after_the_key():
-    """Property values may contain equals signs after their delimiter."""
-    assert _parse_properties("key=value=with=equals", Property) == [
-        Property(property_key="key", property_value="value=with=equals")
-    ]
+def test_parse_property_values_maps_keys_and_collects_repeated_values():
+    assert _parse_property_values(
+        "single-value=one|repeated-value=two|repeated-value=three",
+        key_map=PROPERTY_KEYS,
+        multivalued_slots={"repeated_value"},
+    ) == {
+        "single_value": "one",
+        "repeated_value": ["two", "three"],
+    }
 
 
-@pytest.mark.parametrize("value", ["=value", "key=", "key", "key=value|"])
-def test_parse_properties_rejects_malformed_expressions(value):
-    """Each property expression must have a nonempty key and value."""
-    with pytest.raises(ValueError, match="invalid property expression"):
-        _parse_properties(value, Property)
+def test_parse_property_values_preserves_equals_after_the_delimiter():
+    assert _parse_property_values(
+        "single-value=a=b",
+        key_map=PROPERTY_KEYS,
+        multivalued_slots=set(),
+    ) == {"single_value": "a=b"}
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "unsupported=value",
+        "single-value=one|single-value=two",
+        "=value",
+        "single-value=",
+        "single-value",
+        "single-value=one|",
+        "single-value=one|keyless-continuation",
+    ],
+)
+def test_parse_property_values_rejects_invalid_expressions(value):
+    with pytest.raises(ValueError):
+        _parse_property_values(
+            value,
+            key_map=PROPERTY_KEYS,
+            multivalued_slots={"repeated_value"},
+        )
+
+
+def test_parse_property_values_returns_none_for_an_empty_column():
+    assert (
+        _parse_property_values(
+            None,
+            key_map=PROPERTY_KEYS,
+            multivalued_slots={"repeated_value"},
+        )
+        is None
+    )

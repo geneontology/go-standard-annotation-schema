@@ -5,10 +5,9 @@ from pathlib import Path
 from .go_standard_annotation_schema import (
     Annotation,
     AnnotationExtension,
-    AnnotationProperty,
+    AnnotationProperties,
     Entity,
-    EntityProperty,
-    Property,
+    GeneProductProperties,
 )
 
 THIS_PATH = Path(__file__).parent
@@ -19,8 +18,7 @@ MAIN_SCHEMA_PATH = SCHEMA_DIRECTORY / "go_standard_annotation_schema.yaml"
 __all__ = [
     "Annotation",
     "AnnotationExtension",
-    "AnnotationProperty",
+    "AnnotationProperties",
     "Entity",
-    "EntityProperty",
-    "Property",
+    "GeneProductProperties",
 ]

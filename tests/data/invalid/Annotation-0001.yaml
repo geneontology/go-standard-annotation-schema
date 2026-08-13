@@ -19,13 +19,10 @@ annotation_extensions:
   - extension_relation: RO:0002233
     extension_term: CHEBI:25682
 annotation_properties:
-  - property_key: id
-    property_value: GOA:5000772737
-  - property_key: comment
-    property_value: "go_evidence:ISO"
-  - property_key: noctua-model-id
-    property_value: "gomodel:69c59f8a00002841"
-  - property_key: model-state
-    property_value: production
-  - property_key: contributor-id
-    property_value: https://orcid.org/0000-0001-7476-6306
+  id: "GOA:5000772737"
+  comment:
+    - "go_evidence:ISO"
+  noctua_model_id: "gomodel:69c59f8a00002841"
+  model_state: production
+  contributor_id:
+    - "orcid:0000-0001-7476-6306"
