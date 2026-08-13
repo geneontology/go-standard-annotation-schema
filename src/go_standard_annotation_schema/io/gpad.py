@@ -3,13 +3,29 @@ from __future__ import annotations
 from itertools import product
 from typing import ClassVar
 
-from go_standard_annotation_schema.datamodel import (
-    Annotation,
-    AnnotationExtension,
-    AnnotationProperty,
-)
+from go_standard_annotation_schema.datamodel import Annotation, AnnotationExtension
 
-from ._common import _Reader, _split_optional, _split_values
+from ._common import _parse_property_values, _Reader, _split_optional, _split_values
+
+_ANNOTATION_PROPERTY_KEYS = {
+    "id": "id",
+    "model-state": "model_state",
+    "noctua-model-id": "noctua_model_id",
+    "contributor-id": "contributor_id",
+    "reviewer-id": "reviewer_id",
+    "creation-date": "creation_date",
+    "modification-date": "modification_date",
+    "reviewed-date": "reviewed_date",
+    "comment": "comment",
+}
+
+_MULTIVALUED_ANNOTATION_PROPERTY_SLOTS = {
+    "contributor_id",
+    "reviewer_id",
+    "modification_date",
+    "reviewed_date",
+    "comment",
+}
 
 
 def _split_alternatives(value: str | None) -> tuple[list[str] | None, ...]:
@@ -51,31 +67,6 @@ def _parse_extension_alternatives(
             )
         result.append(extensions)
     return tuple(result)
-
-
-def _parse_properties(value: str | None) -> list[AnnotationProperty] | None:
-    if not value:
-        return None
-
-    result = []
-    preceding_key: str | None = None
-    for expression in value.split("|"):
-        key, separator, property_value = expression.partition("=")
-        if separator:
-            if not key or not property_value:
-                raise ValueError(f"invalid property expression: {expression!r}")
-            preceding_key = key
-        elif preceding_key is None or not expression:
-            raise ValueError(f"invalid property expression: {expression!r}")
-        else:
-            property_value = expression
-        result.append(
-            AnnotationProperty(
-                property_key=preceding_key,
-                property_value=property_value,
-            )
-        )
-    return result
 
 
 class GpadReader(_Reader[Annotation]):
@@ -174,7 +165,11 @@ class GpadReader(_Reader[Annotation]):
             "interacting_taxon_id": _split_optional(fields[7]),
             "annotation_date": fields[8],
             "assigned_by": fields[9],
-            "annotation_properties": _parse_properties(fields[11]),
+            "annotation_properties": _parse_property_values(
+                fields[11],
+                key_map=_ANNOTATION_PROPERTY_KEYS,
+                multivalued_slots=_MULTIVALUED_ANNOTATION_PROPERTY_SLOTS,
+            ),
         }
         # Column 7 (with/from) and column 11 (annotation extensions) can both have
         # multiple pipe-delimited alternatives. Each alternative represents a separate

@@ -1,7 +1,7 @@
 id: https://w3id.org/geneontology/go-standard-annotation-schema
 name: go-standard-annotation-schema
 title: GO Standard Annotation Schema
-description: |-
+description: >-
   LinkML schema for GO Standard Annotations
 license: BSD-3-Clause
 see_also:
@@ -24,7 +24,7 @@ types:
   # TODO: structured_pattern on types is not currently materialized in generated
   #       artifacts. See: https://github.com/linkml/linkml/pull/3832
   external_identifier:
-    description: |-
+    description: >-
       An identifier of an object from an external source, such as a gene product, an
       ontology term, or a publication.
     typeof: string
@@ -34,7 +34,7 @@ types:
       partial_match: false
 
   eco_identifier:
-    description: |-
+    description: >-
       An identifier of an ECO term.
     typeof: external_identifier
     structured_pattern:
@@ -43,7 +43,7 @@ types:
       partial_match: false
 
   go_identifier:
-    description: |-
+    description: >-
       An identifier of a GO term.
     typeof: external_identifier
     structured_pattern:
@@ -52,7 +52,7 @@ types:
       partial_match: false
 
   ncbi_taxon_identifier:
-    description: |-
+    description: >-
       An identifier of a taxon from the NCBI Taxonomy database.
     typeof: external_identifier
     structured_pattern:
@@ -60,15 +60,25 @@ types:
       interpolated: true
       partial_match: false
 
+  contributor_identifier:
+    description: >-
+      An identifier of a contributor, such as a curator or user who entered or changed
+      an annotation.
+    typeof: external_identifier
+    structured_pattern:
+      syntax: "(orcid|goc):{local_id}"
+      interpolated: true
+      partial_match: false
+
 slots:
   db_object_id:
-    description: |-
+    description: >-
       A unique identifier for the item being annotated.
     range: external_identifier
     required: true
 
   negation:
-    description: |-
+    description: >-
       A boolean indicating whether the annotation is negated.
     range: boolean
     required: false
@@ -78,7 +88,7 @@ slots:
         not present?
 
   relation:
-    description: |-
+    description: >-
       Relation from the Relation Ontology that describe how the annotated biological
       entity relates to the GO term with which it is associated.
     range: external_identifier
@@ -89,13 +99,13 @@ slots:
         via an enum.
 
   ontology_class_id:
-    description: |-
+    description: >-
       The GO identifier for the term attributed to the DB object ID.
     range: go_identifier
     required: true
 
   references:
-    description: |-
+    description: >-
       One or more unique identifiers for a single source cited as an authority for the
       attribution of the GO ID to the DB object ID. This may be a literature reference
       or a database record. Valid references are one of: PubMed, DOI, GO_REF, MOD
@@ -106,14 +116,14 @@ slots:
     minimum_cardinality: 1
 
   evidence_type:
-    description: |-
+    description: >-
       The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that
       supports the association between the DB object ID and the GO term.
     range: eco_identifier
     required: true
 
   with_or_from:
-    description: |-
+    description: >-
       Used with specific ECO codes to capture an additional identifier supporting the
       evidence for the annotation. For example, it can identify another gene product to
       which the annotated gene product is similar (ISS) or interacts with (IPI).
@@ -129,7 +139,7 @@ slots:
         With/From values. Decide if and how this should be represented in the schema.
 
   interacting_taxon_id:
-    description: |-
+    description: >-
       Taxonomic identifier for interacting organism to be used only in conjunction with
       terms that have the biological process term 'GO:0044419 biological process
       involved in interspecies interaction between organisms' or the cellular component
@@ -140,7 +150,7 @@ slots:
     multivalued: true
 
   annotation_date:
-    description: |-
+    description: >-
       Date on which the annotation was made
     range: date
     required: true
@@ -150,7 +160,7 @@ slots:
         datetime, or both.
 
   assigned_by:
-    description: |-
+    description: >-
       The database which made the annotation one of the values from the set of GOC
       groups; used for tracking the source of an individual annotation.
     range: string
@@ -160,21 +170,21 @@ slots:
         one database and incorporated into another retains the original value.
 
   extension_relation:
-    description: |-
+    description: >-
       A term from the Relation Ontology that describes how the GO term in the extension
       relates to the GO term in the annotation.
     range: external_identifier
     required: true
 
   extension_term:
-    description: |-
+    description: >-
       The gene product, chemical, cell type, anatomical structure, or other entity that
       is used to further specify the GO term in the annotation.
     range: external_identifier
     required: true
 
   annotation_extensions:
-    description: |-
+    description: >-
       Annotation extensions allow GO terms in annotations to be further specified, using
       gene products, chemicals, cell types, anatomical structures, to provide additional
       biological context. The cross-reference is prefaced by an appropriate relationship
@@ -192,33 +202,14 @@ slots:
         they are inlined as a list. This makes change operations that target a specific
         annotation extension more difficult.
 
-  property_key:
-    description: |-
-      The key of an annotation property.
-    range: string
-    required: true
-
-  property_value:
-    description: |-
-      The value of an annotation property.
-    range: string
-    required: true
-
   annotation_properties:
-    description: |-
-      A list if key-value pairs that provide additional information about an annotation.
-    range: AnnotationProperty
+    description: Additional properties associated with an annotation.
+    range: AnnotationProperties
     required: false
-    multivalued: true
     inlined: true
-    inlined_as_list: true
-    todos:
-      - Annotation properties do not have a unique identifier, so the schema indicates
-        they are inlined as a list. This makes change operations that target a specific
-        annotation property more difficult.
 
   db_object_symbol:
-    description: |-
+    description: >-
       The symbol of the entity being annotated.
     range: string
     required: false
@@ -230,7 +221,7 @@ slots:
         missing.
 
   db_object_name:
-    description: |-
+    description: >-
       The name of the entity being annotated.
     range: string
     required: false
@@ -240,14 +231,14 @@ slots:
         is implemented here. Decide if that is correct.
 
   db_object_synonyms:
-    description: |-
+    description: >-
       Alternative names for the entity being annotated.
     range: string
     required: false
     multivalued: true
 
   db_object_type:
-    description: |-
+    description: >-
       The class of biological entity being annotated.
     range: external_identifier
     required: true
@@ -264,21 +255,21 @@ slots:
         appropriate, so that is what is implemented here. Decide if that is correct.
 
   db_object_taxon_id:
-    description: |-
+    description: >-
       The NCBI Taxonomy identifier for the organism (species or strain) encoding the
       entity being annotated.
     range: ncbi_taxon_identifier
     required: true
 
   encoded_by:
-    description: |-
+    description: >-
       For proteins and transcripts, the gene that encodes the entity being annotated.
     range: external_identifier
     required: false
     multivalued: true
 
   canonical_object_id:
-    description: |-
+    description: >-
       If the entity being annotated is a gene, gene-centric reference protein or a
       protein complex, this should repeat the ID of the object being annotated. If the
       entity being annotated is derived from a gene product such as a protein isoform, a
@@ -292,7 +283,7 @@ slots:
         appropriate, so that is what is implemented here. Decide if that is correct.
 
   protein_containing_complex_members:
-    description: |-
+    description: >-
       If the entity being annotated is a protein-containing complex, this should list
       the gene-centric canonical protein identifiers.
     range: external_identifier
@@ -300,13 +291,13 @@ slots:
     multivalued: true
 
   db_xrefs:
-    description: |-
+    description: >-
       Cross-references to other databases for the entity being annotated.
     range: external_identifier
     required: false
     multivalued: true
     notes:
-      - |-
+      - >-
         This field is mandatory if the prefix of the annotated entity's identifier is
         not one of: UniProtKB, RNACentral, ComplexPortal. In these cases, db_xrefs must
         include the corresponding UniProtKB ID, RNACentral, or ComplexPortal as
@@ -315,17 +306,14 @@ slots:
         also be included.
 
   gene_product_properties:
-    description: |-
-      A list of key-value pairs that provide additional information about an entity.
-    range: EntityProperty
+    description: The properties associated with an entity in a GPI row.
+    range: GeneProductProperties
     required: false
-    multivalued: true
     inlined: true
-    inlined_as_list: true
 
 classes:
   Annotation:
-    description: |-
+    description: >-
       An association between a gene product and a GO term, with an evidence code, a
       reference to support the association, and other data associated with the gene
       product or the annotation.
@@ -344,7 +332,7 @@ classes:
       - annotation_properties
 
   AnnotationExtension:
-    description: |-
+    description: >-
       Annotation extensions allow GO terms in annotations to be further specified, using
       gene products, chemicals, cell types, anatomical structures, to
       provide additional biological context.
@@ -352,33 +340,111 @@ classes:
       - extension_relation
       - extension_term
 
-  Property:
-    description: |-
-      A key-value pair that provides additional information about an annotation or
-      entity.
-    slots:
-      - property_key
-      - property_value
+  AnnotationProperties:
+    description: >-
+      The closed set of properties associated with an annotation.
+    attributes:
+      id:
+        description: The contributing database's unique identifier for an annotation.
+        range: external_identifier
+        required: false
 
-  AnnotationProperty:
-    description: |-
-      A key-value pair that provides additional information about an annotation.
-    is_a: Property
+      model_state:
+        description: The GO-CAM model state.
+        range: string
+        required: false
+        pattern: "^[A-Za-z_]+$"
+        notes:
+          - The GPAD grammar says that this should be a string of only alphabetic
+            characters, but this doesn't account for the already used "internal_test"
+            model state. The pattern has been updated to allow underscores as well.
 
-  EntityProperty:
-    description: |-
-      A key-value pair that provides additional information about an entity.
-    is_a: Property
-    slot_usage:
-      property_key:
+      noctua_model_id:
+        description: The unique identifier of the associated GO-CAM model.
+        range: external_identifier
+        required: false
+
+      contributor_id:
+        description: >-
+          The identifier of a curator or user who entered or changed an annotation.
+        range: contributor_identifier
+        required: false
+        multivalued: true
+
+      reviewer_id:
+        description: >-
+          The identifier of a curator or user who last reviewed an annotation.
+        range: contributor_identifier
+        required: false
+        multivalued: true
+
+      creation_date:
+        description: The date on which the annotation was created.
+        required: false
+        range: date
+
+      modification_date:
+        description: A date on which the annotation was modified.
+        required: false
+        multivalued: true
+        range: date
+
+      reviewed_date:
+        description: A date on which the annotation was reviewed.
+        required: false
+        multivalued: true
+        range: date
+
+      comment:
+        description: Free text about a specific annotation.
+        range: string
+        required: false
+        multivalued: true
+    notes:
+      - Attributes are used instead of slots here because the names of the attributes
+        are somewhat tightly coupled to the GPAD file format. They should not be reused
+        or modified in other contexts, as top-level slots might be.
+
+  GeneProductProperties:
+    description: The closed set of properties associated with an entity in a GPI row.
+    attributes:
+      db_subset:
+        description: The status of a UniProtKB accession with respect to curator review.
+        range: string
+        required: false
         equals_string_in:
-          - db-subset
-          - uniprot-proteome
-          - go-annotation-complete
-          - go-annotation-summary
+          - TrEMBL
+          - Swiss-Prot
+        notes:
+          - Using equals_string_in instead of an enum here to avoid issues with the
+            specific capitalization and punctuation of the values.
+
+      uniprot_proteome:
+        description: >-
+          The UniProt proteome accession for the set of proteins that constitute an
+          organism's proteome.
+        range: string
+        required: false
+        pattern: "^UP[0-9]+$"
+
+      go_annotation_complete:
+        description: >-
+          The date on which a curator determined that the set of GO annotations for an
+          entity was complete.
+        required: false
+        range: date
+
+      go_annotation_summary:
+        description: A textual gene or gene-product description.
+        range: string
+        required: false
+    notes:
+      - Attributes are used instead of slots here because the names of the attributes
+        are somewhat tightly coupled to the GPI file format. They should not be reused
+        or modified in other contexts, as top-level slots might be.
 
   Entity:
-    description: |-
+    description: >-
       An annotatable biological entity for an organism: protein-coding genes, non-coding
       RNA genes, protein isoforms (i. e., splice variants) and modified forms, such as
       cleaved forms or proteins modified by post-translational modifications.

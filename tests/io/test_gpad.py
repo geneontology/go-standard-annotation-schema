@@ -4,7 +4,7 @@ from io import StringIO
 import pytest
 
 import go_standard_annotation_schema.io as go_io
-from go_standard_annotation_schema.datamodel import Annotation
+from go_standard_annotation_schema.datamodel import Annotation, AnnotationProperties
 from go_standard_annotation_schema.io import (
     FileMetadata,
     GpadReader,
@@ -53,8 +53,8 @@ def test_parse_gpad_line_returns_annotation_tuple():
         "BFO:0000066",
         "RO:0002092",
     ]
-    assert annotation.annotation_properties is not None
-    assert annotation.annotation_properties[1].property_value == "value=with=equals"
+    assert isinstance(annotation.annotation_properties, AnnotationProperties)
+    assert annotation.annotation_properties.comment == ["value=with=equals"]
 
 
 def test_io_package_exports_gpad_reader_with_supported_reader_namespace():
@@ -298,30 +298,72 @@ def test_gpad_annotation_date_is_parsed_as_a_date():
     assert isinstance(annotation.annotation_date, date)
 
 
-def test_gpad_property_continuations_repeat_the_preceding_key():
-    """Keyless property segments repeat the immediately preceding GPAD key."""
+def test_gpad_rejects_keyless_property_continuations():
     line = _with_field(
         GPAD_LINE,
         12,
-        "contributor-id=https://one|https://two|https://three",
+        "contributor-id=orcid:0000-0001|orcid:0000-0002",
     )
 
-    annotation = _parse_one(line)
-
-    assert annotation.annotation_properties is not None
-    assert [
-        (item.property_key, item.property_value)
-        for item in annotation.annotation_properties
-    ] == [
-        ("contributor-id", "https://one"),
-        ("contributor-id", "https://two"),
-        ("contributor-id", "https://three"),
-    ]
+    with pytest.raises(RowError):
+        GpadReader.parse_line(line)
 
 
 def test_gpad_rejects_a_keyless_first_property_segment():
-    """A GPAD property continuation must follow an explicit property key."""
+    """Every keyless GPAD property segment is malformed."""
     line = _with_field(GPAD_LINE, 12, "https://one|id=GOA:1")
 
     with pytest.raises(RowError):
         GpadReader.parse_line(line)
+
+
+def test_gpad_maps_all_annotation_property_names():
+    line = _with_field(
+        GPAD_LINE,
+        12,
+        "id=GOA:1|model-state=production|noctua-model-id=gomodel:123|"
+        "contributor-id=orcid:0000-0001|contributor-id=goc:abc|"
+        "reviewer-id=orcid:0000-0002|creation-date=2026-08-13|"
+        "modification-date=2026-08-14|reviewed-date=2026-08-15|"
+        "comment=first|comment=second",
+    )
+
+    properties = _parse_one(line).annotation_properties
+
+    assert properties is not None
+    assert properties.id == "GOA:1"
+    assert properties.model_state == "production"
+    assert properties.noctua_model_id == "gomodel:123"
+    assert properties.contributor_id == ["orcid:0000-0001", "goc:abc"]
+    assert properties.reviewer_id == ["orcid:0000-0002"]
+    assert properties.creation_date == date(2026, 8, 13)
+    assert properties.modification_date == [date(2026, 8, 14)]
+    assert properties.reviewed_date == [date(2026, 8, 15)]
+    assert properties.comment == ["first", "second"]
+
+
+@pytest.mark.parametrize(
+    "value,skip_reason",
+    [
+        ("id=GOA:1|id=GOA:2", None),
+        ("model-state=production|model-state=draft", None),
+        ("noctua-model-id=gomodel:1|noctua-model-id=gomodel:2", None),
+        ("creation-date=2026-08-13|creation-date=2026-08-14", None),
+        ("unsupported=value", None),
+        ("id=not-an-id", "https://github.com/linkml/linkml/pull/3832"),
+        ("model-state=not-valid", None),
+        ("contributor-id=example:1", "https://github.com/linkml/linkml/pull/3832"),
+        (
+            "reviewer-id=https://orcid.org/0000-0001",
+            "https://github.com/linkml/linkml/pull/3832",
+        ),
+        ("creation-date=not-a-date", None),
+    ],
+)
+def test_gpad_rejects_duplicate_unknown_or_invalid_annotation_properties(
+    value, skip_reason
+):
+    if skip_reason:
+        pytest.skip(skip_reason)
+    with pytest.raises(RowError):
+        GpadReader.parse_line(_with_field(GPAD_LINE, 12, value))

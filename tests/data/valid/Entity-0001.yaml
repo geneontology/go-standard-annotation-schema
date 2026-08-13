@@ -10,3 +10,8 @@ db_object_taxon_id: "NCBITaxon:6239"
 canonical_object_id: "WB:WBGene00000019"
 db_xrefs:
   - "UniProtKB:S6EZS3"
+gene_product_properties:
+  db_subset: Swiss-Prot
+  uniprot_proteome: UP000001940
+  go_annotation_complete: "2026-08-13"
+  go_annotation_summary: Curated summary
