@@ -438,10 +438,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todos" class="md-nav__link">
+  <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODOs
+        Notes
       
     </span>
   </a>
@@ -571,14 +571,28 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>### Value Constraints</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="todos">TODOs</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regex Pattern</td>
+<td><code>^\S+$</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>The GPI spec says that this is required, but in practice it is missing in many rows of existing GPI files. Decide whether this should be required in the schema and handled in the file parsing code if it is missing.</li>
+<li>The GPI grammar and narrative spec both say that this is required, but in practice it is missing in many rows of existing GPI files. Decide whether this should be required in the schema and handled in the file parsing code if it is missing.</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -608,16 +622,17 @@
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_symbol</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The symbol of the entity being annotated.</span>
-<span class="nt">todos</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI spec says that this is required, but in practice it is missing in many rows</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">of existing GPI files. Decide whether this should be required in the schema and</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">handled in the file parsing code if it is missing.</span>
+<span class="nt">notes</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar and narrative spec both say that this is required, but in practice</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">it is missing in many rows of existing GPI files. Decide whether this should be</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">required in the schema and handled in the file parsing code if it is missing.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^\S+$</span>
 </code></pre></div>
 </details>
 </div>

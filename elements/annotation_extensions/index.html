@@ -438,10 +438,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todos" class="md-nav__link">
+  <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODOs
+        Notes
       
     </span>
   </a>
@@ -520,10 +520,7 @@
 
 
 <h1 id="slot-annotation_extensions">Slot: annotation_extensions</h1>
-<p><em>Annotation extensions allow GO terms in annotations to be further specified, using</em></p>
-<p><em>gene products, chemicals, cell types, anatomical structures, to provide additional</em></p>
-<p><em>biological context. The cross-reference is prefaced by an appropriate relationship</em></p>
-<p><em>from the Relation Ontology.</em></p>
+<p><em>Annotation extensions allow GO terms in annotations to be further specified, using gene products, chemicals, cell types, anatomical structures, to provide additional biological context. The cross-reference is prefaced by an appropriate relationship from the Relation Ontology.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/annotation_extensions">go_standard_annotation_schema:annotation_extensions</a></p>
 <!-- no inheritance hierarchy -->
@@ -539,7 +536,7 @@
 <tbody>
 <tr>
 <td><a href="../Annotation/">Annotation</a></td>
-<td>An association between a gene product and a GO term, with an evidence code, a</td>
+<td>An association between a gene product and a GO term, with an evidence code, a...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -579,9 +576,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="todos">TODOs</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>The GPAD spec makes a distinction between pipe- and comma-separated lists of annotation extensions. Decide if and how this should be represented in the schema.</li>
 <li>Annotation extensions do not have a unique identifier, so the schema indicates they are inlined as a list. This makes change operations that target a specific annotation extension more difficult.</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -611,17 +607,11 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annotation_extensions</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Annotation</span><span class="nv"> </span><span class="s">extensions</span><span class="nv"> </span><span class="s">allow</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">terms</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">annotations</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">further</span><span class="nv"> </span><span class="s">specified,</span>
-<span class="w">  </span><span class="s">using</span>
-
-<span class="w">  </span><span class="s">gene</span><span class="nv"> </span><span class="s">products,</span><span class="nv"> </span><span class="s">chemicals,</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">types,</span><span class="nv"> </span><span class="s">anatomical</span><span class="nv"> </span><span class="s">structures,</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">provide</span><span class="nv"> </span><span class="s">additional</span>
-
-<span class="w">  </span><span class="s">biological</span><span class="nv"> </span><span class="s">context.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">cross-reference</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">prefaced</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">relationship</span>
-
-<span class="w">  </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Relation</span><span class="nv"> </span><span class="s">Ontology.&#39;</span>
-<span class="nt">todos</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec makes a distinction between pipe- and comma-separated lists of annotation</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">extensions. Decide if and how this should be represented in the schema.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions allow GO terms in annotations to be further specified,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">using gene products, chemicals, cell types, anatomical structures, to provide additional</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">biological context. The cross-reference is prefaced by an appropriate relationship</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">from the Relation Ontology.</span>
+<span class="nt">notes</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions do not have a unique identifier, so the schema indicates they</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">are inlined as a list. This makes change operations that target a specific annotation</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">extension more difficult.</span>

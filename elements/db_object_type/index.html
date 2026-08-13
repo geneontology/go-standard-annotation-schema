@@ -438,6 +438,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -576,10 +587,15 @@
 </tr>
 </tbody>
 </table>
-<h2 id="notes">Notes</h2>
+<h2 id="comments">Comments</h2>
 <ul>
 <li>This field should describe the type of biological object as defined by the contributing database. For example, WormBase identifiers represent genes, PomBase identifiers represent protein-coding genes, and SGD identifiers represent proteins.</li>
+<li>The entity type value must be provided as an ontology term identifier from Sequence Ontology, Protein Ontology, or GO, and must correspond to one of the permitted GPI entity types or a more granular child term. Common entries include PR:000000001 (protein), GO:0032991 (protein-containing complex), SO:0001217 (protein-coding gene), SO:0000655 (ncRNA) or any SO child term, SO:0001263 (ncRNA-coding gene) or any SO child term, SO:0000336 (pseudogene).</li>
 <li>GO does not allow 'gene' and 'gene product' as biological entity types, as this does not allow to differentiate between proteins and ncRNAs products.</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The GPI grammar says that column 5 has cardinality 1..*, <code>ID ( '|' ID )*</code> but the narrative spec says that it has cardinality 1. The narrative spec seems more appropriate, so that is what is implemented here. Decide if that is correct.</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -610,9 +626,19 @@
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_type</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The class of biological entity being annotated.</span>
 <span class="nt">notes</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 5 has cardinality 1..*, `ID ( &#39;|&#39; ID )*` but the</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">narrative spec says that it has cardinality 1. The narrative spec seems more appropriate,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">so that is what is implemented here. Decide if that is correct.</span>
+<span class="nt">comments</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This field should describe the type of biological object as defined by the contributing</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">database. For example, WormBase identifiers represent genes, PomBase identifiers</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">represent protein-coding genes, and SGD identifiers represent proteins.</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The entity type value must be provided as an ontology term identifier from Sequence</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">Ontology, Protein Ontology, or GO, and must correspond to one of the permitted GPI</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">entity types or a more granular child term. Common entries include PR:000000001</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(protein), GO:0032991 (protein-containing complex), SO:0001217 (protein-coding gene),</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">SO:0000655 (ncRNA) or any SO child term, SO:0001263 (ncRNA-coding gene) or any SO</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">child term, SO:0000336 (pseudogene).</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GO does not allow &#39;gene&#39; and &#39;gene product&#39; as biological entity types, as this</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">does not allow to differentiate between proteins and ncRNAs products.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>

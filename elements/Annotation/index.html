@@ -278,9 +278,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-annotation">Class: Annotation</h1>
-<p><em>An association between a gene product and a GO term, with an evidence code, a</em></p>
-<p><em>reference to support the association, and other data associated with the gene</em></p>
-<p><em>product or the annotation.</em></p>
+<p><em>An association between a gene product and a GO term, with an evidence code, a reference to support the association, and other data associated with the gene product or the annotation.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/Annotation">go_standard_annotation_schema:Annotation</a></p>
 <pre class="mermaid"><code> classDiagram
@@ -305,8 +303,8 @@
 
 
 
-        Annotation --&gt; "*" AnnotationProperty : annotation_properties
-        click AnnotationProperty href "../AnnotationProperty/"
+        Annotation --&gt; "0..1" AnnotationProperties : annotation_properties
+        click AnnotationProperties href "../AnnotationProperties/"
 
 
 
@@ -356,7 +354,7 @@
 <tr>
 <td><a href="../relation/">relation</a></td>
 <td>1 <br/> <a href="../ExternalIdentifier/">ExternalIdentifier</a></td>
-<td>Relation from the Relation Ontology that describe how the annotated biologica...</td>
+<td>Relation from the Relation Ontology that describes how the annotated biologic...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -398,7 +396,7 @@
 <tr>
 <td><a href="../assigned_by/">assigned_by</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>The database which made the annotation one of the values from the set of GOC</td>
+<td>The database which made the annotation one of the values from the set of GOC ...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -409,8 +407,8 @@
 </tr>
 <tr>
 <td><a href="../annotation_properties/">annotation_properties</a></td>
-<td>* <br/> <a href="../AnnotationProperty/">AnnotationProperty</a></td>
-<td>A list if key-value pairs that provide additional information about an annota...</td>
+<td>0..1 <br/> <a href="../AnnotationProperties/">AnnotationProperties</a></td>
+<td>Additional properties associated with an annotation</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -444,12 +442,9 @@
 <h3 id="direct">Direct</h3>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'An</span><span class="nv"> </span><span class="s">association</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term,</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">evidence</span>
-<span class="w">  </span><span class="s">code,</span><span class="nv"> </span><span class="s">a</span>
-
-<span class="w">  </span><span class="s">reference</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">support</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">association,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">associated</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">gene</span>
-
-<span class="w">  </span><span class="s">product</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.'</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An association between a gene product and a GO term, with an evidence</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">code, a reference to support the association, and other data associated with the</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">gene product or the annotation.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">slots</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_id</span>
@@ -469,12 +464,9 @@
 <h3 id="induced">Induced</h3>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'An</span><span class="nv"> </span><span class="s">association</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term,</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">evidence</span>
-<span class="w">  </span><span class="s">code,</span><span class="nv"> </span><span class="s">a</span>
-
-<span class="w">  </span><span class="s">reference</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">support</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">association,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">associated</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">gene</span>
-
-<span class="w">  </span><span class="s">product</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.'</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An association between a gene product and a GO term, with an evidence</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">code, a reference to support the association, and other data associated with the</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">gene product or the annotation.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">db_object_id</span><span class="p">:</span>
@@ -491,7 +483,7 @@
 <span class="w">  </span><span class="nt">negation</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">negation</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A boolean indicating whether the annotation is negated.</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Decide if this should be required in the schema so that it is always explicitly</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">set to true or false. Or, is it okay to have it be optional and assumed false</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">if not present?</span>
@@ -504,11 +496,9 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">relation</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">relation</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Relation</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Relation</span><span class="nv"> </span><span class="s">Ontology</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">describe</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span>
-<span class="w">      </span><span class="s">biological</span>
-
-<span class="w">      </span><span class="s">entity</span><span class="nv"> </span><span class="s">relates</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">associated.'</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relation from the Relation Ontology that describes how the annotated</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">biological entity relates to the GO term with which it is associated.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec says that the "relation used SHOULD come from the allowed gene-product-to-term</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">relations". Decide whether to enforce this in the schema via an enum.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
@@ -531,13 +521,9 @@
 <span class="w">  </span><span class="nt">references</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">references</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'One</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">more</span><span class="nv"> </span><span class="s">unique</span><span class="nv"> </span><span class="s">identifiers</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">cited</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">authority</span>
-<span class="w">      </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span>
-
-<span class="w">      </span><span class="s">attribution</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">DB</span><span class="nv"> </span><span class="s">object</span><span class="nv"> </span><span class="s">ID.</span><span class="nv"> </span><span class="s">This</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">literature</span><span class="nv"> </span><span class="s">reference</span>
-
-<span class="w">      </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">record.</span><span class="nv"> </span><span class="s">Valid</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of:</span><span class="nv"> </span><span class="s">PubMed,</span><span class="nv"> </span><span class="s">DOI,</span><span class="nv"> </span><span class="s">GO_REF,</span><span class="nv"> </span><span class="s">MOD</span>
-
-<span class="w">      </span><span class="s">reference.'</span>
+<span class="w">      </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">attribution</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">DB</span><span class="nv"> </span><span class="s">object</span><span class="nv"> </span><span class="s">ID.</span><span class="nv"> </span><span class="s">This</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">literature</span>
+<span class="w">      </span><span class="s">reference</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">record.</span><span class="nv"> </span><span class="s">Valid</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of:</span><span class="nv"> </span><span class="s">PubMed,</span><span class="nv"> </span><span class="s">DOI,</span><span class="nv"> </span><span class="s">GO_REF,</span>
+<span class="w">      </span><span class="s">MOD</span><span class="nv"> </span><span class="s">reference.'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
@@ -549,10 +535,8 @@
 <span class="w">    </span><span class="nt">minimum_cardinality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">evidence_type</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evidence_type</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">Evidence</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">Conclusion</span><span class="nv"> </span><span class="s">Ontology</span><span class="nv"> </span><span class="s">(ECO)</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">evidence</span>
-<span class="w">      </span><span class="s">code</span><span class="nv"> </span><span class="s">that</span>
-
-<span class="w">      </span><span class="s">supports</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">association</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">DB</span><span class="nv"> </span><span class="s">object</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The Evidence &amp; Conclusion Ontology (ECO) identifier for the evidence</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">code that supports the association between the DB object ID and the GO term.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
@@ -562,18 +546,10 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">with_or_from</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">with_or_from</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Used</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">specific</span><span class="nv"> </span><span class="s">ECO</span><span class="nv"> </span><span class="s">codes</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">capture</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">additional</span><span class="nv"> </span><span class="s">identifier</span>
-<span class="w">      </span><span class="s">supporting</span><span class="nv"> </span><span class="s">the</span>
-
-<span class="w">      </span><span class="s">evidence</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">example,</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">identify</span><span class="nv"> </span><span class="s">another</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span>
-<span class="w">      </span><span class="s">to</span>
-
-<span class="w">      </span><span class="s">which</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">similar</span><span class="nv"> </span><span class="s">(ISS)</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">interacts</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">(IPI).</span>
-
-<span class="w">      </span><span class="s">Population</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">With/From</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">mandatory</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">certain</span><span class="nv"> </span><span class="s">evidence</span><span class="nv"> </span><span class="s">codes.'</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec makes a distinction between pipe- and comma-separated lists of</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">With/From values. Decide if and how this should be represented in the schema.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Used with specific ECO codes to capture an additional identifier</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">supporting the evidence for the annotation. For example, it can identify another</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">gene product to which the annotated gene product is similar (ISS) or interacts</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">with (IPI). Population of the With/From is mandatory for certain evidence codes.</span>
 <span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cardinality must be 0 for evidence codes IDA, TAS, NAS, or ND</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cardinality must be 1, &gt;1 for IEA, IC, IGI, IPI, ISS &amp; child terms of ISS</span>
@@ -587,17 +563,11 @@
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">interacting_taxon_id</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interacting_taxon_id</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Taxonomic</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">interacting</span><span class="nv"> </span><span class="s">organism</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">in</span>
-<span class="w">      </span><span class="s">conjunction</span><span class="nv"> </span><span class="s">with</span>
-
-<span class="w">      </span><span class="s">terms</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">process</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="se">''</span><span class="s">GO:0044419</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">process</span>
-
-<span class="w">      </span><span class="s">involved</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">interspecies</span><span class="nv"> </span><span class="s">interaction</span><span class="nv"> </span><span class="s">between</span><span class="nv"> </span><span class="s">organisms</span><span class="se">''</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">cellular</span><span class="nv"> </span><span class="s">component</span>
-
-<span class="w">      </span><span class="s">term</span><span class="nv"> </span><span class="se">''</span><span class="s">GO:0018995</span><span class="nv"> </span><span class="s">host</span><span class="nv"> </span><span class="s">cellular</span><span class="nv"> </span><span class="s">component</span><span class="se">''</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">ancestor.</span><span class="nv"> </span><span class="s">Identifiers</span><span class="nv"> </span><span class="s">must</span>
-<span class="w">      </span><span class="s">come</span>
-
-<span class="w">      </span><span class="s">from</span><span class="nv"> </span><span class="s">NCBI</span><span class="nv"> </span><span class="s">Taxonomy</span><span class="nv"> </span><span class="s">database.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Taxonomic identifier for interacting organism to be used only in</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">conjunction with terms that have the biological process term 'GO:0044419 biological</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">process involved in interspecies interaction between organisms' or the cellular</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">component term 'GO:0018995 host cellular component' as an ancestor. Identifiers</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">must come from NCBI Taxonomy database.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
@@ -609,7 +579,7 @@
 <span class="w">  </span><span class="nt">annotation_date</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annotation_date</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date on which the annotation was made</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD file description says that this is a date in the format `YYYY-MM-DD`.</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">The spec says that it is a date or datetime. Decide whether to permit date,</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">datetime, or both.</span>
@@ -622,10 +592,8 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">assigned_by</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assigned_by</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">made</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">      </span><span class="s">set</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">GOC</span>
-
-<span class="w">      </span><span class="s">groups;</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">tracking</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">individual</span><span class="nv"> </span><span class="s">annotation.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The database which made the annotation one of the values from the</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">set of GOC groups; used for tracking the source of an individual annotation.</span>
 <span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Value may differ from the DB:DB Object ID column. Any annotation that is made</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">by one database and incorporated into another retains the original value.</span>
@@ -638,17 +606,11 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">annotation_extensions</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annotation_extensions</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Annotation</span><span class="nv"> </span><span class="s">extensions</span><span class="nv"> </span><span class="s">allow</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">terms</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">annotations</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">further</span>
-<span class="w">      </span><span class="s">specified,</span><span class="nv"> </span><span class="s">using</span>
-
-<span class="w">      </span><span class="s">gene</span><span class="nv"> </span><span class="s">products,</span><span class="nv"> </span><span class="s">chemicals,</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">types,</span><span class="nv"> </span><span class="s">anatomical</span><span class="nv"> </span><span class="s">structures,</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">provide</span><span class="nv"> </span><span class="s">additional</span>
-
-<span class="w">      </span><span class="s">biological</span><span class="nv"> </span><span class="s">context.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">cross-reference</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">prefaced</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">relationship</span>
-
-<span class="w">      </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Relation</span><span class="nv"> </span><span class="s">Ontology.'</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec makes a distinction between pipe- and comma-separated lists of</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">annotation extensions. Decide if and how this should be represented in the schema.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions allow GO terms in annotations to be further</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">specified, using gene products, chemicals, cell types, anatomical structures,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">to provide additional biological context. The cross-reference is prefaced by</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">an appropriate relationship from the Relation Ontology.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions do not have a unique identifier, so the schema indicates</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">they are inlined as a list. This makes change operations that target a specific</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">annotation extension more difficult.</span>
@@ -664,22 +626,15 @@
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">annotation_properties</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annotation_properties</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A list if key-value pairs that provide additional information about</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">an annotation.</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation properties do not have a unique identifier, so the schema indicates</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">they are inlined as a list. This makes change operations that target a specific</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">annotation property more difficult.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Additional properties associated with an annotation.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationProperty</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationProperties</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
 </div>

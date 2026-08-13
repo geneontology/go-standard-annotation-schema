@@ -438,10 +438,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todos" class="md-nav__link">
+  <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODOs
+        Notes
       
     </span>
   </a>
@@ -520,8 +520,7 @@
 
 
 <h1 id="slot-relation">Slot: relation</h1>
-<p><em>Relation from the Relation Ontology that describe how the annotated biological</em></p>
-<p><em>entity relates to the GO term with which it is associated.</em></p>
+<p><em>Relation from the Relation Ontology that describes how the annotated biological entity relates to the GO term with which it is associated.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/relation">go_standard_annotation_schema:relation</a></p>
 <!-- no inheritance hierarchy -->
@@ -537,7 +536,7 @@
 <tbody>
 <tr>
 <td><a href="../Annotation/">Annotation</a></td>
-<td>An association between a gene product and a GO term, with an evidence code, a</td>
+<td>An association between a gene product and a GO term, with an evidence code, a...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -577,7 +576,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="todos">TODOs</h2>
+<h2 id="notes">Notes</h2>
 <ul>
 <li>The GPAD spec says that the "relation used SHOULD come from the allowed gene-product-to-term relations". Decide whether to enforce this in the schema via an enum.</li>
 </ul>
@@ -608,11 +607,9 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">relation</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Relation</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Relation</span><span class="nv"> </span><span class="s">Ontology</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">describe</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span>
-<span class="w">  </span><span class="s">biological</span>
-
-<span class="w">  </span><span class="s">entity</span><span class="nv"> </span><span class="s">relates</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">associated.&#39;</span>
-<span class="nt">todos</span><span class="p">:</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relation from the Relation Ontology that describes how the annotated</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">biological entity relates to the GO term with which it is associated.</span>
+<span class="nt">notes</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec says that the &quot;relation used SHOULD come from the allowed gene-product-to-term</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">relations&quot;. Decide whether to enforce this in the schema via an enum.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>

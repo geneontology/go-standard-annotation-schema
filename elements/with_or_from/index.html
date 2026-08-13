@@ -449,17 +449,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TODOs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -531,10 +520,7 @@
 
 
 <h1 id="slot-with_or_from">Slot: with_or_from</h1>
-<p><em>Used with specific ECO codes to capture an additional identifier supporting the</em></p>
-<p><em>evidence for the annotation. For example, it can identify another gene product to</em></p>
-<p><em>which the annotated gene product is similar (ISS) or interacts with (IPI).</em></p>
-<p><em>Population of the With/From is mandatory for certain evidence codes.</em></p>
+<p><em>Used with specific ECO codes to capture an additional identifier supporting the evidence for the annotation. For example, it can identify another gene product to which the annotated gene product is similar (ISS) or interacts with (IPI). Population of the With/From is mandatory for certain evidence codes.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/with_or_from">go_standard_annotation_schema:with_or_from</a></p>
 <!-- no inheritance hierarchy -->
@@ -550,7 +536,7 @@
 <tbody>
 <tr>
 <td><a href="../Annotation/">Annotation</a></td>
-<td>An association between a gene product and a GO term, with an evidence code, a</td>
+<td>An association between a gene product and a GO term, with an evidence code, a...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -595,10 +581,6 @@
 <li>Cardinality must be 0 for evidence codes IDA, TAS, NAS, or ND</li>
 <li>Cardinality must be 1, &gt;1 for IEA, IC, IGI, IPI, ISS &amp; child terms of ISS</li>
 </ul>
-<h2 id="todos">TODOs</h2>
-<ul>
-<li>The GPAD spec makes a distinction between pipe- and comma-separated lists of With/From values. Decide if and how this should be represented in the schema.</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -626,17 +608,10 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">with_or_from</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Used</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">specific</span><span class="nv"> </span><span class="s">ECO</span><span class="nv"> </span><span class="s">codes</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">capture</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">additional</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">supporting</span>
-<span class="w">  </span><span class="s">the</span>
-
-<span class="w">  </span><span class="s">evidence</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">example,</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">identify</span><span class="nv"> </span><span class="s">another</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">to</span>
-
-<span class="w">  </span><span class="s">which</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">similar</span><span class="nv"> </span><span class="s">(ISS)</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">interacts</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">(IPI).</span>
-
-<span class="w">  </span><span class="s">Population</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">With/From</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">mandatory</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">certain</span><span class="nv"> </span><span class="s">evidence</span><span class="nv"> </span><span class="s">codes.&#39;</span>
-<span class="nt">todos</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec makes a distinction between pipe- and comma-separated lists of With/From</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">values. Decide if and how this should be represented in the schema.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Used with specific ECO codes to capture an additional identifier supporting</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the evidence for the annotation. For example, it can identify another gene product</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">to which the annotated gene product is similar (ISS) or interacts with (IPI). Population</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">of the With/From is mandatory for certain evidence codes.</span>
 <span class="nt">comments</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cardinality must be 0 for evidence codes IDA, TAS, NAS, or ND</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cardinality must be 1, &gt;1 for IEA, IC, IGI, IPI, ISS &amp; child terms of ISS</span>

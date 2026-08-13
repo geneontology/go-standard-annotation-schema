@@ -278,9 +278,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-entity">Class: Entity</h1>
-<p><em>An annotatable biological entity for an organism: protein-coding genes, non-coding</em></p>
-<p><em>RNA genes, protein isoforms (i. e., splice variants) and modified forms, such as</em></p>
-<p><em>cleaved forms or proteins modified by post-translational modifications.</em></p>
+<p><em>An annotatable biological entity for an organism: protein-coding genes, non-coding RNA genes, protein isoforms (i. e., splice variants) and modified forms, such as cleaved forms or proteins modified by post-translational modifications.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/Entity">go_standard_annotation_schema:Entity</a></p>
 <pre class="mermaid"><code> classDiagram
@@ -310,8 +308,8 @@
 
 
 
-        Entity --&gt; "*" EntityProperty : gene_product_properties
-        click EntityProperty href "../EntityProperty/"
+        Entity --&gt; "0..1" GeneProductProperties : gene_product_properties
+        click GeneProductProperties href "../GeneProductProperties/"
 
 
 
@@ -375,7 +373,7 @@
 <tr>
 <td><a href="../canonical_object_id/">canonical_object_id</a></td>
 <td>1 <br/> <a href="../ExternalIdentifier/">ExternalIdentifier</a></td>
-<td>If the entity being annotated is a gene, gene-centric reference protein or a</td>
+<td>If the entity being annotated is a gene, gene-centric reference protein or a ...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -392,8 +390,8 @@
 </tr>
 <tr>
 <td><a href="../gene_product_properties/">gene_product_properties</a></td>
-<td>* <br/> <a href="../EntityProperty/">EntityProperty</a></td>
-<td>A list of key-value pairs that provide additional information about an entity</td>
+<td>0..1 <br/> <a href="../GeneProductProperties/">GeneProductProperties</a></td>
+<td>The properties associated with an entity in a GPI row</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -428,11 +426,8 @@
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'An</span><span class="nv"> </span><span class="s">annotatable</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">entity</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">organism:</span><span class="nv"> </span><span class="s">protein-coding</span><span class="nv"> </span><span class="s">genes,</span>
-<span class="w">  </span><span class="s">non-coding</span>
-
-<span class="w">  </span><span class="s">RNA</span><span class="nv"> </span><span class="s">genes,</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">isoforms</span><span class="nv"> </span><span class="s">(i.</span><span class="nv"> </span><span class="s">e.,</span><span class="nv"> </span><span class="s">splice</span><span class="nv"> </span><span class="s">variants)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">forms,</span><span class="nv"> </span><span class="s">such</span><span class="nv"> </span><span class="s">as</span>
-
-<span class="w">  </span><span class="s">cleaved</span><span class="nv"> </span><span class="s">forms</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">proteins</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">post-translational</span><span class="nv"> </span><span class="s">modifications.'</span>
+<span class="w">  </span><span class="s">non-coding</span><span class="nv"> </span><span class="s">RNA</span><span class="nv"> </span><span class="s">genes,</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">isoforms</span><span class="nv"> </span><span class="s">(i.</span><span class="nv"> </span><span class="s">e.,</span><span class="nv"> </span><span class="s">splice</span><span class="nv"> </span><span class="s">variants)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">forms,</span>
+<span class="w">  </span><span class="s">such</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">cleaved</span><span class="nv"> </span><span class="s">forms</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">proteins</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">post-translational</span><span class="nv"> </span><span class="s">modifications.'</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">slots</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_id</span>
@@ -452,11 +447,8 @@
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'An</span><span class="nv"> </span><span class="s">annotatable</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">entity</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">organism:</span><span class="nv"> </span><span class="s">protein-coding</span><span class="nv"> </span><span class="s">genes,</span>
-<span class="w">  </span><span class="s">non-coding</span>
-
-<span class="w">  </span><span class="s">RNA</span><span class="nv"> </span><span class="s">genes,</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">isoforms</span><span class="nv"> </span><span class="s">(i.</span><span class="nv"> </span><span class="s">e.,</span><span class="nv"> </span><span class="s">splice</span><span class="nv"> </span><span class="s">variants)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">forms,</span><span class="nv"> </span><span class="s">such</span><span class="nv"> </span><span class="s">as</span>
-
-<span class="w">  </span><span class="s">cleaved</span><span class="nv"> </span><span class="s">forms</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">proteins</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">post-translational</span><span class="nv"> </span><span class="s">modifications.'</span>
+<span class="w">  </span><span class="s">non-coding</span><span class="nv"> </span><span class="s">RNA</span><span class="nv"> </span><span class="s">genes,</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">isoforms</span><span class="nv"> </span><span class="s">(i.</span><span class="nv"> </span><span class="s">e.,</span><span class="nv"> </span><span class="s">splice</span><span class="nv"> </span><span class="s">variants)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">forms,</span>
+<span class="w">  </span><span class="s">such</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">cleaved</span><span class="nv"> </span><span class="s">forms</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">proteins</span><span class="nv"> </span><span class="s">modified</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">post-translational</span><span class="nv"> </span><span class="s">modifications.'</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">db_object_id</span><span class="p">:</span>
@@ -473,10 +465,10 @@
 <span class="w">  </span><span class="nt">db_object_symbol</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_symbol</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The symbol of the entity being annotated.</span>
-<span class="w">    </span><span class="nt">todos</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI spec says that this is required, but in practice it is missing in many</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">rows of existing GPI files. Decide whether this should be required in the schema</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and handled in the file parsing code if it is missing.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar and narrative spec both say that this is required, but in practice</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">it is missing in many rows of existing GPI files. Decide whether this should</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">be required in the schema and handled in the file parsing code if it is missing.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -484,9 +476,14 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^\S+$</span>
 <span class="w">  </span><span class="nt">db_object_name</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_name</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the entity being annotated.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar implies that column 3 is required, but the narrative spec says</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">that it is optional. The narrative spec seems more appropriate, so that is what</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is implemented here. Decide if that is correct.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -509,9 +506,19 @@
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_type</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The class of biological entity being annotated.</span>
 <span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' ID )*` but</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the narrative spec says that it has cardinality 1. The narrative spec seems</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">more appropriate, so that is what is implemented here. Decide if that is correct.</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This field should describe the type of biological object as defined by the contributing</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">database. For example, WormBase identifiers represent genes, PomBase identifiers</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">represent protein-coding genes, and SGD identifiers represent proteins.</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The entity type value must be provided as an ontology term identifier from Sequence</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Ontology, Protein Ontology, or GO, and must correspond to one of the permitted</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">GPI entity types or a more granular child term. Common entries include PR:000000001</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(protein), GO:0032991 (protein-containing complex), SO:0001217 (protein-coding</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">gene), SO:0000655 (ncRNA) or any SO child term, SO:0001263 (ncRNA-coding gene)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">or any SO child term, SO:0000336 (pseudogene).</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GO does not allow 'gene' and 'gene product' as biological entity types, as this</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">does not allow to differentiate between proteins and ncRNAs products.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
@@ -523,10 +530,8 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">db_object_taxon_id</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_taxon_id</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">NCBI</span><span class="nv"> </span><span class="s">Taxonomy</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">organism</span><span class="nv"> </span><span class="s">(species</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">strain)</span>
-<span class="w">      </span><span class="s">encoding</span><span class="nv"> </span><span class="s">the</span>
-
-<span class="w">      </span><span class="s">entity</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">annotated.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The NCBI Taxonomy identifier for the organism (species or strain)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">encoding the entity being annotated.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -548,19 +553,15 @@
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">canonical_object_id</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">canonical_object_id</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'If</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">entity</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">gene,</span><span class="nv"> </span><span class="s">gene-centric</span><span class="nv"> </span><span class="s">reference</span>
-<span class="w">      </span><span class="s">protein</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span>
-
-<span class="w">      </span><span class="s">protein</span><span class="nv"> </span><span class="s">complex,</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">should</span><span class="nv"> </span><span class="s">repeat</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">object</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">annotated.</span><span class="nv"> </span><span class="s">If</span>
-<span class="w">      </span><span class="s">the</span>
-
-<span class="w">      </span><span class="s">entity</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">derived</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">such</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">isoform,</span>
-<span class="w">      </span><span class="s">a</span>
-
-<span class="w">      </span><span class="s">modified</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">processed</span><span class="nv"> </span><span class="s">transcript</span><span class="nv"> </span><span class="s">(e.</span><span class="nv"> </span><span class="s">g.</span><span class="nv"> </span><span class="s">miRNA),</span><span class="nv"> </span><span class="s">then</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">refers</span><span class="nv"> </span><span class="s">to</span>
-<span class="w">      </span><span class="s">the</span>
-
-<span class="w">      </span><span class="s">gene-centric</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">entity.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the entity being annotated is a gene, gene-centric reference protein</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">or a protein complex, this should repeat the ID of the object being annotated.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">If the entity being annotated is derived from a gene product such as a protein</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">isoform, a modified protein or a processed transcript (e. g. miRNA), then this</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">refers to the gene-centric ID of the annotated entity.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '|' ID )* )?`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">but the narrative spec says that it has cardinality 1. The narrative spec seems</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">more appropriate, so that is what is implemented here. Decide if that is correct.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -570,10 +571,8 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">protein_containing_complex_members</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">protein_containing_complex_members</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'If</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">entity</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">protein-containing</span><span class="nv"> </span><span class="s">complex,</span><span class="nv"> </span><span class="s">this</span>
-<span class="w">      </span><span class="s">should</span><span class="nv"> </span><span class="s">list</span>
-
-<span class="w">      </span><span class="s">the</span><span class="nv"> </span><span class="s">gene-centric</span><span class="nv"> </span><span class="s">canonical</span><span class="nv"> </span><span class="s">protein</span><span class="nv"> </span><span class="s">identifiers.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the entity being annotated is a protein-containing complex, this</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">should list the gene-centric canonical protein identifiers.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -585,15 +584,11 @@
 <span class="w">  </span><span class="nt">db_xrefs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_xrefs</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cross-references to other databases for the entity being annotated.</span>
-<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">mandatory</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">prefix</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotated</span><span class="nv"> </span><span class="s">entity</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">identifier</span>
-<span class="w">      </span><span class="s">is</span>
-
-<span class="w">      </span><span class="s">not</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of:</span><span class="nv"> </span><span class="s">UniProtKB,</span><span class="nv"> </span><span class="s">RNACentral,</span><span class="nv"> </span><span class="s">ComplexPortal.</span><span class="nv"> </span><span class="s">In</span><span class="nv"> </span><span class="s">these</span><span class="nv"> </span><span class="s">cases,</span><span class="nv"> </span><span class="s">db_xrefs</span><span class="nv"> </span><span class="s">must</span>
-
-<span class="w">      </span><span class="s">include</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">corresponding</span><span class="nv"> </span><span class="s">UniProtKB</span><span class="nv"> </span><span class="s">ID,</span><span class="nv"> </span><span class="s">RNACentral,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">ComplexPortal</span><span class="nv"> </span><span class="s">as</span>
-
-<span class="w">      </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">according</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Object</span><span class="nv"> </span><span class="s">Type.'</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This field is mandatory if the prefix of the annotated entity's identifier is</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">not UniProtKB, RNACentral, or ComplexPortal. In these cases, db_xrefs must include</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the corresponding UniProtKB ID, RNACentral, or ComplexPortal as appropriate</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">according to the Object Type.</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Additional cross references such as NCBI gene or protein IDs, HGNC, etc, may</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">also be included.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
@@ -606,18 +601,15 @@
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">gene_product_properties</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gene_product_properties</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A list of key-value pairs that provide additional information about</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">an entity.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The properties associated with an entity in a GPI row.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EntityProperty</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GeneProductProperties</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
 </div>

@@ -584,27 +584,23 @@
 <tbody>
 <tr>
 <td><a href="Annotation/">Annotation</a></td>
-<td>An association between a gene product and a GO term, with an evidence code, a</td>
+<td>An association between a gene product and a GO term, with an evidence code, a...</td>
 </tr>
 <tr>
 <td><a href="AnnotationExtension/">AnnotationExtension</a></td>
 <td>Annotation extensions allow GO terms in annotations to be further specified, ...</td>
 </tr>
 <tr>
+<td><a href="AnnotationProperties/">AnnotationProperties</a></td>
+<td>The closed set of properties associated with an annotation</td>
+</tr>
+<tr>
 <td><a href="Entity/">Entity</a></td>
 <td>An annotatable biological entity for an organism: protein-coding genes, non-c...</td>
 </tr>
 <tr>
-<td><a href="Property/">Property</a></td>
-<td>A key-value pair that provides additional information about an annotation or</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AnnotationProperty/">AnnotationProperty</a></td>
-<td>A key-value pair that provides additional information about an annotation</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="EntityProperty/">EntityProperty</a></td>
-<td>A key-value pair that provides additional information about an entity</td>
+<td><a href="GeneProductProperties/">GeneProductProperties</a></td>
+<td>The closed set of properties associated with an entity in a GPI row</td>
 </tr>
 </tbody>
 </table>
@@ -627,15 +623,27 @@
 </tr>
 <tr>
 <td><a href="annotation_properties/">annotation_properties</a></td>
-<td>A list if key-value pairs that provide additional information about an annota...</td>
+<td>Additional properties associated with an annotation</td>
 </tr>
 <tr>
 <td><a href="assigned_by/">assigned_by</a></td>
-<td>The database which made the annotation one of the values from the set of GOC</td>
+<td>The database which made the annotation one of the values from the set of GOC ...</td>
 </tr>
 <tr>
 <td><a href="canonical_object_id/">canonical_object_id</a></td>
-<td>If the entity being annotated is a gene, gene-centric reference protein or a</td>
+<td>If the entity being annotated is a gene, gene-centric reference protein or a ...</td>
+</tr>
+<tr>
+<td><a href="comment/">comment</a></td>
+<td>Free text about a specific annotation</td>
+</tr>
+<tr>
+<td><a href="contributor_id/">contributor_id</a></td>
+<td>The identifier of a curator or user who entered or changed an annotation</td>
+</tr>
+<tr>
+<td><a href="creation_date/">creation_date</a></td>
+<td>The date on which the annotation was created</td>
 </tr>
 <tr>
 <td><a href="db_object_id/">db_object_id</a></td>
@@ -662,6 +670,10 @@
 <td>The class of biological entity being annotated</td>
 </tr>
 <tr>
+<td><a href="db_subset/">db_subset</a></td>
+<td>The status of a UniProtKB accession with respect to curator review</td>
+</tr>
+<tr>
 <td><a href="db_xrefs/">db_xrefs</a></td>
 <td>Cross-references to other databases for the entity being annotated</td>
 </tr>
@@ -683,27 +695,43 @@
 </tr>
 <tr>
 <td><a href="gene_product_properties/">gene_product_properties</a></td>
-<td>A list of key-value pairs that provide additional information about an entity</td>
+<td>The properties associated with an entity in a GPI row</td>
+</tr>
+<tr>
+<td><a href="go_annotation_complete/">go_annotation_complete</a></td>
+<td>The date on which a curator determined that the set of GO annotations for an ...</td>
+</tr>
+<tr>
+<td><a href="go_annotation_summary/">go_annotation_summary</a></td>
+<td>A textual gene or gene-product description</td>
+</tr>
+<tr>
+<td><a href="id/">id</a></td>
+<td>The contributing database's unique identifier for an annotation</td>
 </tr>
 <tr>
 <td><a href="interacting_taxon_id/">interacting_taxon_id</a></td>
 <td>Taxonomic identifier for interacting organism to be used only in conjunction ...</td>
 </tr>
 <tr>
+<td><a href="model_state/">model_state</a></td>
+<td>The GO-CAM model state</td>
+</tr>
+<tr>
+<td><a href="modification_date/">modification_date</a></td>
+<td>A date on which the annotation was modified</td>
+</tr>
+<tr>
 <td><a href="negation/">negation</a></td>
 <td>A boolean indicating whether the annotation is negated</td>
 </tr>
 <tr>
+<td><a href="noctua_model_id/">noctua_model_id</a></td>
+<td>The unique identifier of the associated GO-CAM model</td>
+</tr>
+<tr>
 <td><a href="ontology_class_id/">ontology_class_id</a></td>
 <td>The GO identifier for the term attributed to the DB object ID</td>
-</tr>
-<tr>
-<td><a href="property_key/">property_key</a></td>
-<td>The key of an annotation property</td>
-</tr>
-<tr>
-<td><a href="property_value/">property_value</a></td>
-<td>The value of an annotation property</td>
 </tr>
 <tr>
 <td><a href="protein_containing_complex_members/">protein_containing_complex_members</a></td>
@@ -715,7 +743,19 @@
 </tr>
 <tr>
 <td><a href="relation/">relation</a></td>
-<td>Relation from the Relation Ontology that describe how the annotated biologica...</td>
+<td>Relation from the Relation Ontology that describes how the annotated biologic...</td>
+</tr>
+<tr>
+<td><a href="reviewed_date/">reviewed_date</a></td>
+<td>A date on which the annotation was reviewed</td>
+</tr>
+<tr>
+<td><a href="reviewer_id/">reviewer_id</a></td>
+<td>The identifier of a curator or user who last reviewed an annotation</td>
+</tr>
+<tr>
+<td><a href="uniprot_proteome/">uniprot_proteome</a></td>
+<td>The UniProt proteome accession for the set of proteins that constitute an org...</td>
 </tr>
 <tr>
 <td><a href="with_or_from/">with_or_from</a></td>
@@ -750,6 +790,10 @@
 <tr>
 <td><a href="Boolean/">Boolean</a></td>
 <td>A binary (true or false) value</td>
+</tr>
+<tr>
+<td><a href="ContributorIdentifier/">ContributorIdentifier</a></td>
+<td>An identifier of a contributor, such as a curator or user who entered or chan...</td>
 </tr>
 <tr>
 <td><a href="Curie/">Curie</a></td>
@@ -818,6 +862,10 @@
 <tr>
 <td><a href="Objectidentifier/">Objectidentifier</a></td>
 <td>A URI or CURIE that represents an object in the model</td>
+</tr>
+<tr>
+<td><a href="RoIdentifier/">RoIdentifier</a></td>
+<td>An identifier of a Relation Ontology term</td>
 </tr>
 <tr>
 <td><a href="Sparqlpath/">Sparqlpath</a></td>

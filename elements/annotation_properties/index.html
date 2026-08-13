@@ -438,17 +438,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TODOs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -520,7 +509,7 @@
 
 
 <h1 id="slot-annotation_properties">Slot: annotation_properties</h1>
-<p><em>A list if key-value pairs that provide additional information about an annotation.</em></p>
+<p><em>Additional properties associated with an annotation.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/annotation_properties">go_standard_annotation_schema:annotation_properties</a></p>
 <!-- no inheritance hierarchy -->
@@ -536,7 +525,7 @@
 <tbody>
 <tr>
 <td><a href="../Annotation/">Annotation</a></td>
-<td>An association between a gene product and a GO term, with an evidence code, a</td>
+<td>An association between a gene product and a GO term, with an evidence code, a...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -553,7 +542,7 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../AnnotationProperty/">AnnotationProperty</a></td>
+<td><a href="../AnnotationProperties/">AnnotationProperties</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
@@ -571,15 +560,11 @@
 </thead>
 <tbody>
 <tr>
-<td>Multivalued</td>
-<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="todos">TODOs</h2>
-<ul>
-<li>Annotation properties do not have a unique identifier, so the schema indicates they are inlined as a list. This makes change operations that target a specific annotation property more difficult.</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -607,21 +592,14 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annotation_properties</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A list if key-value pairs that provide additional information about an</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">annotation.</span>
-<span class="nt">todos</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation properties do not have a unique identifier, so the schema indicates they</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">are inlined as a list. This makes change operations that target a specific annotation</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">property more difficult.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Additional properties associated with an annotation.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationProperty</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationProperties</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
 </div>

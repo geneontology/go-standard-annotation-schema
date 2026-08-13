@@ -287,9 +287,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-annotationextension">Class: AnnotationExtension</h1>
-<p><em>Annotation extensions allow GO terms in annotations to be further specified, using</em></p>
-<p><em>gene products, chemicals, cell types, anatomical structures, to</em></p>
-<p><em>provide additional biological context.</em></p>
+<p><em>Annotation extensions allow GO terms in annotations to be further specified, using gene products, chemicals, cell types, anatomical structures, to provide additional biological context.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/AnnotationExtension">go_standard_annotation_schema:AnnotationExtension</a></p>
 <pre class="mermaid"><code> classDiagram
@@ -314,7 +312,7 @@
 <tbody>
 <tr>
 <td><a href="../extension_relation/">extension_relation</a></td>
-<td>1 <br/> <a href="../ExternalIdentifier/">ExternalIdentifier</a></td>
+<td>1 <br/> <a href="../RoIdentifier/">RoIdentifier</a></td>
 <td>A term from the Relation Ontology that describes how the GO term in the exten...</td>
 <td>direct</td>
 </tr>
@@ -374,12 +372,9 @@
 <h3 id="direct">Direct</h3>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Annotation</span><span class="nv"> </span><span class="s">extensions</span><span class="nv"> </span><span class="s">allow</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">terms</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">annotations</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">further</span><span class="nv"> </span><span class="s">specified,</span>
-<span class="w">  </span><span class="s">using</span>
-
-<span class="w">  </span><span class="s">gene</span><span class="nv"> </span><span class="s">products,</span><span class="nv"> </span><span class="s">chemicals,</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">types,</span><span class="nv"> </span><span class="s">anatomical</span><span class="nv"> </span><span class="s">structures,</span><span class="nv"> </span><span class="s">to</span>
-
-<span class="w">  </span><span class="s">provide</span><span class="nv"> </span><span class="s">additional</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">context.'</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions allow GO terms in annotations to be further specified,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">using gene products, chemicals, cell types, anatomical structures, to provide additional</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">biological context.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">slots</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extension_relation</span>
@@ -389,33 +384,26 @@
 <h3 id="induced">Induced</h3>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Annotation</span><span class="nv"> </span><span class="s">extensions</span><span class="nv"> </span><span class="s">allow</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">terms</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">annotations</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">further</span><span class="nv"> </span><span class="s">specified,</span>
-<span class="w">  </span><span class="s">using</span>
-
-<span class="w">  </span><span class="s">gene</span><span class="nv"> </span><span class="s">products,</span><span class="nv"> </span><span class="s">chemicals,</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">types,</span><span class="nv"> </span><span class="s">anatomical</span><span class="nv"> </span><span class="s">structures,</span><span class="nv"> </span><span class="s">to</span>
-
-<span class="w">  </span><span class="s">provide</span><span class="nv"> </span><span class="s">additional</span><span class="nv"> </span><span class="s">biological</span><span class="nv"> </span><span class="s">context.'</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation extensions allow GO terms in annotations to be further specified,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">using gene products, chemicals, cell types, anatomical structures, to provide additional</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">biological context.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">extension_relation</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extension_relation</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Relation</span><span class="nv"> </span><span class="s">Ontology</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">describes</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term</span>
-<span class="w">      </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">extension</span>
-
-<span class="w">      </span><span class="s">relates</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A term from the Relation Ontology that describes how the GO term</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in the extension relates to the GO term in the annotation.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external_identifier</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ro_identifier</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">extension_term</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extension_term</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">gene</span><span class="nv"> </span><span class="s">product,</span><span class="nv"> </span><span class="s">chemical,</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">type,</span><span class="nv"> </span><span class="s">anatomical</span><span class="nv"> </span><span class="s">structure,</span><span class="nv"> </span><span class="s">or</span>
-<span class="w">      </span><span class="s">other</span><span class="nv"> </span><span class="s">entity</span><span class="nv"> </span><span class="s">that</span>
-
-<span class="w">      </span><span class="s">is</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">further</span><span class="nv"> </span><span class="s">specify</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GO</span><span class="nv"> </span><span class="s">term</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">annotation.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The gene product, chemical, cell type, anatomical structure, or other</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">entity that is used to further specify the GO term in the annotation.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
