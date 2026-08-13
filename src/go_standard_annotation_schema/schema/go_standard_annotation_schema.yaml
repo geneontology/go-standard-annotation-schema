@@ -222,16 +222,22 @@ slots:
       The symbol of the entity being annotated.
     range: string
     required: false
+    pattern: "^\\S+$"
     todos:
-      - The GPI spec says that this is required, but in practice it is missing in many
-        rows of existing GPI files. Decide whether this should be required in the schema
-        and handled in the file parsing code if it is missing.
+      - The GPI grammar and narrative spec both say that this is required, but in
+        practice it is missing in many rows of existing GPI files. Decide whether this
+        should be required in the schema and handled in the file parsing code if it is
+        missing.
 
   db_object_name:
     description: |-
       The name of the entity being annotated.
     range: string
     required: false
+    todos:
+      - The GPI grammar implies that column 3 is required, but the narrative spec says
+        that it is optional. The narrative spec seems more appropriate, so that is what
+        is implemented here. Decide if that is correct.
 
   db_object_synonyms:
     description: |-
@@ -252,6 +258,10 @@ slots:
         represent proteins.
       - GO does not allow 'gene' and 'gene product' as biological entity types, as this
         does not allow to differentiate between proteins and ncRNAs products.
+    todos:
+      - The GPI grammar says that column 6 has cardinality 1..*, `ID ( '|' ID )*` but
+        the narrative spec says that it cardinality 1. The narrative spec seems more
+        appropriate, so that is what is implemented here. Decide if that is correct.
 
   db_object_taxon_id:
     description: |-
@@ -276,6 +286,10 @@ slots:
       gene-centric ID of the annotated entity.
     range: external_identifier
     required: true
+    todos:
+      - The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '|' ID )* )?`
+        but the narrative spec says that it cardinality 1. The narrative spec seems more
+        appropriate, so that is what is implemented here. Decide if that is correct.
 
   protein_containing_complex_members:
     description: |-
