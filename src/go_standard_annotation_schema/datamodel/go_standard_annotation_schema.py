@@ -127,9 +127,14 @@ linkml_meta = LinkMLMeta({'default_prefix': 'go_standard_annotation_schema',
                                                          'annotation.',
                                           'from_schema': 'https://w3id.org/geneontology/go-standard-annotation-schema',
                                           'name': 'contributor_identifier',
-                                          'structured_pattern': {'interpolated': True,
-                                                                 'partial_match': False,
-                                                                 'syntax': '(orcid|goc):{local_id}'},
+                                          'notes': ['The GPAD/GPI grammar says '
+                                                    'that this type of identifier '
+                                                    'must have an orcid or goc '
+                                                    'prefix. In practice a full '
+                                                    'https://orcid.org URL is '
+                                                    'used. For now, this schema is '
+                                                    'not enforcing a specific '
+                                                    'prefix.'],
                                           'typeof': 'external_identifier'},
                'curie': {'base': 'Curie',
                          'comments': ['in RDF serializations this MUST be expanded '

@@ -298,15 +298,20 @@ def test_gpad_annotation_date_is_parsed_as_a_date():
     assert isinstance(annotation.annotation_date, date)
 
 
-def test_gpad_rejects_keyless_property_continuations():
+def test_gpad_accepts_keyless_multivalued_property_continuations():
     line = _with_field(
         GPAD_LINE,
         12,
-        "contributor-id=orcid:0000-0001|orcid:0000-0002",
+        "contributor-id=orcid:0000-0001|orcid:0000-0002|"
+        "reviewer-id=goc:first|goc:second|comment=reviewed",
     )
 
-    with pytest.raises(RowError):
-        GpadReader.parse_line(line)
+    properties = _parse_one(line).annotation_properties
+
+    assert properties is not None
+    assert properties.contributor_id == ["orcid:0000-0001", "orcid:0000-0002"]
+    assert properties.reviewer_id == ["goc:first", "goc:second"]
+    assert properties.comment == ["reviewed"]
 
 
 def test_gpad_rejects_a_keyless_first_property_segment():
@@ -315,6 +320,20 @@ def test_gpad_rejects_a_keyless_first_property_segment():
 
     with pytest.raises(RowError):
         GpadReader.parse_line(line)
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "id=GOA:1|GOA:2",
+        "model-state=production|draft",
+        "comment=first||second",
+        "comment=first|",
+    ],
+)
+def test_gpad_rejects_invalid_property_continuations(value):
+    with pytest.raises(RowError):
+        GpadReader.parse_line(_with_field(GPAD_LINE, 12, value))
 
 
 def test_gpad_maps_all_annotation_property_names():

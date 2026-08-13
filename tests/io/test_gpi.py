@@ -137,6 +137,13 @@ def test_gpi_rejects_duplicate_or_invalid_gene_product_properties(value):
         GpiReader.parse_line(_with_field(GPI_LINE, 11, value))
 
 
+def test_gpi_rejects_keyless_property_continuations():
+    line = _with_field(GPI_LINE, 11, "db-subset=TrEMBL|Swiss-Prot")
+
+    with pytest.raises(RowError):
+        GpiReader.parse_line(line)
+
+
 def test_gpi_accepts_an_ncrna_sequence_ontology_descendant():
     """GPI permits any Sequence Ontology child of the ncRNA entity type."""
     fields = GPI_LINE.split("\t")

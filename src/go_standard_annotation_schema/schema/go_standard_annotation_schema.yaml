@@ -86,10 +86,10 @@ types:
       An identifier of a contributor, such as a curator or user who entered or changed
       an annotation.
     typeof: external_identifier
-    structured_pattern:
-      syntax: "(orcid|goc):{local_id}"
-      interpolated: true
-      partial_match: false
+    notes:
+      - The GPAD/GPI grammar says that this type of identifier must have an orcid or
+        goc prefix. In practice a full https://orcid.org URL is used. For now, this
+        schema is not enforcing a specific prefix.
 
 slots:
   db_object_id:

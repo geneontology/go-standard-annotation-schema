@@ -66,10 +66,18 @@ def _parse_property_values(
         return None
 
     result: dict[str, str | list[str]] = {}
+    current_multivalued_values: list[str] | None = None
     for expression in value.split("|"):
         key, separator, slot_value = expression.partition("=")
+        if not separator:
+            if not expression or current_multivalued_values is None:
+                raise ValueError(f"invalid property expression: {expression!r}")
+            current_multivalued_values.append(expression)
+            continue
+
+        current_multivalued_values = None
         slot_name = key_map.get(key)
-        if not separator or not key or not slot_value or slot_name is None:
+        if not key or not slot_value or slot_name is None:
             raise ValueError(f"invalid property expression: {expression!r}")
 
         if slot_name in multivalued_slots:
@@ -77,6 +85,7 @@ def _parse_property_values(
             if not isinstance(existing, list):
                 raise ValueError(f"duplicate scalar property: {key!r}")
             existing.append(slot_value)
+            current_multivalued_values = existing
         elif slot_name in result:
             raise ValueError(f"duplicate scalar property: {key!r}")
         else:
