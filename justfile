@@ -8,6 +8,8 @@ set default-list := true
 schema_name := "go_standard_annotation_schema"
 source_schema_dir := "src" / schema_name / "schema"
 source_schema_path := source_schema_dir / schema_name + ".yaml"
+package_json_schema_dir := "src" / schema_name / "jsonschema"
+package_json_schema_path := package_json_schema_dir / schema_name + ".schema.json"
 materialized_schema_path := "tmp" / schema_name + "_materialized.yaml"
 python_dir := "src" / schema_name / "datamodel"
 project_dir := "project"
@@ -27,6 +29,7 @@ clean:
   find {{python_dir}} -type f -name "*.py" -not -name "__init__.py" -delete
   find {{python_dir}} -type d -delete
   find {{project_dir}} -not -name "README.md" -delete
+  rm -rf {{package_json_schema_dir}}
   rm -rf {{doc_dir}}/*.md
 
 # Run all tests
@@ -113,6 +116,8 @@ gen-json-schema: _gen-materialized-schema
   uv run linkml generate json-schema \
     --top-class Annotation \
     {{materialized_schema_path}} > {{project_dir}}/jsonschema/{{schema_name}}.schema.json
+  mkdir -p {{package_json_schema_dir}}
+  cp {{project_dir}}/jsonschema/{{schema_name}}.schema.json {{package_json_schema_path}}
 
 # Generate Pydantic models from the schema
 [group('model development')]
