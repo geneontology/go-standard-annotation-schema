@@ -36,6 +36,11 @@ dev = [
 
 # See https://hatch.pypa.io/latest/config/build/#file-selection for how to
 # explicitly include files other than default into the build distributions.
+[tool.hatch.build.targets.sdist.force-include]
+"project/jsonschema/go_standard_annotation_schema.schema.json" = "project/jsonschema/go_standard_annotation_schema.schema.json"
+
+[tool.hatch.build.targets.wheel.force-include]
+"project/jsonschema/go_standard_annotation_schema.schema.json" = "go_standard_annotation_schema/jsonschema/go_standard_annotation_schema.schema.json"
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
