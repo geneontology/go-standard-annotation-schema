@@ -1,3 +1,5 @@
+.DS_Store
+
 # generated part of documentation
 /docs/elements/*.md
 # linkml-run-examples output (not useful to have in git in its current form)
@@ -7,6 +9,7 @@
 tmp
 project/*
 !project/README.md
+/src/go_standard_annotation_schema/jsonschema/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
