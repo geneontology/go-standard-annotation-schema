@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import gzip
 import os
-from collections import deque
 from collections.abc import Iterator, Mapping, Set
 from datetime import date, datetime
 from io import TextIOBase
-from typing import ClassVar, Generic, TextIO, TypeVar
+from typing import ClassVar, Generic, TextIO
 
 from pydantic import ValidationError
 
@@ -17,15 +16,15 @@ from .types import (
     FormatName,
     HeaderError,
     MetadataEntry,
+    ModelT,
     ReaderState,
     ReaderStateError,
     ReaderStats,
+    Record,
     RowError,
     RowIssue,
     Source,
 )
-
-ModelT = TypeVar("ModelT")
 
 
 class _FieldCountError(ValueError):
@@ -167,7 +166,7 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
         self._source_name: str | None = None
         self._metadata: FileMetadata | None = None
         self._buffered_line: tuple[int, str] | None = None
-        self._pending_models: deque[ModelT] = deque()
+        self._records: Iterator[Record[ModelT]] | None = None
         self._counters = {
             "lines_read": 0,
             "metadata_entries": 0,
@@ -221,6 +220,7 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
             )
             self._read_header_block()
             self._state = "open"
+            self._records = self._iter_records()
         except Exception:
             if self._owns_stream and self._stream is not None:
                 self._stream.close()
@@ -241,36 +241,60 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
     def __next__(self) -> ModelT:
         if self._state != "open":
             raise ReaderStateError("reader can only be iterated while open")
+        assert self._records is not None
+        return next(self._records).item
 
-        while True:
-            if self._pending_models:
-                self._counters["records_yielded"] += 1
-                return self._pending_models.popleft()
+    def records(self) -> Iterator[Record[ModelT]]:
+        """Yield records with their source line numbers.
 
-            line_info = self._next_line()
-            if line_info is None:
+        This method provides an iterator that yields `Record` instances, which
+        include both the parsed model and the corresponding source line number.
+
+        Raises:
+            ReaderStateError: If called, or if the returned iterator is advanced,
+                while the reader is not open.
+        """
+        if self._state != "open":
+            raise ReaderStateError("reader can only be iterated while open")
+        assert self._records is not None
+        return self._records
+
+    def _iter_records(self) -> Iterator[Record[ModelT]]:
+        """Yield records with their source line numbers."""
+        try:
+            while True:
+                if self._state != "open":
+                    raise ReaderStateError("reader can only be iterated while open")
+                line_info = self._next_line()
+                if line_info is None:
+                    return
+                line_number, raw_line = line_info
+                line = _without_line_terminator(raw_line)
+                if line == "":
+                    self._counters["blank_lines"] += 1
+                    continue
+                if line.startswith("!"):
+                    self._counters["comments_ignored"] += 1
+                    continue
+
+                self._counters["data_rows"] += 1
+                try:
+                    models = self._parse_data_line(raw_line, line_number)
+                except RowError as error:
+                    if self._errors == "strict":
+                        raise error from error.issue.cause
+                    self._counters["rows_skipped"] += 1
+                    if self._on_error is not None:
+                        self._on_error(error.issue)
+                    continue
+                for model in models:
+                    self._counters["records_yielded"] += 1
+                    yield Record(item=model, line_number=line_number)
+                    if self._state != "open":
+                        raise ReaderStateError("reader can only be iterated while open")
+        finally:
+            if self._state == "open":
                 self._state = "exhausted"
-                raise StopIteration
-            line_number, raw_line = line_info
-            line = _without_line_terminator(raw_line)
-            if line == "":
-                self._counters["blank_lines"] += 1
-                continue
-            if line.startswith("!"):
-                self._counters["comments_ignored"] += 1
-                continue
-
-            self._counters["data_rows"] += 1
-            try:
-                models = self._parse_data_line(raw_line, line_number)
-            except RowError as error:
-                if self._errors == "strict":
-                    raise error from error.issue.cause
-                self._counters["rows_skipped"] += 1
-                if self._on_error is not None:
-                    self._on_error(error.issue)
-                continue
-            self._pending_models.extend(models)
 
     @classmethod
     def _parse_models(
