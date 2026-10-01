@@ -451,6 +451,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.GpadReader.records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        records
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -529,6 +540,17 @@
     <span class="md-ellipsis">
       
         parse_line
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.GpiReader.records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        records
       
     </span>
   </a>
@@ -679,6 +701,17 @@
     <span class="md-ellipsis">
       
         ReaderStats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.types.Record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record
       
     </span>
   </a>
@@ -852,6 +885,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.GpadReader.records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        records
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -930,6 +974,17 @@
     <span class="md-ellipsis">
       
         parse_line
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.GpiReader.records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        records
       
     </span>
   </a>
@@ -1080,6 +1135,17 @@
     <span class="md-ellipsis">
       
         ReaderStats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_standard_annotation_schema.io.types.Record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record
       
     </span>
   </a>
@@ -1474,6 +1540,39 @@ or values rejected by model validation.</p>
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+<h4 id="go_standard_annotation_schema.io.GpadReader.records" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">records</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Yield records with their source line numbers.</p>
+<p>This method provides an iterator that yields <code>Record</code> instances, which
+include both the parsed model and the corresponding source line number.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="ReaderStateError (go_standard_annotation_schema.io.types.ReaderStateError)" href="#go_standard_annotation_schema.io.types.ReaderStateError">ReaderStateError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If called, or if the returned iterator is advanced,
+while the reader is not open.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
 
 
   </div>
@@ -1801,6 +1900,39 @@ or values rejected by model validation.</p>
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+<h4 id="go_standard_annotation_schema.io.GpiReader.records" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">records</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Yield records with their source line numbers.</p>
+<p>This method provides an iterator that yields <code>Record</code> instances, which
+include both the parsed model and the corresponding source line number.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="ReaderStateError (go_standard_annotation_schema.io.types.ReaderStateError)" href="#go_standard_annotation_schema.io.types.ReaderStateError">ReaderStateError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If called, or if the returned iterator is advanced,
+while the reader is not open.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
 
 
   </div>
@@ -2110,6 +2242,55 @@ or values rejected by model validation.</p>
 
 
         <p>Statistics about the reader's progress and results.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="go_standard_annotation_schema.io.types.Record" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">Record</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">line_number</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A single record yielded by a reader, including its source line number.</p>
 
 
 
