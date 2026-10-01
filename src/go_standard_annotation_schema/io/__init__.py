@@ -11,6 +11,7 @@ from .types import (
     ReaderError,
     ReaderStateError,
     ReaderStats,
+    Record,
     RowError,
     RowIssue,
 )
@@ -26,6 +27,7 @@ __all__ = [
     "ReaderError",
     "ReaderStateError",
     "ReaderStats",
+    "Record",
     "RowError",
     "RowIssue",
 ]

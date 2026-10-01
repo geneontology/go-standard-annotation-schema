@@ -4,7 +4,9 @@ import os
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import Literal, TextIO
+from typing import Generic, Literal, TextIO, TypeVar
+
+ModelT = TypeVar("ModelT")
 
 ErrorMode = Literal["strict", "skip"]
 """The error handling mode for a reader."""
@@ -58,6 +60,14 @@ class ReaderStats:
     rows_skipped: int = 0
     blank_lines: int = 0
     comments_ignored: int = 0
+
+
+@dataclass(frozen=True, slots=True)
+class Record(Generic[ModelT]):
+    """A single record yielded by a reader, including its source line number."""
+
+    item: ModelT
+    line_number: int
 
 
 class ReaderError(Exception):

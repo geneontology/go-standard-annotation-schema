@@ -248,6 +248,8 @@ def test_reader_rejects_invalid_state_and_error_mode():
         reader.__enter__()
     with pytest.raises(ValueError, match="errors"):
         StringReader(StringIO(VALID), errors=cast(ErrorMode, "ignore"))
+    with pytest.raises(ReaderStateError):
+        _ = reader.records()
 
 
 @pytest.mark.parametrize(
@@ -320,3 +322,51 @@ def test_parse_property_values_returns_none_for_an_empty_column():
         )
         is None
     )
+
+
+def test_records_yields_records_with_correct_line_numbers():
+    """The reader must yield records with the correct line numbers."""
+    with StringReader(StringIO(VALID)) as reader:
+        records = list(reader.records())
+        assert len(records) == 2
+        assert records[0].line_number == 6
+        assert records[1].line_number == 7
+
+    with ExpandingStringReader(StringIO(VALID)) as reader:
+        records = list(reader.records())
+        assert len(records) == 4
+        assert records[0].line_number == 6
+        assert records[1].line_number == 6
+        assert records[2].line_number == 7
+        assert records[3].line_number == 7
+
+
+def test_state_is_exhausted_after_strict_error():
+    """A reader must set its state to exhausted after a fatal error in strict mode."""
+    text = VALID.replace("c\td", "too\tmany\tfields")
+    source = CountingStringIO(text)
+    with StringReader(source, errors="strict") as reader:
+        _ = next(reader)
+        assert reader._state == "open"
+        with pytest.raises(RowError):
+            next(reader)
+        with pytest.raises(ReaderStateError):
+            next(reader)
+
+
+def test_attempt_to_iterate_records_outside_context_raises():
+    """A reader must not allow iteration outside its context manager."""
+    with StringReader(StringIO(VALID)) as reader:
+        iter_records = reader.records()
+
+    with pytest.raises(ReaderStateError):
+        next(iter_records)
+
+    with ExpandingStringReader(StringIO(VALID)) as reader:
+        iter_records = reader.records()
+        # One record yielded from the first row
+        next(iter_records)
+
+    with pytest.raises(ReaderStateError):
+        # Shouldn't be able to yield the second record from the first row at this point.
+        next(iter_records)
