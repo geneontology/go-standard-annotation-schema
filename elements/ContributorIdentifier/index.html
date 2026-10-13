@@ -497,8 +497,34 @@
 <td>Type URI</td>
 <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 </tr>
+<tr>
+<td>## Value Constraints</td>
+<td></td>
+</tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regex Pattern</td>
+<td><code>^(?:[A-Za-z][A-Za-z0-9_\-.]*:[A-Za-z0-9_\-.:/]+)$</code></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Additional Constraints</summary>
+**Structured Pattern:**
+
+- **Syntax:** `{prefix}:{local_id}`
+- **Interpolated:** True
+
+</details>
 <h2 id="notes">Notes</h2>
 <ul>
 <li>The GPAD/GPI grammar says that this type of identifier must have an orcid or goc prefix. In practice a full <a href="https://orcid.org">https://orcid.org</a> URL is used. For now, this schema is not enforcing a specific prefix.</li>
@@ -519,11 +545,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>go_standard_annotation_schema:contributor_identifier</td>
+<td>go_standard_annotation_schema:ContributorIdentifier</td>
 </tr>
 <tr>
 <td>native</td>
-<td>go_standard_annotation_schema:contributor_identifier</td>
+<td>go_standard_annotation_schema:ContributorIdentifier</td>
 </tr>
 </tbody>
 </table>
