@@ -370,12 +370,15 @@ def test_gpad_maps_all_annotation_property_names():
         ("noctua-model-id=gomodel:1|noctua-model-id=gomodel:2", None),
         ("creation-date=2026-08-13|creation-date=2026-08-14", None),
         ("unsupported=value", None),
-        ("id=not-an-id", "https://github.com/linkml/linkml/pull/3832"),
+        ("id=not-an-id", None),
         ("model-state=not-valid", None),
-        ("contributor-id=example:1", "https://github.com/linkml/linkml/pull/3832"),
+        (
+            "contributor-id=example:1",
+            "https://github.com/geneontology/go-standard-annotation-schema/issues/16",
+        ),
         (
             "reviewer-id=https://orcid.org/0000-0001",
-            "https://github.com/linkml/linkml/pull/3832",
+            "https://github.com/geneontology/go-standard-annotation-schema/issues/16",
         ),
         ("creation-date=not-a-date", None),
     ],

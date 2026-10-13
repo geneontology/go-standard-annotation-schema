@@ -24,12 +24,6 @@ imports:
   - linkml:types
 
 notes:
-  - This schema uses custom types with structured patterns to represent various types of
-    identifiers. However, LinkML tooling currently does not materialize structured
-    patterns in generated artifacts. The necessary changes are currently (as of
-    2026-08-13) pending in https://github.com/linkml/linkml/pull/3832. Once this PR is
-    merged, the changes released, and the LinkML dependency in this project updated, we
-    will have stronger validation of identifier formats.
   - This schema deviates from the grammar and specs when necessary to either reflect
     actual data or to establish better modeling practices. These deviations are
     documented as notes on specific schema elements.

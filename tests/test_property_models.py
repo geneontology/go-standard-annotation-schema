@@ -35,19 +35,19 @@ def test_annotation_properties_have_typed_specification_slots():
 @pytest.mark.parametrize(
     "values,skip_reason",
     [
-        ({"id": "not-an-id"}, "https://github.com/linkml/linkml/pull/3832"),
+        ({"id": "not-an-id"}, None),
         ({"model_state": "not alphabetic"}, None),
         (
             {"noctua_model_id": "not-an-id"},
-            "https://github.com/linkml/linkml/pull/3832",
+            None,
         ),
         (
             {"contributor_id": ["https://orcid.org/0000-0001"]},
-            "https://github.com/linkml/linkml/pull/3832",
+            "https://github.com/geneontology/go-standard-annotation-schema/issues/16",
         ),
         (
             {"reviewer_id": ["example:0000-0001"]},
-            "https://github.com/linkml/linkml/pull/3832",
+            "https://github.com/geneontology/go-standard-annotation-schema/issues/16",
         ),
         ({"creation_date": "not-a-date"}, None),
         ({"modification_date": ["not-a-date"]}, None),
