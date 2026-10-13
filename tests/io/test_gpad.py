@@ -285,9 +285,10 @@ def test_interacting_taxa_are_split_only_on_pipes():
         "NCBITaxon:9606",
         "NCBITaxon:10090",
     ]
-    assert _parse_one(comma_line).interacting_taxon_id == [
-        "NCBITaxon:9606,NCBITaxon:10090"
-    ]
+    # A comma-separated value is passed through as a single string, and the model
+    # validation fails because it is not a valid NCBITaxon CURIE.
+    with pytest.raises(RowError):
+        _parse_one(comma_line)
 
 
 def test_gpad_annotation_date_is_parsed_as_a_date():
