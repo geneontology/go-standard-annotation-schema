@@ -1,0 +1,118 @@
+# Weekly check that valueset enums still match their upstream ontologies.
+# Drift is tracked in a single issue labeled "valueset-drift".
+---
+name: Valueset drift check
+
+on:  # yamllint disable-line rule:truthy
+  schedule:
+    - cron: "17 6 * * 1"  # Mondays, 06:17 UTC
+  workflow_dispatch:
+
+env:
+  FORCE_COLOR: "1"  # Make tools pretty.
+
+permissions: {}
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          version: "0.11.24"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install project
+        run: uv sync --locked --no-progress
+
+      - name: Check valuesets for drift
+        id: check
+        run: |
+          set +e
+          uv run --locked just check-valuesets > "$RUNNER_TEMP/report.txt"
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/report.txt"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Update tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          label="valueset-drift"
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          issue=$(gh issue list --label "$label" --state open --limit 1 \
+            --json number --jq '.[0].number // empty')
+
+          # Exit 1 means drift only if the script got as far as its summary;
+          # otherwise something else (e.g. just itself) failed.
+          if [ "$STATUS" = "1" ] && \
+            ! grep -q '^Checked [0-9]* values;' "$RUNNER_TEMP/report.txt"; then
+            STATUS="1 without a drift report"
+          fi
+
+          case "$STATUS" in
+            0)
+              if [ -n "$issue" ]; then
+                gh issue comment "$issue" --body "No drift as of $run_url"
+                gh issue close "$issue"
+              fi
+              ;;
+            1)
+              report="$RUNNER_TEMP/report.txt"
+              body="$RUNNER_TEMP/body.md"
+              {
+                echo "The [valueset drift check]($run_url) found differences."
+                echo
+                echo '```'
+                cat "$report"
+                echo '```'
+              } > "$body"
+              if [ -n "$issue" ]; then
+                # Editing the body notifies no one, so also comment when the
+                # findings changed. Release versions alone don't count.
+                findings() { sed 's/ (release [^)]*)$//' "$1"; }
+                gh issue view "$issue" --json body --jq .body | tr -d '\r' \
+                  | awk '/^```$/ { inside = !inside; next } inside' \
+                  > "$RUNNER_TEMP/previous.txt"
+                if ! cmp -s <(findings "$RUNNER_TEMP/previous.txt") \
+                  <(findings "$report"); then
+                  {
+                    echo "The [drift report]($run_url) changed:"
+                    echo
+                    echo '```'
+                    cat "$report"
+                    echo '```'
+                  } > "$RUNNER_TEMP/comment.md"
+                  gh issue comment "$issue" --body-file "$RUNNER_TEMP/comment.md"
+                fi
+                gh issue edit "$issue" --body-file "$body"
+              else
+                gh label create "$label" --force --color "d93f0b" \
+                  --description "Valueset enums differ from upstream ontologies"
+                gh issue create --title "Valueset drift detected" \
+                  --label "$label" --body-file "$body"
+              fi
+              ;;
+            *)
+              echo "::error::Valueset drift check could not run (exit $STATUS)."
+              exit 1
+              ;;
+          esac

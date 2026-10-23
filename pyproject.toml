@@ -54,6 +54,7 @@ fallback-version = "0.0.0"
 # Ref.: https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
 [tool.pytest]
 testpaths = ["tests"]
+pythonpath = ["."]
 
 # https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
@@ -85,7 +86,7 @@ select = [
 
 # https://docs.astral.sh/ty/configuration/
 [tool.ty.src]
-include = ["src", "tests"]
+include = ["src", "tests", "scripts"]
 exclude = [
   "src/go_standard_annotation_schema/datamodel/go_standard_annotation_schema.py",
 ]

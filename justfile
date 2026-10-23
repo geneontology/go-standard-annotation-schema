@@ -46,6 +46,11 @@ test: gen-python
       --output-directory examples/output \
       --schema {{ source_schema_path }} > examples/output/README.md
 
+# Check valueset enums for drift from their upstream ontologies (needs network)
+[group('model development')]
+check-valuesets:
+    uv run python scripts/check_valueset_drift.py
+
 # Run all non-mutating code quality checks
 [group('code quality')]
 check: lock-check format-check lint-python lint-yaml spellcheck lint-schema type-check
