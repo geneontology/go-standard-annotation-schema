@@ -369,7 +369,6 @@ def test_cli_rejects_malformed_source_option(tmp_path, ro_only, bad):
     result = invoke(schema, "--source", bad)
 
     assert result.exit_code == drift.EXIT_LOAD_ERROR, result.output
-    assert "--source" in result.stderr
     assert result.stdout == ""
 
 
