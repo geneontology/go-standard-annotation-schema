@@ -16,6 +16,9 @@ permissions: {}
 jobs:
   drift:
     runs-on: ubuntu-latest
+    concurrency:
+      group: valueset-drift
+      cancel-in-progress: false
     permissions:
       issues: write
 
