@@ -1,0 +1,5 @@
+extends: recommended
+rules:
+  standard_naming:
+    exclude_type:
+      - permissible_value
