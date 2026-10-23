@@ -68,6 +68,91 @@ class LinkMLMeta(RootModel):
 
 linkml_meta = None
 
+class GeneProductToGoTermRelation(str, Enum):
+    """
+    The relationship between a gene product and a GO term in an annotation.
+    """
+    enables = "RO:0002327"
+    contributes_to = "RO:0002326"
+    involved_in = "RO:0002331"
+    acts_upstream_of_or_within = "RO:0002264"
+    acts_upstream_of_or_within_positive_effect = "RO:0004032"
+    acts_upstream_of_or_within_negative_effect = "RO:0004033"
+    acts_upstream_of = "RO:0002263"
+    acts_upstream_of_positive_effect = "RO:0004034"
+    acts_upstream_of_negative_effect = "RO:0004035"
+    is_active_in = "RO:0002432"
+    part_of = "BFO:0000050"
+    located_in = "RO:0001025"
+    colocalizes_with = "RO:0002325"
+
+
+class AnnotationExtensionRelation(str, Enum):
+    """
+    The relationship between a GO term and an entity in an annotation extension.
+    """
+    part_of = "BFO:0000050"
+    has_part = "BFO:0000051"
+    occurs_in = "BFO:0000066"
+    adjacent_to = "RO:0002220"
+    overlaps = "RO:0002131"
+    existence_overlaps = "RO:0002490"
+    existence_starts_and_ends_during = "RO:0002491"
+    enabled_by = "RO:0002333"
+    contributes_to = "RO:0002326"
+    has_input = "RO:0002233"
+    has_output = "RO:0002234"
+    has_primary_input = "RO:0004009"
+    has_primary_output = "RO:0004008"
+    has_target_end_location = "RO:0002339"
+    has_target_start_location = "RO:0002338"
+    transports_or_maintains_localization_of = "RO:0002313"
+    provides_input_for = "RO:0002413"
+    directly_positively_regulates = "RO:0002629"
+    has_small_molecule_regulator = "RO:0012000"
+    has_small_molecule_activator = "RO:0012001"
+    has_small_molecule_inhibitor = "RO:0012002"
+    is_small_molecule_regulator_of = "RO:0012004"
+    is_small_molecule_activator_of = "RO:0012005"
+    is_small_molecule_inhibitor_of = "RO:0012006"
+    located_in = "RO:0001025"
+    location_of = "RO:0001015"
+    is_active_in = "RO:0002432"
+    happens_during = "RO:0002092"
+    regulates = "RO:0002211"
+    negatively_regulates = "RO:0002212"
+    positively_regulates = "RO:0002213"
+    directly_regulates = "RO:0002578"
+    directly_negatively_regulates = "RO:0002630"
+    indirectly_regulates = "RO:0012012"
+    indirectly_positively_regulates = "RO:0002407"
+    indirectly_negatively_regulates = "RO:0002409"
+    constitutively_upstream_of = "RO:0012009"
+    immediately_constitutively_upstream_of = "RO:0019004"
+    removes_input_for = "RO:0012010"
+    causally_upstream_of_or_within = "RO:0002418"
+    causally_upstream_of_or_within_negative_effect = "RO:0004046"
+    causally_upstream_of_or_within_positive_effect = "RO:0004047"
+    causally_upstream_of = "RO:0002411"
+    causally_upstream_of_negative_effect = "RO:0002305"
+    causally_upstream_of_positive_effect = "RO:0002304"
+    acts_on_population_of = "RO:0012003"
+    results_in_development_of = "RO:0002296"
+    results_in_formation_of_anatomical_entity = "RO:0002297"
+    results_in_morphogenesis_of = "RO:0002298"
+    results_in_acquisition_of_features_of = "RO:0002315"
+    results_in_commitment_to = "RO:0002348"
+    results_in_determination_of = "RO:0002349"
+    results_in_specification_of = "RO:0002356"
+    results_in_assembly_of = "RO:0002588"
+    results_in_disassembly_of = "RO:0002590"
+    results_in_organization_of = "RO:0002592"
+    results_in_maturation_of = "RO:0002299"
+    results_in_growth_of = "RO:0002343"
+    results_in_movement_of = "RO:0002565"
+    results_in_remodeling_of = "RO:0002591"
+
+
 
 class Annotation(ConfiguredBaseModel):
     """
@@ -75,7 +160,7 @@ class Annotation(ConfiguredBaseModel):
     """
     db_object_id: str = Field(default=..., description="""A unique identifier for the item being annotated.""")
     negation: Optional[bool] = Field(default=None, description="""A boolean indicating whether the annotation is negated.""")
-    relation: str = Field(default=..., description="""Relation from the Relation Ontology that describes how the annotated biological entity relates to the GO term with which it is associated.""")
+    relation: GeneProductToGoTermRelation = Field(default=..., description="""Relation from the Relation Ontology that describes how the annotated biological entity relates to the GO term with which it is associated.""")
     ontology_class_id: str = Field(default=..., description="""The GO identifier for the term attributed to the DB object ID.""")
     references: list[str] = Field(default=..., description="""One or more unique identifiers for a single source cited as an authority for the attribution of the GO ID to the DB object ID. This may be a literature reference or a database record. Valid references are one of: PubMed, DOI, GO_REF, MOD reference.""", min_length=1)
     evidence_type: str = Field(default=..., description="""The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that supports the association between the DB object ID and the GO term.""")
@@ -96,19 +181,6 @@ class Annotation(ConfiguredBaseModel):
                     raise ValueError(err_msg)
         elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid db_object_id format: {v}"
-            raise ValueError(err_msg)
-        return v
-
-    @field_validator('relation')
-    def pattern_relation(cls, v):
-        pattern=re.compile(r"^(?:[A-Za-z][A-Za-z0-9_\-.]*:[A-Za-z0-9_\-.:/]+)$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.search(element):
-                    err_msg = f"Invalid relation format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.search(v):
-            err_msg = f"Invalid relation format: {v}"
             raise ValueError(err_msg)
         return v
 
@@ -182,21 +254,8 @@ class AnnotationExtension(ConfiguredBaseModel):
     """
     Annotation extensions allow GO terms in annotations to be further specified, using gene products, chemicals, cell types, anatomical structures, to provide additional biological context.
     """
-    extension_relation: str = Field(default=..., description="""A term from the Relation Ontology that describes how the GO term in the extension relates to the GO term in the annotation.""")
+    extension_relation: AnnotationExtensionRelation = Field(default=..., description="""A term from the Relation Ontology that describes how the GO term in the extension relates to the GO term in the annotation.""")
     extension_term: str = Field(default=..., description="""The gene product, chemical, cell type, anatomical structure, or other entity that is used to further specify the GO term in the annotation.""")
-
-    @field_validator('extension_relation')
-    def pattern_extension_relation(cls, v):
-        pattern=re.compile(r"^(?:(RO|BFO):[A-Za-z0-9_\-.:/]+)$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.search(element):
-                    err_msg = f"Invalid extension_relation format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.search(v):
-            err_msg = f"Invalid extension_relation format: {v}"
-            raise ValueError(err_msg)
-        return v
 
     @field_validator('extension_term')
     def pattern_extension_term(cls, v):

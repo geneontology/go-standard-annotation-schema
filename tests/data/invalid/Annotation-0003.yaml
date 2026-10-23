@@ -1,0 +1,30 @@
+# This file is invalid because it contains a disallowed RO term (RO:0002606) in an
+# annotation extension.
+
+db_object_id: "MGI:MGI:1916469"
+relation: "RO:0002327"
+ontology_class_id: "GO:0016403"
+references:
+  - "PMID:14638548"
+evidence_type: "ECO:0000266"
+with_or_from:
+  - "UniProtKB:O94760"
+annotation_date: "2026-04-30"
+assigned_by: MGI
+annotation_extensions:
+  - extension_relation: BFO:0000050
+    extension_term: GO:0051000
+  - extension_relation: BFO:0000050
+    extension_term: GO:0141150
+  - extension_relation: BFO:0000066
+    extension_term: GO:0005829
+  - extension_relation: RO:0002606
+    extension_term: CHEBI:25682
+annotation_properties:
+  id: "GOA:5000772737"
+  comment:
+    - "go_evidence:ISO"
+  noctua_model_id: "gomodel:69c59f8a00002841"
+  model_state: production
+  contributor_id:
+    - "orcid:0000-0001-7476-6306"

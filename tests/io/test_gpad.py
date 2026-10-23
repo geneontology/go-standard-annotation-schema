@@ -144,7 +144,7 @@ def test_gpad_expands_both_grouped_fields_as_a_cartesian_product():
     line = _with_field(
         line,
         11,
-        "RO:0000001(X:1),RO:0000002(X:2)|RO:0000003(X:3)",
+        "RO:0002233(X:1),RO:0002234(X:2)|RO:0002629(X:3)",
     )
 
     annotations = GpadReader.parse_line(line)
@@ -162,10 +162,10 @@ def test_gpad_expands_both_grouped_fields_as_a_cartesian_product():
             [extension.extension_relation for extension in item.annotation_extensions]
         )
     assert extension_groups == [
-        ["RO:0000001", "RO:0000002"],
-        ["RO:0000003"],
-        ["RO:0000001", "RO:0000002"],
-        ["RO:0000003"],
+        ["RO:0002233", "RO:0002234"],
+        ["RO:0002629"],
+        ["RO:0002233", "RO:0002234"],
+        ["RO:0002629"],
     ]
 
 

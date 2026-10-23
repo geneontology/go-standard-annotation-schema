@@ -1,0 +1,242 @@
+id: https://w3id.org/geneontology/go-standard-annotation-schema/valuesets/relations
+name: go-standard-annotation-schema-relations
+prefixes:
+  go_standard_annotation_schema: https://w3id.org/geneontology/go-standard-annotation-schema/
+  linkml: https://w3id.org/linkml/
+  RO: http://purl.obolibrary.org/obo/RO_
+  BFO: http://purl.obolibrary.org/obo/BFO_
+imports:
+  - linkml:types
+default_prefix: go_standard_annotation_schema
+
+enums:
+  GeneProductToGoTermRelation:
+    title: Gene Product to GO Term Relation
+    description: >-
+      The relationship between a gene product and a GO term in an annotation.
+    permissible_values:
+      "RO:0002327":
+        title: enables
+        meaning: RO:0002327
+      "RO:0002326":
+        title: contributes to
+        meaning: RO:0002326
+      "RO:0002331":
+        title: involved in
+        meaning: RO:0002331
+      "RO:0002264":
+        title: acts upstream of or within
+        meaning: RO:0002264
+      "RO:0004032":
+        title: acts upstream of or within, positive effect
+        meaning: RO:0004032
+      "RO:0004033":
+        title: acts upstream of or within, negative effect
+        meaning: RO:0004033
+      "RO:0002263":
+        title: acts upstream of
+        meaning: RO:0002263
+      "RO:0004034":
+        title: acts upstream of, positive effect
+        meaning: RO:0004034
+      "RO:0004035":
+        title: acts upstream of, negative effect
+        meaning: RO:0004035
+      "RO:0002432":
+        title: is active in
+        meaning: RO:0002432
+      "BFO:0000050":
+        title: part of
+        meaning: BFO:0000050
+      "RO:0001025":
+        title: located in
+        meaning: RO:0001025
+      "RO:0002325":
+        title: colocalizes with
+        meaning: RO:0002325
+
+  AnnotationExtensionRelation:
+    title: Annotation Extension Relation
+    description: >-
+      The relationship between a GO term and an entity in an annotation extension.
+    permissible_values:
+      "BFO:0000050":
+        title: part of
+        meaning: BFO:0000050
+      "BFO:0000051":
+        title: has part
+        meaning: BFO:0000051
+      "BFO:0000066":
+        title: occurs in
+        meaning: BFO:0000066
+      "RO:0002220":
+        title: adjacent to
+        meaning: RO:0002220
+      "RO:0002131":
+        title: overlaps
+        meaning: RO:0002131
+      "RO:0002490":
+        title: existence overlaps
+        meaning: RO:0002490
+      "RO:0002491":
+        title: existence starts and ends during
+        meaning: RO:0002491
+      "RO:0002333":
+        title: enabled by
+        meaning: RO:0002333
+      "RO:0002326":
+        title: contributes to
+        meaning: RO:0002326
+      "RO:0002233":
+        title: has input
+        meaning: RO:0002233
+      "RO:0002234":
+        title: has output
+        meaning: RO:0002234
+      "RO:0004009":
+        title: has primary input
+        meaning: RO:0004009
+      "RO:0004008":
+        title: has primary output
+        meaning: RO:0004008
+      "RO:0002339":
+        title: has target end location
+        meaning: RO:0002339
+      "RO:0002338":
+        title: has target start location
+        meaning: RO:0002338
+      "RO:0002313":
+        title: transports or maintains localization of
+        meaning: RO:0002313
+      "RO:0002413":
+        title: provides input for
+        meaning: RO:0002413
+      "RO:0002629":
+        title: directly positively regulates
+        meaning: RO:0002629
+      "RO:0012000":
+        title: has small molecule regulator
+        meaning: RO:0012000
+      "RO:0012001":
+        title: has small molecule activator
+        meaning: RO:0012001
+      "RO:0012002":
+        title: has small molecule inhibitor
+        meaning: RO:0012002
+      "RO:0012004":
+        title: is small molecule regulator of
+        meaning: RO:0012004
+      "RO:0012005":
+        title: is small molecule activator of
+        meaning: RO:0012005
+      "RO:0012006":
+        title: is small molecule inhibitor of
+        meaning: RO:0012006
+      "RO:0001025":
+        title: located in
+        meaning: RO:0001025
+      "RO:0001015":
+        title: location of
+        meaning: RO:0001015
+      "RO:0002432":
+        title: is active in
+        meaning: RO:0002432
+      "RO:0002092":
+        title: happens during
+        meaning: RO:0002092
+      "RO:0002211":
+        title: regulates
+        meaning: RO:0002211
+      "RO:0002212":
+        title: negatively regulates
+        meaning: RO:0002212
+      "RO:0002213":
+        title: positively regulates
+        meaning: RO:0002213
+      "RO:0002578":
+        title: directly regulates
+        meaning: RO:0002578
+      "RO:0002630":
+        title: directly negatively regulates
+        meaning: RO:0002630
+      "RO:0012012":
+        title: indirectly regulates
+        meaning: RO:0012012
+      "RO:0002407":
+        title: indirectly positively regulates
+        meaning: RO:0002407
+      "RO:0002409":
+        title: indirectly negatively regulates
+        meaning: RO:0002409
+      "RO:0012009":
+        title: constitutively upstream of
+        meaning: RO:0012009
+      "RO:0019004":
+        title: immediately constitutively upstream of
+        meaning: RO:0019004
+      "RO:0012010":
+        title: removes input for
+        meaning: RO:0012010
+      "RO:0002418":
+        title: causally upstream of or within
+        meaning: RO:0002418
+      "RO:0004046":
+        title: causally upstream of or within, negative effect
+        meaning: RO:0004046
+      "RO:0004047":
+        title: causally upstream of or within, positive effect
+        meaning: RO:0004047
+      "RO:0002411":
+        title: causally upstream of
+        meaning: RO:0002411
+      "RO:0002305":
+        title: causally upstream of, negative effect
+        meaning: RO:0002305
+      "RO:0002304":
+        title: causally upstream of, positive effect
+        meaning: RO:0002304
+      "RO:0012003":
+        title: acts on population of
+        meaning: RO:0012003
+      "RO:0002296":
+        title: results in development of
+        meaning: RO:0002296
+      "RO:0002297":
+        title: results in formation of anatomical entity
+        meaning: RO:0002297
+      "RO:0002298":
+        title: results in morphogenesis of
+        meaning: RO:0002298
+      "RO:0002315":
+        title: results in acquisition of features of
+        meaning: RO:0002315
+      "RO:0002348":
+        title: results in commitment to
+        meaning: RO:0002348
+      "RO:0002349":
+        title: results in determination of
+        meaning: RO:0002349
+      "RO:0002356":
+        title: results in specification of
+        meaning: RO:0002356
+      "RO:0002588":
+        title: results in assembly of
+        meaning: RO:0002588
+      "RO:0002590":
+        title: results in disassembly of
+        meaning: RO:0002590
+      "RO:0002592":
+        title: results in organization of
+        meaning: RO:0002592
+      "RO:0002299":
+        title: results in maturation of
+        meaning: RO:0002299
+      "RO:0002343":
+        title: results in growth of
+        meaning: RO:0002343
+      "RO:0002565":
+        title: results in movement of
+        meaning: RO:0002565
+      "RO:0002591":
+        title: results in remodeling of
+        meaning: RO:0002591
