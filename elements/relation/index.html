@@ -427,17 +427,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -542,7 +531,7 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../ExternalIdentifier/">ExternalIdentifier</a></td>
+<td><a href="../GeneProductToGoTermRelation/">GeneProductToGoTermRelation</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
@@ -568,10 +557,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="notes">Notes</h2>
-<ul>
-<li>The GPAD spec says that the "relation used SHOULD come from the allowed gene-product-to-term relations". Decide whether to enforce this in the schema via an enum.</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -601,14 +586,11 @@
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">relation</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relation from the Relation Ontology that describes how the annotated</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">biological entity relates to the GO term with which it is associated.</span>
-<span class="nt">notes</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec says that the &quot;relation used SHOULD come from the allowed gene-product-to-term</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">relations&quot;. Decide whether to enforce this in the schema via an enum.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external_identifier</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GeneProductToGoTermRelation</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>

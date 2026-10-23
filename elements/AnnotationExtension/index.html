@@ -295,6 +295,15 @@
     click AnnotationExtension href "../AnnotationExtension/"
       AnnotationExtension : extension_relation
 
+
+
+
+
+        AnnotationExtension --&gt; "1" AnnotationExtensionRelation : extension_relation
+        click AnnotationExtensionRelation href "../AnnotationExtensionRelation/"
+
+
+
       AnnotationExtension : extension_term
 
 </code></pre>
@@ -312,7 +321,7 @@
 <tbody>
 <tr>
 <td><a href="../extension_relation/">extension_relation</a></td>
-<td>1 <br/> <a href="../RoIdentifier/">RoIdentifier</a></td>
+<td>1 <br/> <a href="../AnnotationExtensionRelation/">AnnotationExtensionRelation</a></td>
 <td>A term from the Relation Ontology that describes how the GO term in the exten...</td>
 <td>direct</td>
 </tr>
@@ -398,7 +407,7 @@
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtension</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ro_identifier</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AnnotationExtensionRelation</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">extension_term</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extension_term</span>

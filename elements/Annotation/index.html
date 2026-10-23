@@ -324,6 +324,15 @@
 
       Annotation : relation
 
+
+
+
+
+        Annotation --&gt; "1" GeneProductToGoTermRelation : relation
+        click GeneProductToGoTermRelation href "../GeneProductToGoTermRelation/"
+
+
+
       Annotation : with_or_from
 
 </code></pre>
@@ -353,7 +362,7 @@
 </tr>
 <tr>
 <td><a href="../relation/">relation</a></td>
-<td>1 <br/> <a href="../ExternalIdentifier/">ExternalIdentifier</a></td>
+<td>1 <br/> <a href="../GeneProductToGoTermRelation/">GeneProductToGoTermRelation</a></td>
 <td>Relation from the Relation Ontology that describes how the annotated biologic...</td>
 <td>direct</td>
 </tr>
@@ -498,15 +507,12 @@
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">relation</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relation from the Relation Ontology that describes how the annotated</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">biological entity relates to the GO term with which it is associated.</span>
-<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD spec says that the "relation used SHOULD come from the allowed gene-product-to-term</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">relations". Decide whether to enforce this in the schema via an enum.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external_identifier</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GeneProductToGoTermRelation</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">ontology_class_id</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ontology_class_id</span>
