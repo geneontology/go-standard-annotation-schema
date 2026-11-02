@@ -1,0 +1,159 @@
+id: https://w3id.org/geneontology/go-standard-annotation-schema/valuesets/evidence
+name: go-standard-annotation-schema-evidence
+prefixes:
+  go_standard_annotation_schema: https://w3id.org/geneontology/go-standard-annotation-schema/
+  linkml: https://w3id.org/linkml/
+  ECO: http://purl.obolibrary.org/obo/ECO_
+imports:
+  - linkml:types
+default_prefix: go_standard_annotation_schema
+
+enums:
+  EvidenceType:
+    title: Evidence Type
+    description: >-
+      The default ECO term for each GO evidence code, as listed in the ECO
+      gaf-eco-mapping.txt file. Each permissible value has the corresponding GO
+      evidence code as an alias.
+    see_also:
+      - http://purl.obolibrary.org/obo/eco/gaf-eco-mapping.txt
+    notes:
+      - These permissible values are not yet checked against ECO for drift. See
+        https://github.com/geneontology/go-standard-annotation-schema/issues/26
+    permissible_values:
+      "ECO:0000269":
+        title: experimental evidence used in manual assertion
+        meaning: ECO:0000269
+        aliases:
+          - EXP
+      "ECO:0007005":
+        title: high throughput direct assay evidence used in manual assertion
+        meaning: ECO:0007005
+        aliases:
+          - HDA
+      "ECO:0007007":
+        title: high throughput expression pattern evidence used in manual assertion
+        meaning: ECO:0007007
+        aliases:
+          - HEP
+      "ECO:0007003":
+        title: >-
+          high throughput genetic interaction phenotypic evidence used in manual
+          assertion
+        meaning: ECO:0007003
+        aliases:
+          - HGI
+      "ECO:0007001":
+        title: high throughput mutant phenotypic evidence used in manual assertion
+        meaning: ECO:0007001
+        aliases:
+          - HMP
+      "ECO:0006056":
+        title: high throughput evidence used in manual assertion
+        meaning: ECO:0006056
+        aliases:
+          - HTP
+      "ECO:0000318":
+        title: biological aspect of ancestor evidence used in manual assertion
+        meaning: ECO:0000318
+        aliases:
+          - IBA
+      "ECO:0000319":
+        title: biological aspect of descendant evidence used in manual assertion
+        meaning: ECO:0000319
+        aliases:
+          - IBD
+      "ECO:0000305":
+        title: curator inference used in manual assertion
+        meaning: ECO:0000305
+        aliases:
+          - IC
+      "ECO:0000314":
+        title: direct assay evidence used in manual assertion
+        meaning: ECO:0000314
+        aliases:
+          - IDA
+      "ECO:0000501":
+        title: evidence used in automatic assertion
+        meaning: ECO:0000501
+        aliases:
+          - IEA
+      "ECO:0000270":
+        title: expression pattern evidence used in manual assertion
+        meaning: ECO:0000270
+        aliases:
+          - IEP
+      "ECO:0000317":
+        title: genomic context evidence used in manual assertion
+        meaning: ECO:0000317
+        aliases:
+          - IGC
+      "ECO:0000316":
+        title: genetic interaction evidence used in manual assertion
+        meaning: ECO:0000316
+        aliases:
+          - IGI
+      "ECO:0000320":
+        title: >-
+          phylogenetic determination of loss of key residues evidence used in manual
+          assertion
+        meaning: ECO:0000320
+        aliases:
+          - IKR
+      "ECO:0000315":
+        title: mutant phenotype evidence used in manual assertion
+        meaning: ECO:0000315
+        aliases:
+          - IMP
+      "ECO:0000353":
+        title: physical interaction evidence used in manual assertion
+        meaning: ECO:0000353
+        aliases:
+          - IPI
+      "ECO:0000321":
+        title: >-
+          rapid divergence from ancestral sequence evidence used in manual assertion
+        meaning: ECO:0000321
+        aliases:
+          - IRD
+      "ECO:0000247":
+        title: sequence alignment evidence used in manual assertion
+        meaning: ECO:0000247
+        aliases:
+          - ISA
+      "ECO:0000255":
+        title: match to sequence model evidence used in manual assertion
+        meaning: ECO:0000255
+        aliases:
+          - ISM
+      "ECO:0000266":
+        title: sequence orthology evidence used in manual assertion
+        meaning: ECO:0000266
+        aliases:
+          - ISO
+      "ECO:0000250":
+        title: sequence similarity evidence used in manual assertion
+        meaning: ECO:0000250
+        aliases:
+          - ISS
+      "ECO:0000303":
+        title: author statement without traceable support used in manual assertion
+        meaning: ECO:0000303
+        aliases:
+          - NAS
+      "ECO:0000307":
+        title: no evidence data found used in manual assertion
+        meaning: ECO:0000307
+        aliases:
+          - ND
+      "ECO:0000245":
+        title: automatically integrated combinatorial evidence used in manual assertion
+        meaning: ECO:0000245
+        aliases:
+          - RCA
+      "ECO:0000304":
+        title: >-
+          author statement supported by traceable reference used in manual assertion
+        meaning: ECO:0000304
+        aliases:
+          - TAS
