@@ -427,6 +427,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -531,7 +542,7 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../EcoIdentifier/">EcoIdentifier</a></td>
+<td><a href="../EvidenceType/">EvidenceType</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
@@ -557,6 +568,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The GPAD/GPI spec allows any ECO term that maps to a GO evidence code. This schema only allows the default ECO term for each GO evidence code, as listed in the ECO gaf-eco-mapping.txt file. More specific ECO terms are not allowed.</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -586,11 +601,15 @@
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evidence_type</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The Evidence &amp; Conclusion Ontology (ECO) identifier for the evidence</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">code that supports the association between the DB object ID and the GO term.</span>
+<span class="nt">notes</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD/GPI spec allows any ECO term that maps to a GO evidence code. This schema</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">only allows the default ECO term for each GO evidence code, as listed in the ECO</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">gaf-eco-mapping.txt file. More specific ECO terms are not allowed.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eco_identifier</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EvidenceType</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>

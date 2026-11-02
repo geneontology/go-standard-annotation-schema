@@ -314,6 +314,15 @@
 
       Annotation : evidence_type
 
+
+
+
+
+        Annotation --&gt; "1" EvidenceType : evidence_type
+        click EvidenceType href "../EvidenceType/"
+
+
+
       Annotation : interacting_taxon_id
 
       Annotation : negation
@@ -380,7 +389,7 @@
 </tr>
 <tr>
 <td><a href="../evidence_type/">evidence_type</a></td>
-<td>1 <br/> <a href="../EcoIdentifier/">EcoIdentifier</a></td>
+<td>1 <br/> <a href="../EvidenceType/">EvidenceType</a></td>
 <td>The Evidence &amp; Conclusion Ontology (ECO) identifier for the evidence code tha...</td>
 <td>direct</td>
 </tr>
@@ -543,12 +552,16 @@
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evidence_type</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The Evidence &amp; Conclusion Ontology (ECO) identifier for the evidence</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">code that supports the association between the DB object ID and the GO term.</span>
+<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPAD/GPI spec allows any ECO term that maps to a GO evidence code. This</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">schema only allows the default ECO term for each GO evidence code, as listed</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in the ECO gaf-eco-mapping.txt file. More specific ECO terms are not allowed.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annotation</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eco_identifier</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EvidenceType</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">with_or_from</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">with_or_from</span>
