@@ -102,5 +102,5 @@ skip = [
   "./tmp/*",
   "uv.lock",
 ]
-ignore-words-list = "ND"
+ignore-words-list = "ND,HDA"
 quiet-level = 3

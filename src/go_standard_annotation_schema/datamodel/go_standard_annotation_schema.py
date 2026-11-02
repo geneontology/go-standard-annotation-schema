@@ -153,6 +153,38 @@ class AnnotationExtensionRelation(str, Enum):
     results_in_remodeling_of = "RO:0002591"
 
 
+class EvidenceType(str, Enum):
+    """
+    The default ECO term for each GO evidence code, as listed in the ECO gaf-eco-mapping.txt file. Each permissible value has the corresponding GO evidence code as an alias.
+    """
+    experimental_evidence_used_in_manual_assertion = "ECO:0000269"
+    high_throughput_direct_assay_evidence_used_in_manual_assertion = "ECO:0007005"
+    high_throughput_expression_pattern_evidence_used_in_manual_assertion = "ECO:0007007"
+    high_throughput_genetic_interaction_phenotypic_evidence_used_in_manual_assertion = "ECO:0007003"
+    high_throughput_mutant_phenotypic_evidence_used_in_manual_assertion = "ECO:0007001"
+    high_throughput_evidence_used_in_manual_assertion = "ECO:0006056"
+    biological_aspect_of_ancestor_evidence_used_in_manual_assertion = "ECO:0000318"
+    biological_aspect_of_descendant_evidence_used_in_manual_assertion = "ECO:0000319"
+    curator_inference_used_in_manual_assertion = "ECO:0000305"
+    direct_assay_evidence_used_in_manual_assertion = "ECO:0000314"
+    evidence_used_in_automatic_assertion = "ECO:0000501"
+    expression_pattern_evidence_used_in_manual_assertion = "ECO:0000270"
+    genomic_context_evidence_used_in_manual_assertion = "ECO:0000317"
+    genetic_interaction_evidence_used_in_manual_assertion = "ECO:0000316"
+    phylogenetic_determination_of_loss_of_key_residues_evidence_used_in_manual_assertion = "ECO:0000320"
+    mutant_phenotype_evidence_used_in_manual_assertion = "ECO:0000315"
+    physical_interaction_evidence_used_in_manual_assertion = "ECO:0000353"
+    rapid_divergence_from_ancestral_sequence_evidence_used_in_manual_assertion = "ECO:0000321"
+    sequence_alignment_evidence_used_in_manual_assertion = "ECO:0000247"
+    match_to_sequence_model_evidence_used_in_manual_assertion = "ECO:0000255"
+    sequence_orthology_evidence_used_in_manual_assertion = "ECO:0000266"
+    sequence_similarity_evidence_used_in_manual_assertion = "ECO:0000250"
+    author_statement_without_traceable_support_used_in_manual_assertion = "ECO:0000303"
+    no_evidence_data_found_used_in_manual_assertion = "ECO:0000307"
+    automatically_integrated_combinatorial_evidence_used_in_manual_assertion = "ECO:0000245"
+    author_statement_supported_by_traceable_reference_used_in_manual_assertion = "ECO:0000304"
+
+
 
 class Annotation(ConfiguredBaseModel):
     """
@@ -163,7 +195,7 @@ class Annotation(ConfiguredBaseModel):
     relation: GeneProductToGoTermRelation = Field(default=..., description="""Relation from the Relation Ontology that describes how the annotated biological entity relates to the GO term with which it is associated.""")
     ontology_class_id: str = Field(default=..., description="""The GO identifier for the term attributed to the DB object ID.""")
     references: list[str] = Field(default=..., description="""One or more unique identifiers for a single source cited as an authority for the attribution of the GO ID to the DB object ID. This may be a literature reference or a database record. Valid references are one of: PubMed, DOI, GO_REF, MOD reference.""", min_length=1)
-    evidence_type: str = Field(default=..., description="""The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that supports the association between the DB object ID and the GO term.""")
+    evidence_type: EvidenceType = Field(default=..., description="""The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that supports the association between the DB object ID and the GO term.""")
     with_or_from: Optional[list[str]] = Field(default=None, description="""Used with specific ECO codes to capture an additional identifier supporting the evidence for the annotation. For example, it can identify another gene product to which the annotated gene product is similar (ISS) or interacts with (IPI). Population of the With/From is mandatory for certain evidence codes.""")
     interacting_taxon_id: Optional[list[str]] = Field(default=None, description="""Taxonomic identifier for interacting organism to be used only in conjunction with terms that have the biological process term 'GO:0044419 biological process involved in interspecies interaction between organisms' or the cellular component term 'GO:0018995 host cellular component' as an ancestor. Identifiers must come from NCBI Taxonomy database.""")
     annotation_date: date = Field(default=..., description="""Date on which the annotation was made""")
@@ -207,19 +239,6 @@ class Annotation(ConfiguredBaseModel):
                     raise ValueError(err_msg)
         elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid references format: {v}"
-            raise ValueError(err_msg)
-        return v
-
-    @field_validator('evidence_type')
-    def pattern_evidence_type(cls, v):
-        pattern=re.compile(r"^(?:ECO:[A-Za-z0-9_\-.:/]+)$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.search(element):
-                    err_msg = f"Invalid evidence_type format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.search(v):
-            err_msg = f"Invalid evidence_type format: {v}"
             raise ValueError(err_msg)
         return v
 

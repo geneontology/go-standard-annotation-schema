@@ -18,6 +18,7 @@ prefixes:
   GO: http://purl.obolibrary.org/obo/GO_
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
+  ECO: http://purl.obolibrary.org/obo/ECO_
 
 default_prefix: go_standard_annotation_schema
 default_range: string
@@ -25,6 +26,7 @@ default_range: string
 imports:
   - linkml:types
   - valuesets/relations
+  - valuesets/evidence
 
 notes:
   - This schema deviates from the grammar and specs when necessary to either reflect
@@ -39,15 +41,6 @@ types:
     typeof: string
     structured_pattern:
       syntax: "{prefix}:{local_id}"
-      interpolated: true
-      partial_match: false
-
-  eco_identifier:
-    description: >-
-      An identifier of an ECO term.
-    typeof: external_identifier
-    structured_pattern:
-      syntax: "ECO:{local_id}"
       interpolated: true
       partial_match: false
 
@@ -124,8 +117,12 @@ slots:
     description: >-
       The Evidence & Conclusion Ontology (ECO) identifier for the evidence code that
       supports the association between the DB object ID and the GO term.
-    range: eco_identifier
+    range: EvidenceType
     required: true
+    notes:
+      - The GPAD/GPI spec allows any ECO term that maps to a GO evidence code. This
+        schema only allows the default ECO term for each GO evidence code, as listed
+        in the ECO gaf-eco-mapping.txt file. More specific ECO terms are not allowed.
 
   with_or_from:
     description: >-
