@@ -126,6 +126,14 @@ def test_empty_generated_by_header_is_fatal():
         pass
 
 
+def test_trailing_whitespace_in_header_value_is_trimmed():
+    """Trailing whitespace in a header value must be stripped before validation."""
+    text = VALID.replace("!gpad-version: 2.0", "!gpad-version: 2.0\t \t\t")
+
+    with StringReader(StringIO(text)) as reader:
+        assert reader.metadata.version == "2.0"
+
+
 def test_strict_mode_wraps_row_error_with_physical_line_number():
     """Malformed data rows must retain their physical line number and cause."""
     text = VALID.replace("a\tb", "too\tmany\tfields")
