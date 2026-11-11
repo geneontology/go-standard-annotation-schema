@@ -394,7 +394,7 @@ class _Reader(Generic[ModelT], Iterator[ModelT]):
             if not separator or not key:
                 self._counters["comments_ignored"] += 1
                 continue
-            entries.append(MetadataEntry(key, value.removeprefix(" ")))
+            entries.append(MetadataEntry(key, value.strip()))
             self._counters["metadata_entries"] += 1
 
         # Collect the values for the required keys, validate that each one appears
