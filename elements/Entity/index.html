@@ -480,10 +480,6 @@
 <span class="w">  </span><span class="nt">db_object_name</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_name</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the entity being annotated.</span>
-<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar implies that column 3 is required, but the narrative spec says</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">that it is optional. The narrative spec seems more appropriate, so that is what</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is implemented here. Decide if that is correct.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>
@@ -505,10 +501,6 @@
 <span class="w">  </span><span class="nt">db_object_type</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_object_type</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The class of biological entity being annotated.</span>
-<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' ID )*` but</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the narrative spec says that it has cardinality 1. The narrative spec seems</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">more appropriate, so that is what is implemented here. Decide if that is correct.</span>
 <span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This field should describe the type of biological object as defined by the contributing</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">database. For example, WormBase identifiers represent genes, PomBase identifiers</span>
@@ -557,11 +549,9 @@
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">or a protein complex, this should repeat the ID of the object being annotated.</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">If the entity being annotated is derived from a gene product such as a protein</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">isoform, a modified protein or a processed transcript (e. g. miRNA), then this</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">refers to the gene-centric ID of the annotated entity.</span>
-<span class="w">    </span><span class="nt">notes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '|' ID )* )?`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">but the narrative spec says that it has cardinality 1. The narrative spec seems</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">more appropriate, so that is what is implemented here. Decide if that is correct.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">refers to the gene-centric ID of the annotated entity. If the entity being annotated</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is of a type for which the provider has no gene-centric ID (e. g. an uncloned</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">gene), this should repeat the ID of the object being annotated.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Entity</span>

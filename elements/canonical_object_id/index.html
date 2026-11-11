@@ -427,17 +427,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -509,7 +498,7 @@
 
 
 <h1 id="slot-canonical_object_id">Slot: canonical_object_id</h1>
-<p><em>If the entity being annotated is a gene, gene-centric reference protein or a protein complex, this should repeat the ID of the object being annotated. If the entity being annotated is derived from a gene product such as a protein isoform, a modified protein or a processed transcript (e. g. miRNA), then this refers to the gene-centric ID of the annotated entity.</em></p>
+<p><em>If the entity being annotated is a gene, gene-centric reference protein or a protein complex, this should repeat the ID of the object being annotated. If the entity being annotated is derived from a gene product such as a protein isoform, a modified protein or a processed transcript (e. g. miRNA), then this refers to the gene-centric ID of the annotated entity. If the entity being annotated is of a type for which the provider has no gene-centric ID (e. g. an uncloned gene), this should repeat the ID of the object being annotated.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/geneontology/go-standard-annotation-schema/canonical_object_id">go_standard_annotation_schema:canonical_object_id</a></p>
 <!-- no inheritance hierarchy -->
@@ -568,10 +557,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="notes">Notes</h2>
-<ul>
-<li>The GPI grammar says that column 8 has cardinality 0..*, <code>( ID ( '|' ID )* )?</code> but the narrative spec says that it has cardinality 1. The narrative spec seems more appropriate, so that is what is implemented here. Decide if that is correct.</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -603,11 +588,9 @@
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">or a protein complex, this should repeat the ID of the object being annotated. If</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the entity being annotated is derived from a gene product such as a protein isoform,</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a modified protein or a processed transcript (e. g. miRNA), then this refers to</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the gene-centric ID of the annotated entity.</span>
-<span class="nt">notes</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The GPI grammar says that column 8 has cardinality 0..*, `( ID ( &#39;|&#39; ID )* )?` but</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the narrative spec says that it has cardinality 1. The narrative spec seems more</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">appropriate, so that is what is implemented here. Decide if that is correct.</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the gene-centric ID of the annotated entity. If the entity being annotated is of</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a type for which the provider has no gene-centric ID (e. g. an uncloned gene), this</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">should repeat the ID of the object being annotated.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/geneontology/go-standard-annotation-schema</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">domain_of</span><span class="p">:</span>
