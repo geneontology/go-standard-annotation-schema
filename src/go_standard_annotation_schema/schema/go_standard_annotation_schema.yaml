@@ -221,10 +221,6 @@ slots:
       The name of the entity being annotated.
     range: string
     required: false
-    notes:
-      - The GPI grammar implies that column 3 is required, but the narrative spec says
-        that it is optional. The narrative spec seems more appropriate, so that is what
-        is implemented here. Decide if that is correct.
 
   db_object_synonyms:
     description: >-
@@ -251,10 +247,6 @@ slots:
         (ncRNA-coding gene) or any SO child term, SO:0000336 (pseudogene).
       - GO does not allow 'gene' and 'gene product' as biological entity types, as this
         does not allow to differentiate between proteins and ncRNAs products.
-    notes:
-      - The GPI grammar says that column 5 has cardinality 1..*, `ID ( '|' ID )*` but
-        the narrative spec says that it has cardinality 1. The narrative spec seems more
-        appropriate, so that is what is implemented here. Decide if that is correct.
 
   db_object_taxon_id:
     description: >-
@@ -276,14 +268,11 @@ slots:
       protein complex, this should repeat the ID of the object being annotated. If the
       entity being annotated is derived from a gene product such as a protein isoform, a
       modified protein or a processed transcript (e. g. miRNA), then this refers to the
-      gene-centric ID of the annotated entity.
+      gene-centric ID of the annotated entity. If the entity being annotated is of a
+      type for which the provider has no gene-centric ID (e. g. an uncloned gene), this
+      should repeat the ID of the object being annotated.
     range: external_identifier
     required: true
-    notes:
-      - The GPI grammar says that column 8 has cardinality 0..*, `( ID ( '|' ID )* )?`
-        but the narrative spec says that it has cardinality 1. The narrative spec seems
-        more appropriate, so that is what is implemented here. Decide if that is
-        correct.
 
   protein_containing_complex_members:
     description: >-
